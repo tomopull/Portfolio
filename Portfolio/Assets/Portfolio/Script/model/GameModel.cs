@@ -216,7 +216,7 @@ public class GameModel : MonoBehaviour {
 		}
 
 
-		DontDestroyOnLoad(this); // シーン読み込みの際に破棄されなくなる
+		//DontDestroyOnLoad(this); // シーン読み込みの際に破棄されなくなる
 
 	}
 		

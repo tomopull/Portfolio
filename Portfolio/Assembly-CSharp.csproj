@@ -48,9 +48,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\data\DataObject.cs" />
-     <Compile Include="Assets\Script\model\GameModel.cs" />
-     <Compile Include="Assets\Script\scene\MainScene.cs" />
+     <Compile Include="Assets\Portfolio\Script\data\DataObject.cs" />
+     <Compile Include="Assets\Portfolio\Script\model\GameModel.cs" />
+     <Compile Include="Assets\Portfolio\Script\scene\MainScene.cs" />
+     <Compile Include="Assets\lib\Demigiant\DOTween\Examples\Basics.cs" />
+     <Compile Include="Assets\lib\Demigiant\DOTween\Examples\Sequences.cs" />
      <Compile Include="Assets\lib\LitJson\IJsonWrapper.cs" />
      <Compile Include="Assets\lib\LitJson\JsonData.cs" />
      <Compile Include="Assets\lib\LitJson\JsonException.cs" />
@@ -61,18 +63,34 @@
      <Compile Include="Assets\lib\LitJson\Lexer.cs" />
      <Compile Include="Assets\lib\LitJson\ParserToken.cs" />
      <Compile Include="Assets\lib\Util\CreateAssetBundles.cs" />
-     <Compile Include="Assets\lib\Util\NewBehaviourScript.cs" />
+     <Compile Include="Assets\lib\Util\GameViewSizeHelper.cs" />
+     <Compile Include="Assets\lib\Util\SceneGUI.cs" />
      <Compile Include="Assets\lib\Util\SortingLayer.cs" />
      <Compile Include="Assets\lib\Util\UIEventHandler.cs" />
      <Compile Include="Assets\lib\Util\Util.cs" />
      <Compile Include="Assets\lib\iTween.cs" />
      <Compile Include="Assets\lib\tomop\AbstractSinglton.cs" />
-     <None Include="Assets\DOTween\readme.txt" />
+     <None Include="Assets\lib\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\lib\Demigiant\DOTween\DOTween43.xml" />
+     <None Include="Assets\lib\Demigiant\DOTween\DOTween46.xml" />
+     <None Include="Assets\lib\Demigiant\DOTween\DOTween50.xml" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity5.3.5f1/Unity5.3.5f1.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity5.3.5f1/Unity5.3.5f1.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/lib/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/lib/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/lib/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/lib/Demigiant/DOTween/DOTween50.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
