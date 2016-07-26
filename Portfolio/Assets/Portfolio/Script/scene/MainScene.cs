@@ -16,9 +16,6 @@ public class MainScene : MonoBehaviour {
 
 	private GameModel.SimpleTouch ActiveTouch;
 
-	//state  set default state
-	private GameModel.GameState _game_state;
-
 	// Use this for initialization
 	void Start () {
 		//init all managers
@@ -33,14 +30,12 @@ public class MainScene : MonoBehaviour {
 		float touchDistance     = (CurrentTouch.StartTouchLocation - CurrentTouch.CurrentTouchLocation).magnitude;
 		TimeSpan timeGap        = System.DateTime.Now - CurrentTouch.StartTime;
 		double touchTimeSpan    = timeGap.TotalSeconds;
-		//string touchType        = ( touchDistance > _game_model.SwipeDistance && touchTimeSpan > _game_model.SwipeTime ) ? "Swipe" : "Tap";
+		string touchType        = ( touchDistance > _game_model.SwipeDistance && touchTimeSpan > _game_model.SwipeTime ) ? "Swipe" : "Tap";
 	}
 
 	//各マネージャー、モデル初期化
 	private void InitManager(){
 		_game_model = GameModel.Instance;
-		//_game_model.ParticleDataList = new List<List<GameObject>> ();
-		_game_model.Init ();
 	}
 
 	//初期化
@@ -67,14 +62,8 @@ public class MainScene : MonoBehaviour {
 		Debug.Log(data.Count);
 	}
 
-
-
-
-
 	// Update is called once per frame
 	void Update () {
-
-		
 
 		if(Application.isEditor){
 
@@ -86,7 +75,6 @@ public class MainScene : MonoBehaviour {
 					ActiveTouch.StartTouchLocation = Input.mousePosition;
 					ActiveTouch.StartTime = System.DateTime.Now;
 					ActiveTouch.Phase = TouchPhase.Began;
-					_game_model.IsButtonDown = true;
 
 				} else {
 
@@ -100,7 +88,6 @@ public class MainScene : MonoBehaviour {
 
 					CaluculateTouchInput (ActiveTouch);
 					ActiveTouch.Phase = TouchPhase.Canceled;
-					_game_model.IsButtonDown = false;
 
 				}
 
@@ -118,8 +105,7 @@ public class MainScene : MonoBehaviour {
 					ActiveTouch.StartTime = System.DateTime.Now;
 					ActiveTouch.StartTouchLocation = _game_model.DeviceTouch.position;
 					ActiveTouch.CurrentTouchLocation = _game_model.DeviceTouch.position;
-					_game_model.IsButtonDown = true;
-
+				
 				} else {
 
 					ActiveTouch.CurrentTouchLocation = _game_model.DeviceTouch.position;
@@ -131,7 +117,7 @@ public class MainScene : MonoBehaviour {
 				if(ActiveTouch.Phase != TouchPhase.Canceled){
 					CaluculateTouchInput (ActiveTouch);
 					ActiveTouch.Phase = TouchPhase.Canceled;
-					_game_model.IsButtonDown = false;
+	
 				}
 
 			}

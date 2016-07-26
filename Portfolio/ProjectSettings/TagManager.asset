@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BG
+    uniqueID: 309379043
+    locked: 0
+  - name: BGOverlay
+    uniqueID: 1363005357
+    locked: 0
+  - name: Content
+    uniqueID: 1936752315
+    locked: 0
+  - name: ContentOverlay
+    uniqueID: 516933367
+    locked: 0
+  - name: Effect
+    uniqueID: 3913107947
+    locked: 0
+  - name: EffectOverlay
+    uniqueID: 2463867299
+    locked: 0

@@ -6,13 +6,6 @@ using LitJson;
 
 public class GameModel : MonoBehaviour {
 
-	//score key
-	public const string SCORE_KEY =  "score_key";
-
-	//high_score_key
-	public const string  HIGH_SCORE_KEY = "high_score_key";
-
-
 	//prefab resource path
 	[SerializeField]
 	private string prefab_resource_path = "Prefabs/";
@@ -22,33 +15,6 @@ public class GameModel : MonoBehaviour {
 	    set { this.prefab_resource_path = value; }
 	}
 
-	//シンプルタッチストラクト
-	public struct GameState{
-		public string GAME_START_STATE;
-		public string GAME_PLAY_STATE;
-		public string GAME_END_STATE;
-		public string GAME_IDLE_STATE;
-	}
-
-	[SerializeField]
-	private string now_state;
-	public string NowState
-	{
-	    get { return this.now_state; } 
-	    set { this.now_state = value; }
-	}
-
-	private static ulong _uniqe_index = 0;
-	
-			//ゲームタイム
-	[SerializeField]
-	private float game_time = 45.0f;
-	public float GameTime
-	{
-	    get { return this.game_time; } 
-	    set { this.game_time = value; }
-	}
-
 	//オリジナルjson data
 	[SerializeField]
 	private JsonData original_json_data;
@@ -56,24 +22,6 @@ public class GameModel : MonoBehaviour {
 	{
 		get { return this.original_json_data; } 
 		set { this.original_json_data = value; }
-	}
-
-	//行数
-	[SerializeField]
-	private int rowCount = 0;
-	public int RowCount
-	{
-		get { return this.rowCount; } 
-		set { this.rowCount = value; }
-	}
-
-	//列数
-	[SerializeField]
-	private int columnCount = 0;
-	public int ColumnCount
-	{
-		get { return this.columnCount; } 
-		set { this.columnCount = value; }
 	}
 
 	//ゲームオブジェクトデータ
@@ -86,14 +34,6 @@ public class GameModel : MonoBehaviour {
 	}
 
 
-	//今インタラクティブかどうか
-	[SerializeField]
-	private bool isInteractive = false;
-	public bool IsInteractive
-	{
-		get { return this.isInteractive; } 
-		set { this.isInteractive = value; }
-	}
 
 	//ネイティブデバイスタッチ
 	[SerializeField]
@@ -122,52 +62,6 @@ public class GameModel : MonoBehaviour {
 		set { this.swipeDistance = value; }
 	}
 
-	//今ボタンが押された状態かどうか
-	[SerializeField]
-	private bool isButtonDown = false;
-	public bool IsButtonDown
-	{
-		get { return this.isButtonDown; } 
-		set { this.isButtonDown = value; }
-	}
-	
-
-
-	//パーティクルのデータの管理
-	[SerializeField]
-	private List<List<GameObject>>_particle_data_list;
-	public List<List<GameObject>> ParticleDataList
-	{
-	    get { return this._particle_data_list; } 
-	    set { this._particle_data_list = value; }
-	}
-		
-	//オブジェクトが消えるパーティクルのデータ
-	[SerializeField]
-	private List<GameObject> vanish_particle_list;
-	public List<GameObject> VanishParticleList
-	{
-		get { return this.vanish_particle_list; } 
-		set { this.vanish_particle_list = value; }
-	}
-
-	//オブジェクトが加点されるパーティクルのデータ
-	[SerializeField]
-	private List<GameObject> get_point_particle_list;
-	public List<GameObject> GetPointParticleList
-	{
-		get { return this.get_point_particle_list; } 
-		set { this.get_point_particle_list = value; }
-	}
-
-
-	//ユニークな整数の取得
-	public static ulong GetUniqueIndex(){
-		_uniqe_index += 1;
-		//print (_uniqe_index);
-		return _uniqe_index;
-	}
-
 
 	//シンプルタッチストラクト
 	public struct SimpleTouch{
@@ -194,11 +88,6 @@ public class GameModel : MonoBehaviour {
 		get {	
 				return GameModel.instance;	
 			}
-	}
-		
-	//初期化
-	public void Init(){
-		_uniqe_index = 0;
 	}
 
 	void Awake()
