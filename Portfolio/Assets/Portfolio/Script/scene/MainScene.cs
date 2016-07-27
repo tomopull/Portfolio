@@ -59,7 +59,10 @@ public class MainScene : MonoBehaviour {
 		//ローカルにオリジナルjsonデータ保存
 		_game_model.OriginalJsonData = data;
 
-		Debug.Log(data.Count);
+		//Debug.Log(data);
+		Debug.Log(data.ToString());
+		
+
 	}
 
 	// Update is called once per frame

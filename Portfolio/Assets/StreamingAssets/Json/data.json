@@ -1,66 +1,48 @@
 {
     "object_data": 
     	[
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-    	{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5},
-   		{"category":1,"point":1},
-    	{"category":2,"point":2},
-    	{"category":3,"point":3},
-    	{"category":4,"point":4},
-    	{"category":5,"point":5}
+    		{
+				"id":1,
+				"title":"valentineAttack",
+				"year":2008,
+				"category":2,
+				"tag":["odaiba land","valentine"],
+				"mov":"valentine_attack",
+				"imgs":["attack_1.jpg","attack_2.jpg","attack_3.jpg","attack_4.jpg","attack_5.jpg"],
+				"detail":
+				"自社サイトの媒体価値向上を目的とした、バレンタインスペシャルキャンペーンゲーム。
+				デザイナー、ディレクターとともに 演出方法を検討しながら制作。 制限時間内に必要な材料のみを選んで
+				オーブンへドラックアンドドロップしていきチョコレートを完成させて、ゲタバコでアタックします。 
+　				ゲームのメインの操作となるドラッグアンドドロップ時に大げさな おおげさなアニメーションをつけて楽しさを演出。"
+			},
+			{
+				"id":2,
+				"title":"Tamagel kun Attack",
+				"year":2008,
+				"category":2,
+				"tag":["odaiba land","Advertisement game"],
+				"mov":"valentine_attack",
+				"imgs":["attack_1.jpg","attack_2.jpg","attack_3.jpg","attack_4.jpg","attack_5.jpg"],
+				"detail":
+				"自社サイトの媒体価値向上を目的とした、バレンタインスペシャルキャンペーンゲーム。
+				デザイナー、ディレクターとともに 演出方法を検討しながら制作。 制限時間内に必要な材料のみを選んで
+				オーブンへドラックアンドドロップしていきチョコレートを完成させて、ゲタバコでアタックします。 
+　				ゲームのメインの操作となるドラッグアンドドロップ時に大げさな おおげさなアニメーションをつけて楽しさを演出。"
+			},
+			{
+				"id":3,
+				"title":"valentineAttack",
+				"year":2008,
+				"category":2,
+				"tag":["odaiba land","valentine"],
+				"mov":"valentine_attack",
+				"imgs":["attack_1.jpg","attack_2.jpg","attack_3.jpg","attack_4.jpg","attack_5.jpg"],
+				"detail":
+				"自社サイトの媒体価値向上を目的とした、バレンタインスペシャルキャンペーンゲーム。
+				デザイナー、ディレクターとともに 演出方法を検討しながら制作。 制限時間内に必要な材料のみを選んで
+				オーブンへドラックアンドドロップしていきチョコレートを完成させて、ゲタバコでアタックします。 
+　				ゲームのメインの操作となるドラッグアンドドロップ時に大げさな おおげさなアニメーションをつけて楽しさを演出。"
+			}
     	]
     	}
 }

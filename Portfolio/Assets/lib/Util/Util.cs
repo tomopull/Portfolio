@@ -28,6 +28,7 @@ static public class Util  {
 
 		if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
 			//OSX Editor
+
 			base_url = "file://" + Application.dataPath + "/StreamingAssets";
 
 		} else if (Application.platform == RuntimePlatform.OSXPlayer) {
@@ -44,6 +45,7 @@ static public class Util  {
 			base_url = Application.dataPath;
 		}
 
+		Debug.Log(base_url);
 		return base_url;
 	}
 		
