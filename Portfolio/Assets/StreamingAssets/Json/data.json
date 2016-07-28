@@ -5,10 +5,10 @@
 				"id":1,
 				"title":"valentineAttack",
 				"year":2008,
-				"category":2,
+				"category":1,
 				"tag":["odaiba land","valentine"],
 				"mov":"valentine_attack",
-				"imgs":["attack_1.jpg","attack_2.jpg","attack_3.jpg","attack_4.jpg","attack_5.jpg"],
+				"imgs":["attack_1","attack_2","attack_3","attack_4","attack_5"],
 				"detail":
 				"自社サイトの媒体価値向上を目的とした、バレンタインスペシャルキャンペーンゲーム。
 				デザイナー、ディレクターとともに 演出方法を検討しながら制作。 制限時間内に必要な材料のみを選んで
@@ -19,29 +19,132 @@
 				"id":2,
 				"title":"Tamagel kun Attack",
 				"year":2008,
-				"category":2,
+				"category":1,
 				"tag":["odaiba land","Advertisement game"],
-				"mov":"valentine_attack",
-				"imgs":["attack_1.jpg","attack_2.jpg","attack_3.jpg","attack_4.jpg","attack_5.jpg"],
+				"mov":"tamagelkun_attack",
+				"imgs":["tamagel_1","tamagel_2","tamagel_3","tamagel_4","tamagel_5"],
 				"detail":
-				"自社サイトの媒体価値向上を目的とした、バレンタインスペシャルキャンペーンゲーム。
-				デザイナー、ディレクターとともに 演出方法を検討しながら制作。 制限時間内に必要な材料のみを選んで
-				オーブンへドラックアンドドロップしていきチョコレートを完成させて、ゲタバコでアタックします。 
-　				ゲームのメインの操作となるドラッグアンドドロップ時に大げさな おおげさなアニメーションをつけて楽しさを演出。"
+				"新商品のプロモーションを目的としたアドバゲーム。全国の文房具店と連動企画。デザイナー、ディレクターと演出案を検討しながら制作。 
+　				クライアントの商品の特徴を訴求するため、アルカノイド型ゲームを制作。
+				ゲームクリア者には抽選でオリジナルシャープペンシルをプレゼント。"
 			},
 			{
 				"id":3,
-				"title":"valentineAttack",
+				"title":"Hustling On The Day Of Halloween",
 				"year":2008,
-				"category":2,
-				"tag":["odaiba land","valentine"],
-				"mov":"valentine_attack",
-				"imgs":["attack_1.jpg","attack_2.jpg","attack_3.jpg","attack_4.jpg","attack_5.jpg"],
+				"category":1,
+				"tag":["odaiba land","Halloween"],
+				"mov":"fujio_halloween",
+				"imgs":["hallow_1","hallow_2","hallow_3"],
 				"detail":
-				"自社サイトの媒体価値向上を目的とした、バレンタインスペシャルキャンペーンゲーム。
-				デザイナー、ディレクターとともに 演出方法を検討しながら制作。 制限時間内に必要な材料のみを選んで
-				オーブンへドラックアンドドロップしていきチョコレートを完成させて、ゲタバコでアタックします。 
-　				ゲームのメインの操作となるドラッグアンドドロップ時に大げさな おおげさなアニメーションをつけて楽しさを演出。"
+				"自サイトの媒体価値の向上が目的。時間内にできるだけ多くのキャンディをゲットしてハイスコアを競い合う。 
+				デザイナーとデザインとゲーム性を検討しながら製作。 
+　			   カジュアルゲームのため、マウスの動きと画面のクリックだけの簡単操作。
+				アイテムによるキャラクターの移動スピードのアップダウン、フィーバーモードを作ることによりゲームにリズム感を持たせる。"
+			},
+			{
+				"id":4,
+				"title":"Yokai Jibikiami1,2",
+				"year":2009,
+				"category":1,
+				"tag":["odaiba land","gegege no kitaro"],
+				"mov":"yokaijibikiami",
+				"imgs":["kitaro_1","kitaro_2","kitaro_3","kitaro_4","kitaro_5"],
+				"detail":
+				"新作映画のプロモーションを目的としたアドバゲーム。一日一回ちゃんちゃんこを仕掛けて、引いて妖怪を集める、コレクションゲーム。 
+				デザイナー、ディレクターとデザインとゲーム性を検討しながら制作。 
+　				クライアントからも好評で第二弾まで継続される。
+				第二弾からは本物の声優さんにキャラクターのゲームオリジナルの声を吹き込んでもらうまでに気にいっていただく"
+			},
+			{
+				"id":5,
+				"title":"The New Year Greeting Dive With Presents",
+				"year":2009,
+				"category":1,
+				"tag":["odaiba land","fujio"],
+				"mov":"fujio_dive",
+				"imgs":["dive_1","dive_2","dive_3"],
+				"detail":
+				"自サイトの媒体価値向上が目的。制限時間内にできるだけ多くのプレゼントをゲットしてハイスコアを競い合う。 
+				デザイナーとデザインとゲーム性を検討しながら制作。 
+　			   カジュアルゲームのため、マウスの動きと画面クリックだけの簡単操作。よりハイスコアを狙えば狙うほど難易度が難しくなるように設定。"
+			},
+			{
+				"id":6,
+				"title":"The Ogre Extermination",
+				"year":2009,
+				"category":1,
+				"tag":["odaiba land","fujio"],
+				"mov":"fujio_oni",
+				"imgs":["oni_1","oni_2","oni_3"],
+				"detail":
+				"自サイトの媒体価値向上が目的。制限時間内に出現する鬼に豆を投げつけてハイスコアを競い合う。
+				デザイナーとデザインとゲーム性を検討しながら制作。 
+　			   カジュアルゲームのため、マウスの動きと画面クリックだけの簡単操作。カジュアルゲームながらも敵キャラクターがたまに挑発してきたり、
+			    ボムの演出 を入れるなのどゲームのリズムが単調にならないよう心がける。"
+			},
+			{
+				"id":7,
+				"title":"The Delightful Life With Tsutaya Discus",
+				"year":2009,
+				"category":1,
+				"tag":["odaiba land","Tsutaya Discus"],
+				"mov":"tsutaya_discus",
+				"imgs":["tsutaya_1","tsutaya_2","tsutaya_3"],
+				"detail":
+				"クライアント定額レンタルサービスへの会員誘導が目的。キャンペーンサイト経由の会員登録には特別デジタルインセンティブが与えられる。 
+				営業担当と目的達成のための企画を立案。 ストーリー性をゲームのメイン要素とし、
+				クライアントのサービス理解を促しつつ会員登録への自然な流れを演出。"
+			},
+			{
+				"id":8,
+				"title":"Donburi Catcher",
+				"year":2009,
+				"category":1,
+				"tag":["odaiba land","Nissin"],
+				"mov":"donburi_catcher",
+				"imgs":["donburi_1","donburi_2","donburi_3"],
+				"detail":
+				"プロモーションを主な目的としたUFOキャッチャー風ゲーム。物理演算エンジンを利用し、本物に近い動きを目指す。
+				デザイナーとともに企画、デザインを考案。
+　				デザインと背景を変えることにより、いくつかのバリエーションを比較的、工数をかけずに制作。"
+			},
+			{
+				"id":9,
+				"title":"World Cruise",
+				"year":2010,
+				"category":1,
+				"tag":["odaiba land","3d"],
+				"mov":"world_cruise",
+				"imgs":["world_1","world_2","world_3","world_4","world_5"],
+				"detail"
+				"プロモーションを主な目的としたUFOキャッチャー風ゲーム。物理演算エンジンを利用し、本物に近い動きを目指す。
+				デザイナーとともに企画、デザインを考案。
+　				デザインと背景を変えることにより、いくつかのバリエーションを比較的、工数をかけずに制作。"
+			},
+			{
+				"id":10,
+				"title":"Mangrove Game",
+				"year":2010,
+				"category":1,
+				"tag":["odaiba land","mangrove"],
+				"mov":"mangrove_game",
+				"imgs":["mangrove1","mangrove2","mangrove3","mangrove4"],
+				"detail"
+				"自社媒体のアフェリエイトプロモーション用にゲーム概要から企画、制作。 
+　				ゲーム開始から時間が経過するにつれてワルモノの移動スピードや数が増えていくので最後まで気が抜けない。"
+			},
+			{
+				"id":11,
+				"title":"Salt Make On The Net",
+				"year":2010,
+				"category":1,
+				"tag":["odaiba land","shio"],
+				"mov":"shio_make",
+				"imgs":["shio1","shio2","shio3","shio4","shio5"],
+				"detail"
+				"クライアントの事業内容のPRを目的としたアドバゲーム。デザイナー,ディレクターと会議を重ね制作。塩に関するクイズと２種類のゲームで構成される。 
+　				クライアントからいただいたグラフィック素材が比較的シンプルだったためフラッシュにより残像表現やパーティクル表現を追加。"
 			}
     	]
     	}
