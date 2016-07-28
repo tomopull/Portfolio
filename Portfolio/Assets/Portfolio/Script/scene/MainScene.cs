@@ -54,15 +54,19 @@ public class MainScene : MonoBehaviour {
 
 		yield return file;
 
-		JsonData data = LitJson.JsonMapper.ToObject(file.text);
+		JsonData json_data = LitJson.JsonMapper.ToObject(file.text);
 
 		//ローカルにオリジナルjsonデータ保存
-		_game_model.OriginalJsonData = data;
+		_game_model.OriginalJsonData = json_data;
 
-		//Debug.Log(data);
-		Debug.Log(data.ToString());
 		
-
+		Debug.Log(json_data.Count);
+		for (int i = 0; i < json_data.Count; i++)
+		{
+			Debug.Log(json_data[i]["title"]);
+			Debug.Log(json_data[i]["imgs"]);
+			Debug.Log(json_data[i]["detail"]);
+		}
 	}
 
 	// Update is called once per frame
