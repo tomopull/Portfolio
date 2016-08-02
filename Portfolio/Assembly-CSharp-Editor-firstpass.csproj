@@ -49,10 +49,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\Editor\dotBunny\VSCode.cs" />
-     <None Include="Assets\lib\Demigiant\DOTween\readme.txt" />
-     <None Include="Assets\lib\Demigiant\DOTween\DOTween43.xml" />
-     <None Include="Assets\lib\Demigiant\DOTween\DOTween46.xml" />
-     <None Include="Assets\lib\Demigiant\DOTween\DOTween50.xml" />
+     <None Include="Assets\Plugins\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween43.xml" />
+     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween46.xml" />
+     <None Include="Assets\Plugins\UniRx\ReadMe.txt" />
+     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween50.xml" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity5.3.5f1/Unity5.3.5f1.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
@@ -77,21 +78,6 @@
  <Reference Include="UnityEditor.TreeEditor">
  <HintPath>/Applications/Unity5.3.5f1/Unity5.3.5f1.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
  </Reference>
- <Reference Include="DOTween">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/lib/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="DOTween43">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/lib/Demigiant/DOTween/DOTween43.dll</HintPath>
- </Reference>
- <Reference Include="DOTween46">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/lib/Demigiant/DOTween/DOTween46.dll</HintPath>
- </Reference>
- <Reference Include="DOTween50">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/lib/Demigiant/DOTween/DOTween50.dll</HintPath>
- </Reference>
- <Reference Include="DOTweenEditor">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/lib/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity5.3.5f1/Unity5.3.5f1.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -107,6 +93,25 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity5.3.5f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{F126D62B-4AAD-47EF-0D79-53329F0BF4E2}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
