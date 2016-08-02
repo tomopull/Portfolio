@@ -1,0 +1,49 @@
+【unityで作るスマートフォン向けサイト】
+
+・canvasとシェーダーを覚える
+
+・view（EarthScene）と
+data(data.json)分ける
+
+・一つのデータで二つ以上の見た目
+
+表示１、球体　→詳細表示（EarthScene）
+
+表示２、リスト　→詳細表示 (ListScene)
+
+表示３、詳細表示は動画とテキスト (DetailPrefab)
+
+
+
+[display canvas設定]
+アスペクト比固定
+プレビューをアイフォンに合わせる。
+
+[検討課題]
+・数秒ごとにページを更新して動きをつける。（四角をくるくるさせる・・・)
+・動的mask処理
+・canvasの構成。
+・イベントハンドラ設定。
+・全体レイアウト、画像リストのレイアウト。　アニメーション
+・タップ時詳細のレイアウト。アニメーション
+
+
+[読み込むjsonの定義]
+
+id[int]
+title[string]
+year[uint]
+category[int] (1:web,2:game)
+tag[string]
+mov[mov_texture]
+imgs[texure,texure,texure.....]
+detail[string]
+
+
+[UniRx]
+・画像のロード処理
+・ロードした画像のサムネイル更新のタイマー処理
+・ボタンのタップ（クリック）処理
+・サムネイルのタップ（クリック）判定
+・左右のフリック判定
+

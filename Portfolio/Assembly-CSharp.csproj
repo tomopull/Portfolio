@@ -48,10 +48,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\Portfolio\Script\data\AbstractBehaviour.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\data\AbstractSinglton.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\data\DataObject.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\model\GameModel.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\scene\MainScene.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Util\Config.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\CreateAssetBundles.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\GameViewSizeHelper.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\SceneGUI.cs" />
@@ -69,17 +71,17 @@
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity5.3.5f1/Unity5.3.5f1.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
- <Reference Include="DOTween46">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween46.dll</HintPath>
- </Reference>
- <Reference Include="DOTween50">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween50.dll</HintPath>
- </Reference>
  <Reference Include="DOTween">
  <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="DOTween43">
  <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween50.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

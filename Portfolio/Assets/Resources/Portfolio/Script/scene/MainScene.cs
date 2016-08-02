@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 using LitJson;
-
 public class MainScene : MonoBehaviour {
 
 	//ゲームのデータ管理
@@ -63,6 +62,7 @@ public class MainScene : MonoBehaviour {
 		Debug.Log(json_data.Count);
 		for (int i = 0; i < json_data.Count; i++)
 		{
+			
 			Debug.Log(json_data[i]["title"]);
 			Debug.Log(json_data[i]["imgs"]);
 			Debug.Log(json_data[i]["detail"]);

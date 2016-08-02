@@ -19,41 +19,12 @@ static public class Util  {
 			deck[randomIndex] = temp;
 		}
 	}
-
-
-	//読み込み外部ファイルのベースのurlの決定
-	static public string GetBaseURL(){
-
-		string base_url = "";
-
-		if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
-			//OSX Editor
-
-			base_url = "file://" + Application.dataPath + "/StreamingAssets";
-
-		} else if (Application.platform == RuntimePlatform.OSXPlayer) {
-			//PC Mac & linux StandAlone
-			base_url = "file://" + Application.dataPath + "/StreamingAssets";
-
-		}else if(Application.platform == RuntimePlatform.IPhonePlayer){
-			//Iphone
-			base_url = "file://" + Application.dataPath + "/Raw";
-
-		} else if(Application.platform == RuntimePlatform.OSXWebPlayer){
-			//Web Player
-			//絶対パス
-			base_url = Application.dataPath;
-		}
-
-		Debug.Log(base_url);
-		return base_url;
-	}
 		
 	/// <summary>
 	/// リソースのprefabから複製
 	/// </summary>
 	static public GameObject InstantiateUtil(GameModel _game_model, string resource_path,Vector3 default_position,Quaternion default_quaernion){
-		GameObject obj = (GameObject)GameObject.Instantiate(Resources.Load(_game_model.PrefabResourcePath + resource_path),default_position ,default_quaernion);
+		GameObject obj = (GameObject)GameObject.Instantiate(Resources.Load(Config.PrefabResourceBasePath + resource_path),default_position ,default_quaernion);
 		//自動的につく(cloneの文字を除去処理 名称をresource_pathのみにする)
 		obj.name = resource_path;
 		return obj;

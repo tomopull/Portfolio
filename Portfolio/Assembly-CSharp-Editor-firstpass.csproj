@@ -78,6 +78,21 @@
  <Reference Include="UnityEditor.TreeEditor">
  <HintPath>/Applications/Unity5.3.5f1/Unity5.3.5f1.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
  </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity5.3.5f1/Unity5.3.5f1.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -92,21 +107,6 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity5.3.5f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="DOTween46">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween46.dll</HintPath>
- </Reference>
- <Reference Include="DOTween50">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween50.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="DOTween43">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween43.dll</HintPath>
- </Reference>
- <Reference Include="DOTweenEditor">
- <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

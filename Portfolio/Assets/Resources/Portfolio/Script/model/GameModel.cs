@@ -6,15 +6,6 @@ using LitJson;
 
 public class GameModel : MonoBehaviour {
 
-	//prefab resource path
-	[SerializeField]
-	private string prefab_resource_path = "Prefabs/";
-	public string PrefabResourcePath
-	{
-	    get { return this.prefab_resource_path; } 
-	    set { this.prefab_resource_path = value; }
-	}
-
 	//オリジナルjson data
 	[SerializeField]
 	private JsonData original_json_data;
@@ -77,7 +68,7 @@ public class GameModel : MonoBehaviour {
 	public string Json_Path {
 
 		get { 
-			json_path = Util.GetBaseURL() + "/Json/data.json";
+			json_path = Config.GetBaseURL() + "/Json/data.json";
 			return json_path;
 		}
 			
