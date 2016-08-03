@@ -6,6 +6,7 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 	//main model
 	[SerializeField]
 	private MainModel _main_model;
+	
 	//main scene
 	[SerializeField]
 	private Main _main;

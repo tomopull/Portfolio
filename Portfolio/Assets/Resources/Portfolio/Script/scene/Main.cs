@@ -11,17 +11,20 @@ using LitJson;
 
 public class Main : AbstractBehaviour,IInterfaceBehaviour {
 
-	//ゲームのデータ管理
+	//MainModel
+	[SerializeField]
 	private MainModel _main_model;
-
+	public MainModel MainModel{ get { return this._main_model; } set { this._main_model = value; } }
+	
 	private MainModel.SimpleTouch ActiveTouch;
 
 	public void Initialize(){
 
 		//init all managers
 		InitManager ();
-		//Init ();
+		Init ();
 		PlayerPrefs.DeleteAll ();
+
 	}
 
 	//スワイプかタッチか判別
@@ -33,9 +36,8 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 		string touchType        = ( touchDistance > _main_model.SwipeDistance && touchTimeSpan > _main_model.SwipeTime ) ? "Swipe" : "Tap";
 	}
 
-	//各マネージャー、モデル初期化
+	//モデル初期化
 	private void InitManager(){
-	
 		_main_model = MainModel.Instance;
 	}
 
@@ -46,8 +48,11 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 
 	//外部ファイルのロード
 	private void LoadFile(){
-		StartCoroutine("LoadFileCorutine",Config.Json_Path);
+		 StartCoroutine("LoadFileCorutine",Config.Json_Path);
+		
 	}
+
+
 
 	private IEnumerator LoadFileCorutine(string _file_path){
 
@@ -58,7 +63,7 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 		JsonData json_data = LitJson.JsonMapper.ToObject(file.text);
 
 		//ローカルにオリジナルjsonデータ保存
-		_main_model.OriginalJsonData = json_data;
+		//_main_model.OriginalJsonData = json_data;
 
 		
 		Debug.Log(json_data.Count);
@@ -69,6 +74,7 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 			// Debug.Log(json_data[i]["detail"]);
 		}
 	}
+	
 
 	// Update is called once per frame
 	void Update () {

@@ -58,6 +58,7 @@
      <Compile Include="Assets\Resources\Portfolio\Util\Config.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\CreateAssetBundles.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\GameViewSizeHelper.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Util\GlobalCoroutine.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\SceneGUI.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\SortingLayer.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\UIEventHandler.cs" />

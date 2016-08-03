@@ -39,7 +39,6 @@ public class Config {
 			//絶対パス
 			base_url = Application.dataPath;
 		}
-
 		return base_url;
 	}
 
