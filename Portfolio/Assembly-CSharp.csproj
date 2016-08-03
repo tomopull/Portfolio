@@ -51,8 +51,10 @@
      <Compile Include="Assets\Resources\Portfolio\Script\data\AbstractBehaviour.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\data\AbstractSinglton.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\data\DataObject.cs" />
-     <Compile Include="Assets\Resources\Portfolio\Script\model\GameModel.cs" />
-     <Compile Include="Assets\Resources\Portfolio\Script\scene\MainScene.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Script\data\IInterfaceBehaviour.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Script\manager\MainManeger.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Script\model\MainModel.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Script\scene\Main.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\Config.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\CreateAssetBundles.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\GameViewSizeHelper.cs" />

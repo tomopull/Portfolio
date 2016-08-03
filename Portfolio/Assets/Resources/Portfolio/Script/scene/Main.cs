@@ -8,33 +8,35 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 using LitJson;
-public class MainScene : MonoBehaviour {
+
+public class Main : AbstractBehaviour,IInterfaceBehaviour {
 
 	//ゲームのデータ管理
-	private GameModel _game_model;
+	private MainModel _main_model;
 
-	private GameModel.SimpleTouch ActiveTouch;
+	private MainModel.SimpleTouch ActiveTouch;
 
-	// Use this for initialization
-	void Start () {
+	public void Initialize(){
+
 		//init all managers
 		InitManager ();
-		Init ();
+		//Init ();
 		PlayerPrefs.DeleteAll ();
 	}
 
 	//スワイプかタッチか判別
-	private void CaluculateTouchInput(GameModel.SimpleTouch CurrentTouch){
+	private void CaluculateTouchInput(MainModel.SimpleTouch CurrentTouch){
 		Vector2 touchDirection  = (CurrentTouch.CurrentTouchLocation - CurrentTouch.StartTouchLocation).normalized;
 		float touchDistance     = (CurrentTouch.StartTouchLocation - CurrentTouch.CurrentTouchLocation).magnitude;
 		TimeSpan timeGap        = System.DateTime.Now - CurrentTouch.StartTime;
 		double touchTimeSpan    = timeGap.TotalSeconds;
-		string touchType        = ( touchDistance > _game_model.SwipeDistance && touchTimeSpan > _game_model.SwipeTime ) ? "Swipe" : "Tap";
+		string touchType        = ( touchDistance > _main_model.SwipeDistance && touchTimeSpan > _main_model.SwipeTime ) ? "Swipe" : "Tap";
 	}
 
 	//各マネージャー、モデル初期化
 	private void InitManager(){
-		_game_model = GameModel.Instance;
+	
+		_main_model = MainModel.Instance;
 	}
 
 	//初期化
@@ -44,7 +46,7 @@ public class MainScene : MonoBehaviour {
 
 	//外部ファイルのロード
 	private void LoadFile(){
-		StartCoroutine("LoadFileCorutine",_game_model.Json_Path);
+		StartCoroutine("LoadFileCorutine",Config.Json_Path);
 	}
 
 	private IEnumerator LoadFileCorutine(string _file_path){
@@ -56,7 +58,7 @@ public class MainScene : MonoBehaviour {
 		JsonData json_data = LitJson.JsonMapper.ToObject(file.text);
 
 		//ローカルにオリジナルjsonデータ保存
-		_game_model.OriginalJsonData = json_data;
+		_main_model.OriginalJsonData = json_data;
 
 		
 		Debug.Log(json_data.Count);
@@ -103,18 +105,18 @@ public class MainScene : MonoBehaviour {
 
 			if (Input.touches.Length > 0) {
 
-				_game_model.DeviceTouch = Input.GetTouch (0);
+				_main_model.DeviceTouch = Input.GetTouch (0);
 
 				if (ActiveTouch.Phase == TouchPhase.Canceled) {
 
-					ActiveTouch.Phase = _game_model.DeviceTouch.phase;
+					ActiveTouch.Phase = _main_model.DeviceTouch.phase;
 					ActiveTouch.StartTime = System.DateTime.Now;
-					ActiveTouch.StartTouchLocation = _game_model.DeviceTouch.position;
-					ActiveTouch.CurrentTouchLocation = _game_model.DeviceTouch.position;
+					ActiveTouch.StartTouchLocation = _main_model.DeviceTouch.position;
+					ActiveTouch.CurrentTouchLocation = _main_model.DeviceTouch.position;
 				
 				} else {
 
-					ActiveTouch.CurrentTouchLocation = _game_model.DeviceTouch.position;
+					ActiveTouch.CurrentTouchLocation = _main_model.DeviceTouch.position;
 
 				}
 

@@ -3,6 +3,13 @@ using System.Collections;
 
 public class Config {
 
+
+	//ローカルのjsonのパス
+	[SerializeField]
+	static private string _json_path = Config.GetBaseURL() + "/Json/data.json";
+	static public string Json_Path{ get { return _json_path; } set { _json_path = value; } }
+
+
 	//prefab base path
 	[SerializeField]
 	static private string _prefab_resource_base_path = "Prefabs/";
@@ -33,7 +40,6 @@ public class Config {
 			base_url = Application.dataPath;
 		}
 
-		Debug.Log(base_url);
 		return base_url;
 	}
 
