@@ -19,12 +19,8 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 	private MainModel.SimpleTouch ActiveTouch;
 
 	public void Initialize(){
-
-		//init all managers
-		InitManager ();
 		Init ();
 		PlayerPrefs.DeleteAll ();
-
 	}
 
 	//スワイプかタッチか判別
@@ -46,14 +42,11 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 		LoadFile ();
 	}
 
+	IEnumerator routine;
 	//外部ファイルのロード
 	private void LoadFile(){
-		 StartCoroutine("LoadFileCorutine",Config.Json_Path);
-		
+		GlobalCoroutine.Go(LoadFileCorutine(Config.Json_Path));
 	}
-
-
-
 	private IEnumerator LoadFileCorutine(string _file_path){
 
 		WWW file = new WWW (_file_path);
@@ -63,19 +56,17 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 		JsonData json_data = LitJson.JsonMapper.ToObject(file.text);
 
 		//ローカルにオリジナルjsonデータ保存
-		//_main_model.OriginalJsonData = json_data;
+		_main_model.OriginalJsonData = json_data;
 
-		
 		Debug.Log(json_data.Count);
 		for (int i = 0; i < json_data.Count; i++)
 		{
-			// Debug.Log(json_data[i]["title"]);
-			// Debug.Log(json_data[i]["imgs"]);
-			// Debug.Log(json_data[i]["detail"]);
+			Debug.Log(json_data[i]["title"]);
+			Debug.Log(json_data[i]["imgs"]);
+			Debug.Log(json_data[i]["detail"]);
 		}
 	}
 	
-
 	// Update is called once per frame
 	void Update () {
 
