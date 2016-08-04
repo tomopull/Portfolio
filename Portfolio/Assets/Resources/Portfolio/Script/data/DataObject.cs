@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using LitJson;
 
 public class DataObject : AbstractBehaviour{
 	//id
@@ -35,8 +36,8 @@ public class DataObject : AbstractBehaviour{
 
 	//tag list
 	[SerializeField]
-	private List<string> _tag_list;
-	public List<string> TagList{ get { return this._tag_list; } set { this._tag_list = value; } }
+	private JsonData _tag_list;
+	public JsonData TagList{ get { return this._tag_list; } set { this._tag_list = value; } }
 
 	//mov url
 	[SerializeField]
@@ -45,8 +46,8 @@ public class DataObject : AbstractBehaviour{
 	
 	//img_list
 	[SerializeField]
-	private List<string> _img_list;
-	public List<string> IMG_LIST{ get { return this._img_list; } set { this._img_list = value; } }
+	private JsonData _img_list;
+	public JsonData IMG_LIST{ get { return this._img_list; } set { this._img_list = value; } }
 
 	//detail
 	[SerializeField]

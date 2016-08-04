@@ -23,16 +23,6 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 		PlayerPrefs.DeleteAll ();
 	}
 
-	//スワイプかタッチか判別
-	private void CaluculateTouchInput(Config.SimpleTouch CurrentTouch){
-		Vector2 touchDirection  = (CurrentTouch.CurrentTouchLocation - CurrentTouch.StartTouchLocation).normalized;
-		float touchDistance     = (CurrentTouch.StartTouchLocation - CurrentTouch.CurrentTouchLocation).magnitude;
-		TimeSpan timeGap        = System.DateTime.Now - CurrentTouch.StartTime;
-		double touchTimeSpan    = timeGap.TotalSeconds;
-		string touchType        = ( touchDistance > Config.SwipeDistance && touchTimeSpan > Config.SwipeTime ) ? "Swipe" : "Tap";
-	}
-
-
 	//外部ファイルのロード
 	private void LoadFile(){
 		GlobalCoroutine.Go(LoadFileCorutine(Config.Json_Path));
@@ -40,21 +30,14 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 	private IEnumerator LoadFileCorutine(string _file_path){
 
 		WWW file = new WWW (_file_path);
-
 		yield return file;
-
+		
 		JsonData json_data = LitJson.JsonMapper.ToObject(file.text);
 
-		//ローカルにオリジナルjsonデータ保存
-		_main_model.OriginalJsonData = json_data;
+		//modelの初期化
+		_main_model.InitializeData(json_data);		
 
-		Debug.Log(json_data.Count);
-		for (int i = 0; i < json_data.Count; i++)
-		{
-			Debug.Log(json_data[i]["title"]);
-			Debug.Log(json_data[i]["imgs"]);
-			Debug.Log(json_data[i]["detail"]);
-		}
+		
 	}
 	
 	// Update is called once per frame
@@ -118,6 +101,16 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 			}
 		}
 		
+	}
+
+
+	//スワイプかタッチか判別
+	private void CaluculateTouchInput(Config.SimpleTouch CurrentTouch){
+		Vector2 touchDirection  = (CurrentTouch.CurrentTouchLocation - CurrentTouch.StartTouchLocation).normalized;
+		float touchDistance     = (CurrentTouch.StartTouchLocation - CurrentTouch.CurrentTouchLocation).magnitude;
+		TimeSpan timeGap        = System.DateTime.Now - CurrentTouch.StartTime;
+		double touchTimeSpan    = timeGap.TotalSeconds;
+		string touchType        = ( touchDistance > Config.SwipeDistance && touchTimeSpan > Config.SwipeTime ) ? "Swipe" : "Tap";
 	}
 
 }
