@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
+using UnityEngine;
 
-public class Config {
+
+public class Config : AbstractBehaviour{
 
 
 	//ローカルのjsonのパス
@@ -41,5 +43,23 @@ public class Config {
 		}
 		return base_url;
 	}
+
+	//ネイティブデバイスタッチ
+	[SerializeField]
+	static private Touch deviceTouch;
+	static public Touch DeviceTouch{get { return deviceTouch; } set { deviceTouch = value; }}
+
+	//スワイプの距離
+	[SerializeField]
+	static private float swipeTime;
+	static public float SwipeTime{	get { return swipeTime; } set { swipeTime = value; }}
+
+	//スワイプ時間
+	[SerializeField]
+	static private float swipeDistance;
+	static public float SwipeDistance{	get { return swipeDistance; } 	set { swipeDistance = value; }}
+
+	//シンプルタッチストラクト
+	 public struct SimpleTouch{public Vector2 StartTouchLocation;	public Vector2 CurrentTouchLocation;	public DateTime StartTime;	public TouchPhase Phase;}
 
 }

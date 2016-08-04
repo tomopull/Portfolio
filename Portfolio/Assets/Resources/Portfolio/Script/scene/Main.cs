@@ -16,33 +16,23 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 	private MainModel _main_model;
 	public MainModel MainModel{ get { return this._main_model; } set { this._main_model = value; } }
 	
-	private MainModel.SimpleTouch ActiveTouch;
+	private Config.SimpleTouch ActiveTouch;
 
 	public void Initialize(){
-		Init ();
+		LoadFile();
 		PlayerPrefs.DeleteAll ();
 	}
 
 	//スワイプかタッチか判別
-	private void CaluculateTouchInput(MainModel.SimpleTouch CurrentTouch){
+	private void CaluculateTouchInput(Config.SimpleTouch CurrentTouch){
 		Vector2 touchDirection  = (CurrentTouch.CurrentTouchLocation - CurrentTouch.StartTouchLocation).normalized;
 		float touchDistance     = (CurrentTouch.StartTouchLocation - CurrentTouch.CurrentTouchLocation).magnitude;
 		TimeSpan timeGap        = System.DateTime.Now - CurrentTouch.StartTime;
 		double touchTimeSpan    = timeGap.TotalSeconds;
-		string touchType        = ( touchDistance > _main_model.SwipeDistance && touchTimeSpan > _main_model.SwipeTime ) ? "Swipe" : "Tap";
+		string touchType        = ( touchDistance > Config.SwipeDistance && touchTimeSpan > Config.SwipeTime ) ? "Swipe" : "Tap";
 	}
 
-	//モデル初期化
-	private void InitManager(){
-		_main_model = MainModel.Instance;
-	}
 
-	//初期化
-	private void Init(){
-		LoadFile ();
-	}
-
-	IEnumerator routine;
 	//外部ファイルのロード
 	private void LoadFile(){
 		GlobalCoroutine.Go(LoadFileCorutine(Config.Json_Path));
@@ -102,18 +92,18 @@ public class Main : AbstractBehaviour,IInterfaceBehaviour {
 
 			if (Input.touches.Length > 0) {
 
-				_main_model.DeviceTouch = Input.GetTouch (0);
+				Config.DeviceTouch = Input.GetTouch (0);
 
 				if (ActiveTouch.Phase == TouchPhase.Canceled) {
 
-					ActiveTouch.Phase = _main_model.DeviceTouch.phase;
+					ActiveTouch.Phase = Config.DeviceTouch.phase;
 					ActiveTouch.StartTime = System.DateTime.Now;
-					ActiveTouch.StartTouchLocation = _main_model.DeviceTouch.position;
-					ActiveTouch.CurrentTouchLocation = _main_model.DeviceTouch.position;
+					ActiveTouch.StartTouchLocation = Config.DeviceTouch.position;
+					ActiveTouch.CurrentTouchLocation = Config.DeviceTouch.position;
 				
 				} else {
 
-					ActiveTouch.CurrentTouchLocation = _main_model.DeviceTouch.position;
+					ActiveTouch.CurrentTouchLocation = Config.DeviceTouch.position;
 
 				}
 

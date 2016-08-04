@@ -21,25 +21,6 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 	private Dictionary<string,DataObject> object_data_dict;
 	public Dictionary<string,DataObject> ObjectDataDict{get { return this.object_data_dict;} set { this.object_data_dict = value;}}
 
-	//ネイティブデバイスタッチ
-	[SerializeField]
-	private Touch deviceTouch;
-	public Touch DeviceTouch{get { return this.deviceTouch; } set { this.deviceTouch = value; }}
-
-	//スワイプの距離
-	[SerializeField]
-	private float swipeTime;
-	public float SwipeTime{	get { return this.swipeTime; } set { this.swipeTime = value; }}
-
-	//スワイプ時間
-	[SerializeField]
-	private float swipeDistance;
-	public float SwipeDistance{	get { return this.swipeDistance; } 	set { this.swipeDistance = value; }}
-
-
-	//シンプルタッチストラクト
-	public struct SimpleTouch{public Vector2 StartTouchLocation;	public Vector2 CurrentTouchLocation;	public DateTime StartTime;	public TouchPhase Phase;}
-
 	private static MainModel instance = null;
 	public static MainModel Instance {
 
