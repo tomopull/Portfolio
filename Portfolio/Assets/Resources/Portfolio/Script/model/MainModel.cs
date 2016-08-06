@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using LitJson;
 
+//メインのモデル
 public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 
 	[SerializeField]

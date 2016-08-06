@@ -42,6 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _main_model: {fileID: 11401908, guid: 5e752a5b3559e446e813437372351e05, type: 2}
   _main: {fileID: 11490436, guid: 6e9b998bad7254e5aa7e755f7900e001, type: 2}
+  _main_data_manager: {fileID: 11498398, guid: b04d5eaa84e9f4f918671fa73566d29d, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

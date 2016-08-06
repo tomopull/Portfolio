@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 
+//データの単位
 public class DataObject : AbstractBehaviour{
 	// //id
 	[SerializeField]

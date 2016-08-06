@@ -52,6 +52,7 @@
      <Compile Include="Assets\Resources\Portfolio\Script\data\AbstractSinglton.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\data\DataObject.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\data\IInterfaceBehaviour.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Script\manager\MainDataManager.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\manager\MainManeger.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\model\MainModel.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\scene\Main.cs" />
