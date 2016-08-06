@@ -3,7 +3,6 @@ using System.Collections;
 
 public class AbstractSinglton : MonoBehaviour {
 
-
 	private static AbstractSinglton instance = null;
 
 	public static AbstractSinglton Instance {

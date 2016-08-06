@@ -17,8 +17,8 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 	}
 
 	public void Initialize(){
-		_main_model.Initialize();
 		_main.Initialize();
+		_main_model.Initialize();
 	}
 	
 }

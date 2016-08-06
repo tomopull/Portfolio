@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using LitJson;
 
 public class DataObject : AbstractBehaviour{
-	//id
+	// //id
 	[SerializeField]
-	private uint _id;
-	public uint Id{ get { return this._id; } set { this._id = value; } }
+	private int _id;
+	public int Id{ get { return this._id; } set { this._id = value; } }
 
 	//title
 	[SerializeField]
@@ -16,23 +16,23 @@ public class DataObject : AbstractBehaviour{
 	
 	//year
 	[SerializeField]
-	private uint _year;
-	public uint Year{ get { return this._year; } set { this._year = value; } }
+	private int _year;
+	public int Year{ get { return this._year; } set { this._year = value; } }
 
 	//category
 	[SerializeField]
-	private uint _ctegory;
-	public uint Category{ get { return this._ctegory; } set { this._ctegory = value; } }
+	private int _category;
+	public int Category{ get { return this._category; } set { this._category = value; } }
 
 	//配列のindex
 	[SerializeField]
-	private uint _index;
-	public uint Index{ get { return this._index; } set { this._index = value; } }
+	private int _index;
+	public int Index{ get { return this._index; } set { this._index = value; } }
 
 	//自身のGameObject
 	[SerializeField]
-	private GameObject _data_obj;
-	public GameObject DataObj{ get { return this._data_obj; } set { this._data_obj = value; } }
+	private GameObject _game_obj;
+	public GameObject GameObj{ get { return this._game_obj; } set { this._game_obj = value; } }
 
 	//tag list
 	[SerializeField]

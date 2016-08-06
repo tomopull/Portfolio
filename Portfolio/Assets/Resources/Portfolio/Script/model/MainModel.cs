@@ -19,22 +19,26 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 			
 			for (int i = 0; i < _json_data.Count; i++)
 			{
-				//new 使っちゃダメ
-				//DataObject _data = new DataObject();
-				//_data.Id = (uint)_json_data[i]["id"];
-				// _data.Title= (string)_json_data[i]["title"];
-				// _data.Year = (uint)_json_data[i]["year"];
-				// _data.Category = (uint)_json_data[i]["category"];
-				// _data.TagList = _json_data[i]["tag"];
-				// _data.MOV_URL = (string)_json_data[i]["mov"];
-				// _data.IMG_LIST = _json_data[i]["imgs"];
-				// _data.Detail = (string)_json_data[i]["detail"];	
+				DataObject _data = Util.InstantiateUtil("DataObjectPrefab",Vector3.zero,Quaternion.identity).GetComponent<DataObject>();
+				_data.Id =(_json_data[i]["id"] as IJsonWrapper).GetInt();
+				 _data.Title= (_json_data[i]["title"] as IJsonWrapper).GetString();
+				 _data.Year = (_json_data[i]["year"] as IJsonWrapper).GetInt();
+				_data.Category =(_json_data[i]["category"] as IJsonWrapper).GetInt();
+				_data.TagList = (JsonData)_json_data[i]["tag"];
+				 _data.MOV_URL = (_json_data[i]["mov"] as IJsonWrapper).GetString();
+				_data.IMG_LIST = (JsonData)_json_data[i]["imgs"];
+				_data.Detail = (_json_data[i]["detail"] as IJsonWrapper).GetString();	
 
-				// Debug.Log(_data.Id);
-				// Debug.Log(_data.Title);
-				// Debug.Log(_data.Detail);
-				
-				// _data_list.Add(_data);
+				Util.CustomLog(_data,Util.RECURSIVE);
+				Debug.Log(_data.Id);
+				Debug.Log(_data.Title);
+				Debug.Log(_data.Year);
+				Debug.Log(_data.Category);
+				Debug.Log(_data.TagList[0]);
+				Debug.Log(_data.MOV_URL);
+				Debug.Log(_data.IMG_LIST[0]);
+				Debug.Log(_data.Detail);
+				 _data_list.Add(_data);
 			}
 
 	}

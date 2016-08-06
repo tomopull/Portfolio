@@ -14,7 +14,7 @@ public class Config : AbstractBehaviour{
 
 	//prefab base path
 	[SerializeField]
-	static private string _prefab_resource_base_path = "Prefabs/";
+	static private string _prefab_resource_base_path = "Portfolio/Prefabs/";
 	static public string PrefabResourceBasePath{ get { return _prefab_resource_base_path; } set { _prefab_resource_base_path = value; } }
 
 

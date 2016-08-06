@@ -11,6 +11,21 @@ using LitJson;
 
 static public class Util  {
 
+
+	public const string RECURSIVE = "_recursive";
+	public const string NORMAL = "_normal";
+	//カスタムログ
+	static public void CustomLog(DataObject _obj, string _type = NORMAL){
+
+		//オブジェクトのプロパティーの再帰出力
+
+		//ノーマル出力
+		if(_type == NORMAL){
+			Debug.Log(_obj);
+		} 
+
+	}
+
 	static public void Shuffle (int[] deck) {
 		for (int i = 0; i < deck.Length; i++) {
 			int temp = deck[i];
@@ -23,7 +38,7 @@ static public class Util  {
 	/// <summary>
 	/// リソースのprefabから複製
 	/// </summary>
-	static public GameObject InstantiateUtil(MainModel _main_model, string resource_path,Vector3 default_position,Quaternion default_quaernion){
+	static public GameObject InstantiateUtil(string resource_path,Vector3 default_position,Quaternion default_quaernion){
 		GameObject obj = (GameObject)GameObject.Instantiate(Resources.Load(Config.PrefabResourceBasePath + resource_path),default_position ,default_quaernion);
 		//自動的につく(cloneの文字を除去処理 名称をresource_pathのみにする)
 		obj.name = resource_path;
@@ -49,7 +64,7 @@ static public class Util  {
 		_text.text = _string;
 		return _string;
 	}
-
+	
 	/// <summary>
 	/// ボタンイベントの設定
 	/// _obj:GameObject
