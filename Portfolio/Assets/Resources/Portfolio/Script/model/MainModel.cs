@@ -6,8 +6,26 @@ using LitJson;
 
 public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 
-
+	[SerializeField]
+	private MainModel _main_model;
 	public void Initialize(){
+		LoadFile();
+		PlayerPrefs.DeleteAll ();
+	}
+
+		private void LoadFile(){
+		GlobalCoroutine.Go(LoadFileCorutine(Config.Json_Path));
+	}
+	private IEnumerator LoadFileCorutine(string _file_path){
+
+		WWW file = new WWW (_file_path);
+		yield return file;
+		
+		JsonData json_data = LitJson.JsonMapper.ToObject(file.text);
+
+		//modelの初期化
+		_main_model.InitializeData(json_data);		
+
 		
 	}
 

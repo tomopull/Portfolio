@@ -12,33 +12,33 @@ using LitJson;
 public class Main : AbstractBehaviour,IInterfaceBehaviour {
 
 	//MainModel
-	[SerializeField]
-	private MainModel _main_model;
-	public MainModel MainModel{ get { return this._main_model; } set { this._main_model = value; } }
+	//[SerializeField]
+	//private MainModel _main_model;
+	//public MainModel MainModel{ get { return this._main_model; } set { this._main_model = value; } }
 	
 	private Config.SimpleTouch ActiveTouch;
 
 	public void Initialize(){
-		LoadFile();
-		PlayerPrefs.DeleteAll ();
+		// LoadFile();
+		// PlayerPrefs.DeleteAll ();
 	}
 
-	//外部ファイルのロード
-	private void LoadFile(){
-		GlobalCoroutine.Go(LoadFileCorutine(Config.Json_Path));
-	}
-	private IEnumerator LoadFileCorutine(string _file_path){
+	// //外部ファイルのロード
+	// private void LoadFile(){
+	// 	GlobalCoroutine.Go(LoadFileCorutine(Config.Json_Path));
+	// }
+	// private IEnumerator LoadFileCorutine(string _file_path){
 
-		WWW file = new WWW (_file_path);
-		yield return file;
+	// 	WWW file = new WWW (_file_path);
+	// 	yield return file;
 		
-		JsonData json_data = LitJson.JsonMapper.ToObject(file.text);
+	// 	JsonData json_data = LitJson.JsonMapper.ToObject(file.text);
 
-		//modelの初期化
-		_main_model.InitializeData(json_data);		
+	// 	//modelの初期化
+	// 	_main_model.InitializeData(json_data);		
 
 		
-	}
+	// }
 	
 	// Update is called once per frame
 	void Update () {
