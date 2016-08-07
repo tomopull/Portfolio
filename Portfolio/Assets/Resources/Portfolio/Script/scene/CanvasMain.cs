@@ -15,7 +15,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	public void SetMainDataManager(MainDataManager _manager){
 		 _main_data_manager = _manager;
-		 
 	}
 
 	//イメージの読込み
