@@ -16,6 +16,9 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 	[SerializeField]
 	private MainDataManager _main_data_manager;
 
+	[SerializeField]
+	private CanvasMain _canvas_main;
+
 	public void Start(){
 		Initialize();
 	}
@@ -30,6 +33,10 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 		_main_data_manager.Initialize();
 		_main_data_manager.SetModel(_main_model);
 
+		//キャンバスメイン初期化
+		_canvas_main.SetMainDataManager(_main_data_manager);
+		_canvas_main.Initialize();
+		
 	}
 	
 }
