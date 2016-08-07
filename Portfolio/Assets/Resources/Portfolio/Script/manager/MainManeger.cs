@@ -26,17 +26,28 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 	public void Initialize(){
 		//外部ファイルロード
 		_main_model.Initialize();
-		//インターフェイス初期化
-		_main.Initialize();
+	}
 
-		//メインデータから色々な形でデータを取得する時
-		_main_data_manager.Initialize();
-		_main_data_manager.SetModel(_main_model);
+	public void Update(){
 
-		//キャンバスメイン初期化
-		_canvas_main.SetMainDataManager(_main_data_manager);
-		_canvas_main.Initialize();
+		//モデルが初期化されたら一回だけ実行。
+		if(_main_model.Initialized){
+			
+			//インターフェイス初期化
+			_main.Initialize();
+
+			//メインデータから色々な形でデータを取得する時
+			_main_data_manager.Initialize();
+			_main_data_manager.SetModel(_main_model);
 		
+			//メインキャンバス
+			_canvas_main.SetMainDataManager(_main_data_manager);
+			_canvas_main.Initialize();
+
+			_main_model.Initialized = !_main_model.Initialized;
+			
+		}
+
 	}
 	
 }

@@ -8,6 +8,10 @@ using LitJson;
 public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 
 	[SerializeField]
+	private bool _initialized;
+	public bool Initialized{ get { return this._initialized; } set { this._initialized = value; } }
+
+	[SerializeField]
 	private MainModel _main_model;
 	public void Initialize(){
 		LoadFile();
@@ -31,6 +35,9 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 	}
 
 	public void InitializeData(JsonData _json_data){
+
+			_initialized = true;
+
 			OriginalJsonData = _json_data;
 			
 			_data_list = new List<DataObject>();
@@ -48,15 +55,15 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 				_data.IMG_LIST = (JsonData)_json_data[i]["imgs"];
 				_data.Detail = (_json_data[i]["detail"] as IJsonWrapper).GetString();	
 
-				Util.CustomLog(_data,Util.RECURSIVE);
-				Debug.Log(_data.Id);
-				Debug.Log(_data.Title);
-				Debug.Log(_data.Year);
-				Debug.Log(_data.Category);
-				Debug.Log(_data.TagList[0]);
-				Debug.Log(_data.MOV_URL);
-				Debug.Log(_data.IMG_LIST[0]);
-				Debug.Log(_data.Detail);
+				// Util.CustomLog(_data,Util.RECURSIVE);
+				// Debug.Log(_data.Id);
+				// Debug.Log(_data.Title);
+				// Debug.Log(_data.Year);
+				// Debug.Log(_data.Category);
+				// Debug.Log(_data.TagList[0]);
+				// Debug.Log(_data.MOV_URL);
+				// Debug.Log(_data.IMG_LIST[0]);
+				// Debug.Log(_data.Detail);
 				 _data_list.Add(_data);
 			}
 

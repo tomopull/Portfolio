@@ -18,11 +18,12 @@ public class MainDataManager : AbstractBehaviour,IInterfaceBehaviour {
 
 	//全てのデータを取得-----------------------------------------------------------------------------------------
 	public List<JsonData> GetAllData(){
-		
+
 		List<JsonData> _data_list = new List<JsonData>();
 		
 		for (int i = 0; i < _main_model.OriginalJsonData.Count; i++)
 		{
+		
 			JsonData _data = _main_model.OriginalJsonData[i];
 			_data_list.Add(_data);
 		}
