@@ -23,7 +23,6 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 	public void Initialize(){
 		//外部ファイルロード
 		_main_model.Initialize();
-
 		//インターフェイス初期化
 		_main.Initialize();
 
