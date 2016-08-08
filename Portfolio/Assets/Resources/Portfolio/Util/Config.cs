@@ -6,6 +6,11 @@ using UnityEngine;
 public class Config : AbstractBehaviour{
 
 
+	//サイト名をパスのルートに入れる
+	[SerializeField]
+	static private string _root_path = "Portfolio";
+	static public string RootPath{ get { return _root_path; } set { _root_path = value; } }
+
 	//ローカルのjsonのパス
 	[SerializeField]
 	static private string _json_path = Config.GetBaseURL() + "/Json/data.json";
@@ -14,7 +19,7 @@ public class Config : AbstractBehaviour{
 
 	//prefab base path
 	[SerializeField]
-	static private string _prefab_resource_base_path = "Portfolio/Prefabs/";
+	static private string _prefab_resource_base_path = RootPath  + "/Prefabs/";
 	static public string PrefabResourceBasePath{ get { return _prefab_resource_base_path; } set { _prefab_resource_base_path = value; } }
 
 
@@ -24,24 +29,30 @@ public class Config : AbstractBehaviour{
 		string base_url = "";
 
 		if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
+			
 			//OSX Editor
-
-			base_url = "file://" + Application.dataPath + "/StreamingAssets";
+			base_url = "file://" + Application.dataPath + "/StreamingAssets/" + RootPath;
 
 		} else if (Application.platform == RuntimePlatform.OSXPlayer) {
+
 			//PC Mac & linux StandAlone
-			base_url = "file://" + Application.dataPath + "/StreamingAssets";
+			base_url = "file://" + Application.dataPath + "/StreamingAssets/" + RootPath;
 
 		}else if(Application.platform == RuntimePlatform.IPhonePlayer){
+
 			//Iphone
 			base_url = "file://" + Application.dataPath + "/Raw";
 
 		} else if(Application.platform == RuntimePlatform.OSXWebPlayer){
+
 			//Web Player
 			//絶対パス
 			base_url = Application.dataPath;
+
 		}
+
 		return base_url;
+
 	}
 
 	//ネイティブデバイスタッチ

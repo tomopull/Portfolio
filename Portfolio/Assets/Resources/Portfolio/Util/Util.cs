@@ -26,7 +26,7 @@ static public class Util  {
 
 	}
 
-	static public void Shuffle (int[] deck) {
+	static public void Shuffle(int[] deck) {
 		for (int i = 0; i < deck.Length; i++) {
 			int temp = deck[i];
 			int randomIndex = UnityEngine.Random.Range(0, deck.Length);
