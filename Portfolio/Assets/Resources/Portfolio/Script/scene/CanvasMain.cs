@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+
 using LitJson;
 
 public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
@@ -49,11 +51,21 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			//Debug.Log(GameObject.Find("ImageTriangle" + i));	
 			//GameObject.Find("ImageTriangle" + (i+1)).GetComponent<GUITexture>().texture =  TextureUtil.ReadTexture(Config.GetBaseURL() + "/images/l/" +  _data_list[i]["imgs"][0] + ".png");
 		
-			string _base_texture = Config.GetBaseURL() + "/images/l/" +  _data_list[i]["imgs"][0];
+			//string _base_url = Config.GetBaseURL() + "/images/l/" +  _data_list[i]["imgs"][0] + ".png";
+			//string _base_url = "Portfolio" + "/images/l/" +  _data_list[i]["imgs"][0];
+			//Debug.Log(_base_url);
+			//Texture2D _texture = Resources.Load(_base_url) as Texture2D;
+			//Debug.Log(_texture);
 
-
-
+			string _base_url = "kitaro_6";
+			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
+			Debug.Log(_texture);
 			
+	 		if(GameObject.Find("ImageTriangle" + i) != null){
+				Image img =  GameObject.Find("ImageTriangle" + i).GetComponent<Image>();
+				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+			 }
+			//Debug.Log(img);
 
 
 

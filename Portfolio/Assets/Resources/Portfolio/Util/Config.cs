@@ -6,6 +6,11 @@ using UnityEngine;
 public class Config : AbstractBehaviour{
 
 
+
+	//外部ファイルを参照するかリソースフォルダのファイルを参照するか。
+	public static string RESOURCES_FILE = "/Resources/";
+	public static string STREAMING_ASSETS = "/StreamingAssets/";
+
 	//サイト名をパスのルートに入れる
 	[SerializeField]
 	static private string _root_path = "Portfolio";
@@ -13,7 +18,7 @@ public class Config : AbstractBehaviour{
 
 	//ローカルのjsonのパス
 	[SerializeField]
-	static private string _json_path = Config.GetBaseURL() + "/Json/data.json";
+	static private string _json_path = Config.GetBaseURL(Config.STREAMING_ASSETS) + "/Json/data.json";
 	static public string Json_Path{ get { return _json_path; } set { _json_path = value; } }
 
 
@@ -24,19 +29,28 @@ public class Config : AbstractBehaviour{
 
 
 	//読み込み外部ファイルのベースのurlの決定
-	static public string GetBaseURL(){
+	static public string GetBaseURL(string _asset_path = "/Resources/"){
 
 		string base_url = "";
-
+		
 		if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
 			
+			//リソースフォルダにあるファイルか、ストリミーグアセットのファイルかそれぞれのぷらっとフォームごとに判定。
 			//OSX Editor
-			base_url = "file://" + Application.dataPath + "/StreamingAssets/" + RootPath;
-
+			if(_asset_path == RESOURCES_FILE){
+				base_url = RootPath;
+			}else if(_asset_path == STREAMING_ASSETS){
+				base_url = "file://" + Application.dataPath + _asset_path + RootPath;
+			}
+			
 		} else if (Application.platform == RuntimePlatform.OSXPlayer) {
 
 			//PC Mac & linux StandAlone
-			base_url = "file://" + Application.dataPath + "/StreamingAssets/" + RootPath;
+			if(_asset_path == RESOURCES_FILE){
+				base_url = RootPath;
+			}else if(_asset_path == STREAMING_ASSETS){
+				base_url = "file://" + Application.dataPath + _asset_path + RootPath;
+			}
 
 		}else if(Application.platform == RuntimePlatform.IPhonePlayer){
 
@@ -51,6 +65,7 @@ public class Config : AbstractBehaviour{
 
 		}
 
+		Debug.Log(base_url);
 		return base_url;
 
 	}
