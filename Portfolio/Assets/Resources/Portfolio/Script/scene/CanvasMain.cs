@@ -57,12 +57,14 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			//Texture2D _texture = Resources.Load(_base_url) as Texture2D;
 			//Debug.Log(_texture);
 
-			string _base_url = "Portfolio" + "/images/l/" +  _data_list[i]["imgs"][0];
+			int select_index_max = _data_list[i]["imgs"].Count;
+			int select_index = Random.Range(0,select_index_max);			
+			string _base_url = "Portfolio" + "/images/l/" +  _data_list[i]["imgs"][select_index];
 			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
 			Debug.Log(_texture);
 			
 	 		if(GameObject.Find("ImageTriangle" + i) != null){
-				Image img =  GameObject.Find("ImageTriangle" + i).GetComponent<Image>();
+				Image img =  GameObject.Find("Image" + i).GetComponent<Image>();
 				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 			 }
 			//Debug.Log(img);
