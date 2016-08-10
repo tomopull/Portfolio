@@ -34,7 +34,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		ShuffleList(_data_list);
 
 
-		 for (int i = 0; i < 48; i++)
+		 for (int i = 0; i < 49; i++)
 		{
 			JsonData _data = _data_list[i];
 			//Debug.Log(_data);
@@ -57,7 +57,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			//Texture2D _texture = Resources.Load(_base_url) as Texture2D;
 			//Debug.Log(_texture);
 
-			string _base_url = "kitaro_6";
+			string _base_url = "Portfolio" + "/images/l/" +  _data_list[i]["imgs"][0];
 			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
 			Debug.Log(_texture);
 			
