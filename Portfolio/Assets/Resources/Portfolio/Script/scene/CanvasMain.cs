@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 using LitJson;
+using UniRx;
 
 public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
@@ -33,48 +34,35 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		CreateDataList(_data_list,_data_list_1);
 		ShuffleList(_data_list);
 
-
 		 for (int i = 0; i < 49; i++)
 		{
 			JsonData _data = _data_list[i];
-			//Debug.Log(_data);
-			//Debug.Log(Config.GetBaseURL()  + "/" + "images/" +   _data_list[i]["imgs"][0] + ".png");
-			//Texture2D _texture = TextureUtil.ReadTexture(Config.GetBaseURL() + "/images/l/" +  _data_list[i]["imgs"][0] + ".png");
-
-			//string _texture_str = Config.GetBaseURL()  + "/" + "images/" +   _data_list[i]["imgs"][0] + ".png";
-			//Debug.Log(_texture_str);
-			//Texture2D _texture = TextureUtil.ReadTexture(_texture_str);
-
-			//Debug.Log(Config.GetBaseURL() + "/images/l/" +  _data_list[i]["imgs"][0] + ".png");
-			// Debug.Log(GameObject.Find("ImageTriangle" + i)); 
-			//テクスチャーを描画
-			//Debug.Log(GameObject.Find("ImageTriangle" + i));	
-			//GameObject.Find("ImageTriangle" + (i+1)).GetComponent<GUITexture>().texture =  TextureUtil.ReadTexture(Config.GetBaseURL() + "/images/l/" +  _data_list[i]["imgs"][0] + ".png");
-		
-			//string _base_url = Config.GetBaseURL() + "/images/l/" +  _data_list[i]["imgs"][0] + ".png";
-			//string _base_url = "Portfolio" + "/images/l/" +  _data_list[i]["imgs"][0];
-			//Debug.Log(_base_url);
-			//Texture2D _texture = Resources.Load(_base_url) as Texture2D;
-			//Debug.Log(_texture);
-
 			int select_index_max = _data_list[i]["imgs"].Count;
 			int select_index = Random.Range(0,select_index_max);			
 			string _base_url = "Portfolio" + "/images/l/" +  _data_list[i]["imgs"][select_index];
 			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
-			Debug.Log(_texture);
+			//Debug.Log(_texture);
 			
 	 		if(GameObject.Find("ImageTriangle" + i) != null){
 				Image img =  GameObject.Find("Image" + i).GetComponent<Image>();
 				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+				Button btn = (Button)GameObject.Find("btn_1").GetComponent<Button>();
+				btn.onClick.AsObservable().Subscribe(_ =>  { ShowDatail(_data_list[i]); } );
 			 }
-			//Debug.Log(img);
-
-
-
-			//GameObject.Find("ImageTriangle" + (i+1)).GetComponent<Sprite>().images =  TextureUtil.ReadTexture( + "/images/l/" +  _data_list[i]["imgs"][0] + ".png");
-			
 
 		}
+		
+	}
+
+	private void ShowDatail(JsonData _data){
+		Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
+		Debug.Log( (_data["title"] as IJsonWrapper).GetString());
+		Debug.Log( (_data["year"] as IJsonWrapper).GetInt());
+		Debug.Log( (_data["category"] as IJsonWrapper).GetInt());
+		Debug.Log( (JsonData)_data["tag"]);
+		Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
+		Debug.Log( (JsonData)_data["imgs"]);
+		Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
 	}
 
 	private void CreateDataList(List<JsonData> _list, List<JsonData> _list_additional){
@@ -82,7 +70,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		{
 			JsonData _tmp_data = _list_additional[i];
 			_list.Add(_tmp_data);
-			Debug.Log(_list.Count);
+			//Debug.Log(_list.Count);
 		}
 
 	}
@@ -95,7 +83,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			_list[randomIndex] = temp;
 		}
 	}
-
 	
 
 
