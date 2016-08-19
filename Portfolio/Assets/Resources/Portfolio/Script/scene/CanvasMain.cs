@@ -35,8 +35,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		ShuffleList(_data_list);
 
 
-		//for (int i = 0; i < 49; i++)
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < 49; i++)
 		{
 			JsonData _data = _data_list[i];
 			int select_index_max = _data_list[i]["imgs"].Count;
@@ -48,8 +47,11 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	 		if(GameObject.Find("ImageTriangle" + i) != null){
 				Image img =  GameObject.Find("Image" + i ).GetComponent<Image>();
 				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
-				Button btn = (Button)GameObject.Find("btn_" + i).GetComponent<Button>();
-				btn.OnClickAsObservable().Subscribe(_ =>  { ShowDatail(_data_list[i]); } );
+				//string btn_str = "btn_" + i;
+				//Debug.Log(btn_str);
+				//Debug.Log("Image" + i );
+				//Button btn = (Button)GameObject.Find(btn_str).GetComponent<Button>();
+				//btn.OnClickAsObservable().Subscribe(_ =>  { ShowDatail(_data_list[i]); } );
 			 }
 
 		}
