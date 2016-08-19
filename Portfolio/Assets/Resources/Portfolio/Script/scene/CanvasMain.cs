@@ -47,18 +47,24 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	 		if(GameObject.Find("ImageTriangle" + i) != null){
 				Image img =  GameObject.Find("Image" + i ).GetComponent<Image>();
 				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
-				//string btn_str = "btn_" + i;
-				//Debug.Log(btn_str);
-				//Debug.Log("Image" + i );
-				//Button btn = (Button)GameObject.Find(btn_str).GetComponent<Button>();
-				//btn.OnClickAsObservable().Subscribe(_ =>  { ShowDatail(_data_list[i]); } );
 			 }
+
+			 if(GameObject.Find("btn_" + i) != null){
+
+				Button btn = (Button)GameObject.Find("btn_" + i).GetComponent<Button>();
+				
+				btn.OnClickAsObservable().Subscribe(_ =>  { ShowDatail(_data_list[i]); } );
+				
+
+			 }
+
 
 		}
 		
 	}
 
 	private void ShowDatail(JsonData _data){
+
 		Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
 		Debug.Log( (_data["title"] as IJsonWrapper).GetString());
 		Debug.Log( (_data["year"] as IJsonWrapper).GetInt());
@@ -67,6 +73,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
 		Debug.Log( (JsonData)_data["imgs"]);
 		Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
+
 	}
 
 	private void CreateDataList(List<JsonData> _list, List<JsonData> _list_additional){
