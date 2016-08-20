@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 using LitJson;
 using UniRx;
@@ -42,8 +43,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			int select_index = Random.Range(0,select_index_max);			
 			string _base_url = "Portfolio" + "/images/l/" +  _data_list[i]["imgs"][select_index];
 			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
-			//Debug.Log(_texture);
-			
+		
 	 		if(GameObject.Find("ImageTriangle" + i) != null){
 				Image img =  GameObject.Find("Image" + i ).GetComponent<Image>();
 				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
@@ -52,27 +52,35 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			 if(GameObject.Find("btn_" + i) != null){
 
 				Button btn = (Button)GameObject.Find("btn_" + i).GetComponent<Button>();
-				
-				btn.OnClickAsObservable().Subscribe(_ =>  { ShowDatail(_data_list[i]); } );
-				
 
-			 }
+				
+				//ボタンにjson data 保存
+				btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
 
+				Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
+				//Debug.Log(btn);
+			}
 
 		}
-		
+
 	}
+	
 
-	private void ShowDatail(JsonData _data){
-
+	private void ShowDatail(BaseEventData  _base_event_data){
+		
+		
+		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
+		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
 		Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
-		Debug.Log( (_data["title"] as IJsonWrapper).GetString());
-		Debug.Log( (_data["year"] as IJsonWrapper).GetInt());
-		Debug.Log( (_data["category"] as IJsonWrapper).GetInt());
-		Debug.Log( (JsonData)_data["tag"]);
-		Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
-		Debug.Log( (JsonData)_data["imgs"]);
+		// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
+		// Debug.Log( (_data["year"] as IJsonWrapper).GetInt());
+		// Debug.Log( (_data["category"] as IJsonWrapper).GetInt());
+		// Debug.Log( (JsonData)_data["tag"]);
+		// Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
+		// Debug.Log( (JsonData)_data["imgs"]);
 		Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
+
+		
 
 	}
 

@@ -9,6 +9,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using LitJson;
 
+using System.Text.RegularExpressions;
+using System.Diagnostics;
+
+
+
 static public class Util  {
 
 
@@ -21,9 +26,17 @@ static public class Util  {
 
 		//ノーマル出力
 		if(_type == NORMAL){
-			Debug.Log(_obj);
+			UnityEngine.Debug.Log("test");
 		} 
 
+	}
+
+
+	//数字だけ抜き出す
+	static public string GetStringOnly(string _str){
+		Regex re = new Regex(@"[^0-9]");
+		string _return_str  = re.Replace(_str, "");
+		return _return_str;
 	}
 
 	static public void Shuffle(int[] deck) {
@@ -45,26 +58,6 @@ static public class Util  {
 		return obj;
 	}
 
-	/// <summary>
-	/// get text component and set the component's string to selected new text
-	/// </summary>
-	/// <returns>The text to text component util.</returns>
-	/// <param name="_str">_str.</param>
-	/// <param name="_new_text">_new_text.</param>
-	static public Text SetTextToTextComponentUtil(string _str,Text _new_text){
-		_new_text = GameObject.Find (_str).GetComponent<Text> ();
-		return _new_text;
-	}
-
-	/// <summary>
-	/// テキストのストリングを更新
-	/// </summary>
-	/// <returns>The text string util.</returns>
-	static public string UpdateTextStringUtil(Text _text, string _string){
-		_text.text = _string;
-		return _string;
-	}
-	
 	/// <summary>
 	/// ボタンイベントの設定
 	/// _obj:GameObject
