@@ -255,7 +255,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
---- !u!1001 &1420406252
+--- !u!1001 &1965863496
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -334,71 +334,13 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11443270, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_FontData.m_FontStyle
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11443270, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: b85346cf5e6d54233b990dc3660c435e,
-        type: 3}
-    - target: {fileID: 131452, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 190226, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114618, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
+    - target: {fileID: 131452, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455788, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: ae076565d657941cdbea968b61a71213,
-        type: 3}
-    - target: {fileID: 22419160, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 401
-      objectReference: {fileID: 0}
-    - target: {fileID: 22419160, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 132
-      objectReference: {fileID: 0}
-    - target: {fileID: 22419160, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -46
-      objectReference: {fileID: 0}
-    - target: {fileID: 22419160, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 580
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455788, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_FontData.m_FontStyle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455788, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_FontData.m_FontSize
-      value: 56
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455788, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_FontData.m_MaxSize
-      value: 82
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455788, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_FontData.m_Alignment
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455788, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_FontData.m_LineSpacing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455788, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
-      propertyPath: m_Text
-      value: TOMOHIRO OHSAWA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
