@@ -4,8 +4,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace Kyusyukeigo.Helper
-{
+
     public class GameViewSizeHelper
     {
         #region public enum
@@ -262,4 +261,3 @@ namespace Kyusyukeigo.Helper
 
         #endregion private Method
     }
-}

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using Kyusyukeigo.Helper;
 
 [InitializeOnLoad]
 public class SceneGUI {
@@ -63,7 +62,7 @@ public class SceneGUI {
   {
     Debug.Log("AddGameViewSize : " + baseText + ", width = " + width + ", height = " + height);
 
-      Kyusyukeigo.Helper.GameViewSizeHelper.AddCustomSize(
+      GameViewSizeHelper.AddCustomSize(
       GameViewSizeGroupType.Standalone,
       new GameViewSizeHelper.GameViewSize
       {
