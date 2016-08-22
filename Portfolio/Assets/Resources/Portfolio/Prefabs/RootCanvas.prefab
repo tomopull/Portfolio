@@ -527,7 +527,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &114618
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -539,7 +539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &114842
 GameObject:
   m_ObjectHideFlags: 1
@@ -1223,7 +1223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &131894
 GameObject:
   m_ObjectHideFlags: 1
@@ -3260,7 +3260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &190404
 GameObject:
   m_ObjectHideFlags: 1
@@ -7214,9 +7214,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: ae076565d657941cdbea968b61a71213, type: 3}
+    m_Font: {fileID: 12800000, guid: b85346cf5e6d54233b990dc3660c435e, type: 3}
     m_FontSize: 50
-    m_FontStyle: 0
+    m_FontStyle: 2
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 84
@@ -8170,18 +8170,18 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 56246a9ec62c14f699d5f6ebae2b4ffb, type: 3}
-    m_FontSize: 48
-    m_FontStyle: 1
+    m_Font: {fileID: 12800000, guid: ae076565d657941cdbea968b61a71213, type: 3}
+    m_FontSize: 56
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 54
-    m_Alignment: 0
+    m_MaxSize: 82
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 0
   m_Text: TOMOHIRO OHSAWA
 --- !u!114 &11455896
 MonoBehaviour:
@@ -13502,8 +13502,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58, y: 444}
-  m_SizeDelta: {x: 500, y: 50}
+  m_AnchoredPosition: {x: -46, y: 401}
+  m_SizeDelta: {x: 580, y: 132}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22419524
 RectTransform:
@@ -15848,7 +15848,6 @@ RectTransform:
   m_Children:
   - {fileID: 22489848}
   - {fileID: 22417710}
-  - {fileID: 22498086}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -16230,6 +16229,7 @@ RectTransform:
   - {fileID: 22464424}
   - {fileID: 22466524}
   - {fileID: 22475152}
+  - {fileID: 22498086}
   m_Father: {fileID: 22476554}
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -16553,11 +16553,11 @@ RectTransform:
   m_Children:
   - {fileID: 22431896}
   - {fileID: 22419160}
-  m_Father: {fileID: 22476554}
-  m_RootOrder: 2
+  m_Father: {fileID: 22489848}
+  m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 654, y: -999.8853}
+  m_AnchoredPosition: {x: 654, y: -1002.5103}
   m_SizeDelta: {x: 545, y: 969}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22498636

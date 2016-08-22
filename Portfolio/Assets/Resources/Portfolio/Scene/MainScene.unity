@@ -392,6 +392,14 @@ Prefab:
       propertyPath: m_FontData.m_Alignment
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11455788, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
+      propertyPath: m_FontData.m_LineSpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455788, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
+      propertyPath: m_Text
+      value: TOMOHIRO OHSAWA
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ec095206802445e09e2c0e6f814e99c, type: 2}
   m_IsPrefabParent: 0
