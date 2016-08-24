@@ -84,7 +84,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
 		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
 
-		
+		_detail_main.Execute(_data);
 
 		Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
 		// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
