@@ -7,21 +7,47 @@ using LitJson;
 //メインのモデル
 public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 
+	
 	[SerializeField]
-	private bool _initialized;
-	public bool Initialized{ get { return this._initialized; } set { this._initialized = value; } }
+	private string _state;
+	public string State{ get { return this._state; } set { this._state = value; } }
 
+	//リクエスト開始
+	public static string REQUEST_STATE = "request_state";
+
+	//ロード完了 
+	public static string LOAD_COMPLETE_STATE = "load_complete_state";
+
+	// //アセットロード開始
+	// public static string ASSET_LOADING_STATE = "asset_loading_state";
+
+	// //アセットロード完了
+	// public static string ASSETS_LOAD_COMPLETE_STATE = "assets_load_complete_state";
+
+	// public static string ASSETS_LOAD_END_STATE = "assets_load_end_state";
+
+	 public static string INITIALIZE_END_STAE = "initialize_end_state";
+	
 	[SerializeField]
 	private MainModel _main_model;
 	public void Initialize(){
+
+		_state = MainModel.REQUEST_STATE;
+
 		LoadFile();
+
 		PlayerPrefs.DeleteAll ();
+
 	}
 
 		private void LoadFile(){
 		GlobalCoroutine.Go(LoadFileCorutine(Config.Json_Path));
+		
 	}
 	private IEnumerator LoadFileCorutine(string _file_path){
+
+		//リクエストの返事が返ってきた
+		
 
 		WWW file = new WWW (_file_path);
 		yield return file;
@@ -30,13 +56,14 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 
 		//modelの初期化
 		_main_model.InitializeData(json_data);		
+		
+
+		_state = MainModel.LOAD_COMPLETE_STATE;
 
 		
 	}
 
 	public void InitializeData(JsonData _json_data){
-
-			_initialized = true;
 
 			OriginalJsonData = _json_data;
 			

@@ -13,12 +13,24 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	private MainDataManager _main_data_manager;
 	// Use this for initialization
 
+	private DetailMain _detail_main;
+
+	private MainModel _main_model;
+
 	public void Initialize(){
 		InitImages();
 	}
 
+	public void SetMainModel(MainModel _model){
+		_main_model = _model;
+	}
+
 	public void SetMainDataManager(MainDataManager _manager){
 		 _main_data_manager = _manager;
+	}
+
+	public void SetDetailMain(DetailMain _detail){
+		 _detail_main = _detail;
 	}
 
 	//イメージの読込み
@@ -52,25 +64,28 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			 if(GameObject.Find("btn_" + i) != null){
 
 				Button btn = (Button)GameObject.Find("btn_" + i).GetComponent<Button>();
-
 				
 				//ボタンにjson data 保存
 				btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
 
 				Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
 				//Debug.Log(btn);
+
 			}
 
 		}
+
 
 	}
 	
 
 	private void ShowDatail(BaseEventData  _base_event_data){
-		
-		
+	
 		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
 		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
+
+		
+
 		Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
 		// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
 		// Debug.Log( (_data["year"] as IJsonWrapper).GetInt());
