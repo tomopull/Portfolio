@@ -51,12 +51,26 @@ static public class Util  {
 	/// <summary>
 	/// リソースのprefabから複製
 	/// </summary>
-	static public GameObject InstantiateUtil(string resource_path,Vector3 default_position,Quaternion default_quaernion){
+	static public GameObject InstantiateUtil(string resource_path,Vector3 default_position,Quaternion default_quaernion, Transform parent){
 		GameObject obj = (GameObject)GameObject.Instantiate(Resources.Load(Config.PrefabResourceBasePath + resource_path),default_position ,default_quaernion);
+
 		//自動的につく(cloneの文字を除去処理 名称をresource_pathのみにする)
 		obj.name = resource_path;
+
+		//親のGameObjectの設定
+		if(parent != null){
+			obj.transform.parent = parent;
+		}
+
+		// Transform初期化
+		Transform tran = obj.transform;
+    	tran.localPosition = Vector3.zero;
+   		tran.localRotation = Quaternion.identity;
+   		tran.localScale = Vector3.one;
+
 		return obj;
 	}
+
 
 	/// <summary>
 	/// ボタンイベントの設定

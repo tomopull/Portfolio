@@ -18,10 +18,9 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	public void Execute(JsonData _data){
 
-		GameObject _detail_view = Util.InstantiateUtil("DetailView",new Vector3(1,1,1),Quaternion.identity);
+		GameObject _detail_view = Util.InstantiateUtil("DetailView",new Vector3(0,0,0),Quaternion.identity,transform);
 		_detail_view.SetActive(true);
-		_detail_view.transform.parent = transform;
-		Debug.Log("Execute");
+		
 	}
 
 }

@@ -72,7 +72,7 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 			
 			for (int i = 0; i < _json_data.Count; i++)
 			{
-				DataObject _data = Util.InstantiateUtil("DataObjectPrefab",Vector3.zero,Quaternion.identity).GetComponent<DataObject>();
+				DataObject _data = Util.InstantiateUtil("DataObjectPrefab",Vector3.zero,Quaternion.identity,null).GetComponent<DataObject>();
 				_data.Id =(_json_data[i]["id"] as IJsonWrapper).GetInt();
 				 _data.Title= (_json_data[i]["title"] as IJsonWrapper).GetString();
 				 _data.Year = (_json_data[i]["year"] as IJsonWrapper).GetInt();
