@@ -17,6 +17,10 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	private MainModel _main_model;
 
+	[SerializeField]
+	private List<JsonData> _all_data_list;
+	public List<JsonData> AllDataList{ get { return this._all_data_list; } set { this._all_data_list = value; } }
+
 	public void Initialize(){
 		InitImages();
 	}
@@ -46,6 +50,9 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		CreateDataList(_data_list,_data_list_1);
 		CreateDataList(_data_list,_data_list_1);
 		ShuffleList(_data_list);
+
+		//最終決定のリスト
+		_all_data_list = _data_list;
 
 
 		for (int i = 0; i < 49; i++)
@@ -78,13 +85,16 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	}
 	
-
 	private void ShowDatail(BaseEventData  _base_event_data){
 	
 		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
 		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
 
+		//デティール表示
 		_detail_main.Execute(_data);
+
+		//メイン非表示
+		HideCanvasMain();
 
 		Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
 		// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
@@ -93,10 +103,23 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		// Debug.Log( (JsonData)_data["tag"]);
 		// Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
 		// Debug.Log( (JsonData)_data["imgs"]);
-		Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
+		//Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
+	}
+
+	private void HideCanvasMain(){
 
 		
+		for (int i = 0; i < 49; i++)
+		{
+			JsonData _data = _all_data_list[i];
 
+	 		if(GameObject.Find("Image" + i) != null){
+
+				GameObject.Find("Image" + i).GetComponent<Image>().enabled = false;
+				
+			 }
+
+		}
 	}
 
 	private void CreateDataList(List<JsonData> _list, List<JsonData> _list_additional){

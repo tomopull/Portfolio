@@ -78,6 +78,7 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 				 _data.Year = (_json_data[i]["year"] as IJsonWrapper).GetInt();
 				_data.Category =(_json_data[i]["category"] as IJsonWrapper).GetInt();
 				_data.TagList = (JsonData)_json_data[i]["tag"];
+				_data.GameObj = _data.gameObject;
 				 _data.MOV_URL = (_json_data[i]["mov"] as IJsonWrapper).GetString();
 				_data.IMG_LIST = (JsonData)_json_data[i]["imgs"];
 				_data.Detail = (_json_data[i]["detail"] as IJsonWrapper).GetString();	
