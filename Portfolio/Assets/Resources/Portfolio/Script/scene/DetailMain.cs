@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using LitJson;
@@ -15,6 +16,8 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 	private GameObject _detail_view;
 	
 	private string  _detail_folder_path = "DetailMain/DetailView/";
+
+	private MovieTexture _movie_texture;
 
 	public void Initialize(){
 		
@@ -40,6 +43,17 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			//詳細
 			GameObject.Find(_detail_folder_path + "DetailText").GetComponent<Text>().text = (_data["detail"] as IJsonWrapper).GetString();
 
+
+			//_movie_texture =  (MovieTexture)GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>().texture;
+			
+			// string _movie_tx_str = (_data["detail"] as IJsonWrapper).GetString();
+			// _movie_texture = (MovieTexture)_movie_tx_str;
+
+
+			//GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>().texture;
+			//_movie_texture = (MovieTexture)GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>().mainTexture;
+			//_movie_texture.Play();
+
 			// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
 			// Debug.Log( (_data["year"] as IJsonWrapper).GetInt());
 			// Debug.Log( (_data["category"] as IJsonWrapper).GetInt());
@@ -47,7 +61,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			// Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
 			// Debug.Log( (JsonData)_data["imgs"]);
 			//Debug.Log( (_data["detail"] as IJsonWrapper).GetString());
-				
+
 		}
 		
 
