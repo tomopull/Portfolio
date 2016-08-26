@@ -296,7 +296,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 22477096}
   - 114: {fileID: 11457222}
-  - 114: {fileID: 11423766}
   m_Layer: 5
   m_Name: DetailView
   m_TagString: Untagged
@@ -511,25 +510,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!114 &11423766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc01f1a54534a46e480012e631c99d86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _id: 0
-  _title: 
-  _year: 0
-  _category: 0
-  _index: 0
-  _game_obj: {fileID: 0}
-  _mov_url: 
-  _detail: 
 --- !u!114 &11426434
 MonoBehaviour:
   m_ObjectHideFlags: 1

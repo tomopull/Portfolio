@@ -23,6 +23,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	public void Initialize(){
 		InitImages();
+		InitTitleButton();
 	}
 
 	public void SetMainModel(MainModel _model){
@@ -35,6 +36,27 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	public void SetDetailMain(DetailMain _detail){
 		 _detail_main = _detail;
+	}
+
+
+	//バオバオ表示に戻るタイトルボタン
+	private void InitTitleButton(){
+		Button btn = (Button)GameObject.Find("TitleButton").GetComponent<Button>();
+		Util.SetButtonEvent(btn.gameObject,ShowBAOBAO,EventTriggerType.PointerClick);
+	}
+
+	//バオバオビューを表示する
+	private void ShowBAOBAO(BaseEventData _base_event_data){
+
+		if(_main_model.MainModelState != MainModel.BAOBAO_VIEW_STATE){
+			
+			CanvasMainActivate(true);
+
+			_detail_main.Remove();
+
+
+
+		}
 	}
 
 	//イメージの読込み
@@ -53,7 +75,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 		//最終決定のリスト
 		_all_data_list = _data_list;
-
 
 		for (int i = 0; i < 49; i++)
 		{
@@ -76,7 +97,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 				btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
 
 				Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
-				//Debug.Log(btn);
 
 			}
 
@@ -93,8 +113,11 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//デティール表示
 		_detail_main.Execute(_data);
 
+		//デテールステート
+		_main_model.MainModelState = MainModel.DETAIL_VIEW_STATE;
+
 		//メイン非表示
-		HideCanvasMain();
+		CanvasMainActivate(false);
 
 		Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
 		// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
@@ -106,16 +129,14 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
 	}
 
-	private void HideCanvasMain(){
-
-		
+	private void CanvasMainActivate(bool _flag){
 		for (int i = 0; i < 49; i++)
 		{
 			JsonData _data = _all_data_list[i];
 
 	 		if(GameObject.Find("Image" + i) != null){
 
-				GameObject.Find("Image" + i).GetComponent<Image>().enabled = false;
+				GameObject.Find("Image" + i).GetComponent<Image>().enabled = _flag;
 				
 			 }
 

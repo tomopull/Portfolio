@@ -34,7 +34,7 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 	public void Update(){
 
 		//サーバー通信完了（json読込み完了//データ読込み完了
-		if(_main_model.State == MainModel.LOAD_COMPLETE_STATE){
+		if(_main_model.MainModelState == MainModel.LOAD_COMPLETE_STATE){
 
 			//インターフェイス初期化
 			_main.Initialize();
@@ -42,7 +42,7 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 			//メインデータから色々な形でデータを取得する時
 			_main_data_manager.Initialize();
 			_main_data_manager.SetModel(_main_model);
-			_main_model.State = MainModel.INITIALIZE_END_STAE;
+			_main_model.MainModelState = MainModel.INITIALIZE_END_STAE;
 
 			//メインキャンバス
 			_canvas_main.Initialize();
@@ -55,6 +55,8 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 			_datail_main.SetMainDataManager(_main_data_manager);
 			_datail_main.Initialize();
 			
+			//バオバオ表示
+			_main_model.MainModelState = MainModel.BAOBAO_VIEW_STATE;
 		}
 
 		

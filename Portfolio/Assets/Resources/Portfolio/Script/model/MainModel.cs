@@ -7,16 +7,25 @@ using LitJson;
 //メインのモデル
 public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 
-	
 	[SerializeField]
-	private string _state;
-	public string State{ get { return this._state; } set { this._state = value; } }
+	//メインモデルの状態管理
+	private string _main_model_state;
+	public string MainModelState{ get { return this._main_model_state; } set { this._main_model_state = value; } }
 
+	[SerializeField]
 	//リクエスト開始
 	public static string REQUEST_STATE = "request_state";
 
 	//ロード完了 
 	public static string LOAD_COMPLETE_STATE = "load_complete_state";
+
+	//サムネイル表示
+	public static string BAOBAO_VIEW_STATE = "baobao_view_state";
+
+	//デティール表示
+	public static string DETAIL_VIEW_STATE = "detail_view_state";
+
+
 
 	// //アセットロード開始
 	// public static string ASSET_LOADING_STATE = "asset_loading_state";
@@ -32,7 +41,7 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 	private MainModel _main_model;
 	public void Initialize(){
 
-		_state = MainModel.REQUEST_STATE;
+		_main_model_state = MainModel.REQUEST_STATE;
 
 		LoadFile();
 
@@ -58,7 +67,7 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 		_main_model.InitializeData(json_data);		
 		
 
-		_state = MainModel.LOAD_COMPLETE_STATE;
+		_main_model_state = MainModel.LOAD_COMPLETE_STATE;
 
 		
 	}

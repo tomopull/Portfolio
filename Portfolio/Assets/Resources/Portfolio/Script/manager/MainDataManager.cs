@@ -16,6 +16,10 @@ public class MainDataManager : AbstractBehaviour,IInterfaceBehaviour {
 		_main_model = model;
 	}
 
+	public MainModel GetModel(){
+		return _main_model;
+	}
+
 	//全てのデータを取得-----------------------------------------------------------------------------------------
 	public List<JsonData> GetAllData(){
 

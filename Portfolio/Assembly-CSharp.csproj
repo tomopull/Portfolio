@@ -58,6 +58,7 @@
      <Compile Include="Assets\Resources\Portfolio\Script\model\MainModel.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\scene\CanvasMain.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\scene\DetailMain.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Script\scene\DetailView.cs" />
      <Compile Include="Assets\Resources\Portfolio\Script\scene\Main.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\Config.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\CreateAssetBundles.cs" />

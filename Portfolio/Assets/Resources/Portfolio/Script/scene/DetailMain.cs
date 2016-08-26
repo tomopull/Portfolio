@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
-using LitJson;
 using System.Collections.Generic;
+using LitJson;
+
+
 
 public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	private MainDataManager _main_data_manager;
 	// Use this for initialization
+
+
+	private GameObject _detail_view;
+	
+	private string  _detail_folder_path = "DetailMain/DetailView/";
 
 	public void Initialize(){
 		
@@ -18,9 +26,39 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	public void Execute(JsonData _data){
 
-		GameObject _detail_view = Util.InstantiateUtil("DetailView",new Vector3(0,0,0),Quaternion.identity,transform);
-		_detail_view.SetActive(true);
+		if(_detail_view == null){
+			_detail_view = Util.InstantiateUtil("DetailView",new Vector3(0,0,0),Quaternion.identity,transform);
+			
+			_detail_view.SetActive(true);
+			
+			//タイトル
+			GameObject.Find(_detail_folder_path + "Title").GetComponent<Text>().text = (_data["title"] as IJsonWrapper).GetString();
+
+			//年度
+			GameObject.Find(_detail_folder_path + "Year").GetComponent<Text>().text = (_data["year"] as IJsonWrapper).GetInt().ToString();
+
+			//詳細
+			GameObject.Find(_detail_folder_path + "DetailText").GetComponent<Text>().text = (_data["detail"] as IJsonWrapper).GetString();
+
+			// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
+			// Debug.Log( (_data["year"] as IJsonWrapper).GetInt());
+			// Debug.Log( (_data["category"] as IJsonWrapper).GetInt());
+			// Debug.Log( (JsonData)_data["tag"]);
+			// Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
+			// Debug.Log( (JsonData)_data["imgs"]);
+			//Debug.Log( (_data["detail"] as IJsonWrapper).GetString());
+				
+		}
 		
+
+	}
+
+	public void Remove(){
+		
+		if(_detail_view){
+			Destroy(_detail_view);
+		}
+
 	}
 
 }
