@@ -49,19 +49,76 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			GameObject.Find(_detail_folder_path + "DetailText").GetComponent<Text>().text = (_data["detail"] as IJsonWrapper).GetString();
 
 			//メインイメージ
-			int select_index_max = _data["imgs"].Count;
-			int select_index = Random.Range(0,select_index_max);			
-			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][select_index];
-			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
-
-			Debug.Log(_texture);
+			MakeMainImage(_data);
 			
-			Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
-			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
-			Debug.Log(_texture.width);
+			//サムネイルボタン作成
+			MakeThumbnailButton(_data);
 			
 			 yield return null;
-			//string _movie_tx_str = (_data["mov"] as IJsonWrapper).GetString();
+		}
+
+	}
+
+	private void MakeMainImage(JsonData _data){
+		//メインイメージ
+		int select_index_max = _data["imgs"].Count;
+		int select_index = Random.Range(0,select_index_max);			
+		string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][select_index];
+		Texture2D _texture = Resources.Load(_base_url) as Texture2D;
+
+		
+		
+		Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
+
+		img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+	}
+
+	private void MakeThumbnailButton(JsonData _data){
+
+		for (int i = 0; i <  _data["imgs"].Count; i++)
+		{			
+			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][i];
+			
+			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
+			//Debug.Log(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) );
+			Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
+			Debug.Log(img);
+			
+			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+
+			//  if(GameObject.Find("btn_" + i) != null){
+
+			// 	Button btn = (Button)GameObject.Find("btn_" + i).GetComponent<Button>();
+				
+			// 	//ボタンにjson data 保存
+			// 	btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
+			// 	Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
+
+			// }
+
+		}
+
+
+		//使わないボタンは非表示
+		int j = 6;
+		while(_data["imgs"].Count < j){
+			GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (j)).SetActive(false);
+			j--;	
+		}
+
+	}
+
+	public void Remove(){
+		
+		if(_detail_view){
+			Destroy(_detail_view);
+		}
+
+	}
+
+}
+
+//string _movie_tx_str = (_data["mov"] as IJsonWrapper).GetString();
 
 			
 			//string  movieTexturePath    = Application.streamingAssetsPath + "/" + "Portfolio/ogv/" + _movie_tx_str;
@@ -109,17 +166,3 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			// Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
 			// Debug.Log( (JsonData)_data["imgs"]);
 			//Debug.Log( (_data["detail"] as IJsonWrapper).GetString());
-
-		}
-
-	}
-
-	public void Remove(){
-		
-		if(_detail_view){
-			Destroy(_detail_view);
-		}
-
-	}
-
-}

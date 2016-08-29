@@ -95,7 +95,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 				
 				//ボタンにjson data 保存
 				btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
-
 				Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
 
 			}
@@ -119,7 +118,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//メイン非表示
 		CanvasMainActivate(false);
 
-		Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
+		//Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
 		// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
 		// Debug.Log( (_data["year"] as IJsonWrapper).GetInt());
 		// Debug.Log( (_data["category"] as IJsonWrapper).GetInt());
