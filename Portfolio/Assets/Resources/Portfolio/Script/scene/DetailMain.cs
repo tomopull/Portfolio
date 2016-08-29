@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using LitJson;
 
 
@@ -82,21 +83,20 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
 			//Debug.Log(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) );
 			Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
-			Debug.Log(img);
+			
 			
 			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+		
+			//ボタンイベント
+			Button btn = (Button)GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/btn_" + (i+1)).GetComponent<Button>();
+			//ボタンにjson data 保存
+			//画像サムネイルの画像のindexの保存
+			btn.GetComponent<ThumbnailData>().JsonData = _data;
+			Util.SetButtonEvent(btn.gameObject,UpDateMainImage,EventTriggerType.PointerClick);
 
-			//  if(GameObject.Find("btn_" + i) != null){
+			}
 
-			// 	Button btn = (Button)GameObject.Find("btn_" + i).GetComponent<Button>();
-				
-			// 	//ボタンにjson data 保存
-			// 	btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
-			// 	Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
-
-			// }
-
-		}
+		
 
 
 		//使わないボタンは非表示
@@ -105,6 +105,24 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (j)).SetActive(false);
 			j--;	
 		}
+
+	}
+
+	private void UpDateMainImage(BaseEventData  _base_event_data){
+
+		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
+		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
+		string btn_clicked =  Util.GetStringOnly(_base_event_data.selectedObject.GetComponent<Button>().ToString());
+		//Debug.Log(btn_clicked);
+		string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][int.Parse(btn_clicked)-1];
+		//Debug.Log(_base_url);
+		Texture2D _texture = Resources.Load(_base_url) as Texture2D;
+
+		Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
+		img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+
+		//Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + btn_clicked + "/Image" + btn_clicked ).GetComponent<Image>();
+		//img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 
 	}
 

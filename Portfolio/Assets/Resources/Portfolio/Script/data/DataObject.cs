@@ -25,7 +25,7 @@ public class DataObject : AbstractBehaviour{
 	private int _category;
 	public int Category{ get { return this._category; } set { this._category = value; } }
 
-	//配列のindex
+	//サムネイル画像のインデックス
 	[SerializeField]
 	private int _index;
 	public int Index{ get { return this._index; } set { this._index = value; } }
