@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
 
 [InitializeOnLoad]
@@ -74,5 +76,7 @@ public class SceneGUI {
       );
   }
 
+ 
 
 }
+ #endif

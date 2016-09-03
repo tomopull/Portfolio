@@ -18,7 +18,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 	
 	private string  _detail_folder_path = "DetailMain/DetailView/";
 
-	private MovieTexture _movie_texture;
+	//private MovieTexture _movie_texture;
 
 	public void Initialize(){
 		
@@ -109,8 +109,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 	}
 
 	private void UpDateMainImage(BaseEventData  _base_event_data){
-
-		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
+		
 		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
 		string btn_clicked =  Util.GetStringOnly(_base_event_data.selectedObject.GetComponent<Button>().ToString());
 		//Debug.Log(btn_clicked);
@@ -120,9 +119,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 		Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
 		img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
-
-		//Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + btn_clicked + "/Image" + btn_clicked ).GetComponent<Image>();
-		//img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 
 	}
 

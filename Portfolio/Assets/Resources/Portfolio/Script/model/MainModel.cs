@@ -56,7 +56,7 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 	private IEnumerator LoadFileCorutine(string _file_path){
 
 		//リクエストの返事が返ってきた
-		
+		Debug.Log(_file_path);
 
 		WWW file = new WWW (_file_path);
 		yield return file;
