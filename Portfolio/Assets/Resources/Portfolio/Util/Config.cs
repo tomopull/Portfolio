@@ -29,46 +29,150 @@ public class Config : AbstractBehaviour{
 
 
 	//読み込み外部ファイルのベースのurlの決定
+
 	static public string GetBaseURL(string _asset_path = "/Resources/"){
+	
+	string base_url = "";
 
-		string base_url = "";
-		
-		if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
-			
-			//リソースフォルダにあるファイルか、ストリミーグアセットのファイルかそれぞれのぷらっとフォームごとに判定。
-			//OSX Editor
-			if(_asset_path == RESOURCES_FILE){
-				base_url = RootPath;
-			}else if(_asset_path == STREAMING_ASSETS){
-				base_url = "file://" + Application.dataPath + _asset_path + RootPath;
-			}
-			
-		} else if (Application.platform == RuntimePlatform.OSXPlayer) {
-
-			//PC Mac & linux StandAlone
-			if(_asset_path == RESOURCES_FILE){
-				base_url = RootPath;
-			}else if(_asset_path == STREAMING_ASSETS){
-				base_url = "file://" + Application.dataPath + _asset_path + RootPath;
-			}
-
-		}else if(Application.platform == RuntimePlatform.IPhonePlayer){
-
-			//Iphone
-			base_url = "file://" + Application.dataPath + "/Raw";
-
-		} else if(Application.platform == RuntimePlatform.OSXWebPlayer){
-
-			//Web Player
-			//絶対パス
-			base_url = Application.dataPath;
-
+	#if UNITY_EDITOR
+		if(_asset_path == RESOURCES_FILE){
+			base_url = RootPath;
+		}else if(_asset_path == STREAMING_ASSETS){
+			base_url = "file://" + Application.dataPath + _asset_path + RootPath;
 		}
+		Debug.Log("UNITY_EDITOR");
+	#endif
 
-		Debug.Log(base_url);
-		return base_url;
+	#if UNITY_IOS
+		if(_asset_path == RESOURCES_FILE){
+			base_url = RootPath;
+		}else if(_asset_path == STREAMING_ASSETS){
+			//base_url = "file://" + Application.dataPath + "/Raw";
+			//base_url = Application.dataPath + "/Raw";
+			//base_url = "file://" + Application.dataPath + _asset_path + RootPath;
+			base_url = "file://" + Application.streamingAssetsPath + "/" +  RootPath;
+			//base_url = Application.streamingAssetsPath;
+		}
+	Debug.Log("IPONE");
+	#endif
 
-	}
+	#if UNITY_STANDALONE_OSX
+	if(_asset_path == RESOURCES_FILE){
+			base_url = RootPath;
+		}else if(_asset_path == STREAMING_ASSETS){
+			base_url = "file://" + Application.dataPath + _asset_path + RootPath;
+		}
+		Debug.Log("UNITY_STANDALONE_OSX");
+	#endif
+
+	#if UNITY_STANDALONE_WIN
+		if(_asset_path == RESOURCES_FILE){
+			base_url = RootPath;
+		}else if(_asset_path == STREAMING_ASSETS){
+			base_url = "file://" + Application.dataPath + _asset_path + RootPath;
+		Debug.Log("UNITY_STANDALONE_WIN");
+			
+		}
+	#endif
+
+	Debug.Log(base_url);
+	return base_url;
+
+	
+		
+	// if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
+		
+	// 	//リソースフォルダにあるファイルか、ストリミーグアセットのファイルかそれぞれのぷらっとフォームごとに判定。
+	// 	//OSX Editor
+	// 	if(_asset_path == RESOURCES_FILE){
+	// 		base_url = RootPath;
+	// 	}else if(_asset_path == STREAMING_ASSETS){
+	// 		base_url = "file://" + Application.dataPath + _asset_path + RootPath;
+	// 	}
+		
+	// } else if (Application.platform == RuntimePlatform.OSXPlayer) {
+
+	// 	//PC Mac & linux StandAlone
+	// 	if(_asset_path == RESOURCES_FILE){
+	// 		base_url = RootPath;
+	// 	}else if(_asset_path == STREAMING_ASSETS){
+	// 		base_url = "file://" + Application.dataPath + _asset_path + RootPath;
+	// 	}
+
+	// }else if(Application.platform == RuntimePlatform.IPhonePlayer){
+
+	// 	//Iphone
+	// 	base_url = "file://" + Application.dataPath + "/Raw";
+
+	// } else if(Application.platform == RuntimePlatform.OSXWebPlayer){
+
+	// 	//Web Player
+	// 	//絶対パス
+	// 	base_url = Application.dataPath;
+
+	// }
+
+	//Debug.Log(base_url);
+	//return base_url;
+
+}
+
+	// static public string GetBaseURL(string _asset_path = "/Resources/"){
+
+	// 	#if UNITY_EDITOR
+	// 	Debug.Log("Unity Editor");
+	// 	#endif
+
+	// 	#if UNITY_IOS
+	// 	Debug.Log("Iphone");
+	// 	#endif
+
+	// 	#if UNITY_STANDALONE_OSX
+	// 	Debug.Log("Stand Alone OSX");
+	// 	#endif
+
+	// 	#if UNITY_STANDALONE_WIN
+	// 	Debug.Log("Stand Alone Windows");
+	// 	#endif
+
+	// 	string base_url = "";
+		
+	// 	if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
+			
+	// 		//リソースフォルダにあるファイルか、ストリミーグアセットのファイルかそれぞれのぷらっとフォームごとに判定。
+	// 		//OSX Editor
+	// 		if(_asset_path == RESOURCES_FILE){
+	// 			base_url = RootPath;
+	// 		}else if(_asset_path == STREAMING_ASSETS){
+	// 			base_url = "file://" + Application.dataPath + _asset_path + RootPath;
+	// 		}
+			
+	// 	} else if (Application.platform == RuntimePlatform.OSXPlayer) {
+
+	// 		//PC Mac & linux StandAlone
+	// 		if(_asset_path == RESOURCES_FILE){
+	// 			base_url = RootPath;
+	// 		}else if(_asset_path == STREAMING_ASSETS){
+	// 			base_url = "file://" + Application.dataPath + _asset_path + RootPath;
+	// 		}
+
+	// 	}else if(Application.platform == RuntimePlatform.IPhonePlayer){
+
+	// 		//Iphone
+	// 		base_url = "file://" + Application.dataPath + "/Raw";
+
+	// 	} else if(Application.platform == RuntimePlatform.OSXWebPlayer){
+
+	// 		//Web Player
+	// 		//絶対パス
+	// 		base_url = Application.dataPath;
+
+	// 	}
+
+	// 	Debug.Log(base_url);
+	// 	return base_url;
+
+	// }
 
 	//ネイティブデバイスタッチ
 	[SerializeField]

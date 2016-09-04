@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -51,12 +52,15 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 
 		private void LoadFile(){
 		GlobalCoroutine.Go(LoadFileCorutine(Config.Json_Path));
+
+		Text _debug_text = GameObject.Find("RootCanvas/DebugText1").GetComponent<Text>();
+		_debug_text.text = Config.Json_Path;
 		
 	}
 	private IEnumerator LoadFileCorutine(string _file_path){
 
 		//リクエストの返事が返ってきた
-		Debug.Log(_file_path);
+		//Debug.Log(_file_path);
 
 		WWW file = new WWW (_file_path);
 		yield return file;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 //メインの表示系
@@ -36,6 +37,9 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 		//サーバー通信完了（json読込み完了//データ読込み完了
 		if(_main_model.MainModelState == MainModel.LOAD_COMPLETE_STATE){
 
+			Text _debug_text = GameObject.Find("RootCanvas/DebugText2").GetComponent<Text>();
+			_debug_text.text = "LOAD_COMPLETE_STATE";
+
 			//インターフェイス初期化
 			_main.Initialize();
 
@@ -57,6 +61,11 @@ public class MainManeger:AbstractBehaviour,IInterfaceBehaviour {
 			
 			//バオバオ表示
 			_main_model.MainModelState = MainModel.BAOBAO_VIEW_STATE;
+		}
+
+		if(_main_model.MainModelState == MainModel.REQUEST_STATE){
+			Text _debug_text = GameObject.Find("RootCanvas/DebugText2").GetComponent<Text>();
+			_debug_text.text = "Update";
 		}
 
 		
