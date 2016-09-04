@@ -54,8 +54,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 			_detail_main.Remove();
 
-
-
 		}
 	}
 
@@ -93,8 +91,12 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 				Button btn = (Button)GameObject.Find("btn_" + i).GetComponent<Button>();
 				
+				//セレクトされた画像
+				btn.GetComponent<ThumbnailData>().SelectIndex = select_index;
+
 				//ボタンにjson data 保存
 				btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
+
 				Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
 
 			}
@@ -108,9 +110,9 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	
 		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
 		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
-
+		int select_index = _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().SelectIndex;
 		//デティール表示
-		_detail_main.Execute(_data);
+		_detail_main.Execute(_data,select_index);
 
 		//デテールステート
 		_main_model.MainModelState = MainModel.DETAIL_VIEW_STATE;

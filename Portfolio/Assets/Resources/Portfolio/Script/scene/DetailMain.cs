@@ -28,11 +28,11 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 		 _main_data_manager = _manager;
 	}
 
-	public void Execute(JsonData _data){
-		StartCoroutine(Show(_data));
+	public void Execute(JsonData _data, int _selected_index){
+		StartCoroutine(Show(_data,_selected_index));
 	}
 
-	private IEnumerator Show(JsonData _data){
+	private IEnumerator Show(JsonData _data, int _selected_index){
 
 		if(_detail_view == null){
 
@@ -50,7 +50,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			GameObject.Find(_detail_folder_path + "DetailText").GetComponent<Text>().text = (_data["detail"] as IJsonWrapper).GetString();
 
 			//メインイメージ
-			MakeMainImage(_data);
+			MakeMainImage(_data,_selected_index);
 			
 			//サムネイルボタン作成
 			MakeThumbnailButton(_data);
@@ -60,15 +60,11 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	}
 
-	private void MakeMainImage(JsonData _data){
-		//メインイメージ
-		int select_index_max = _data["imgs"].Count;
-		int select_index = Random.Range(0,select_index_max);			
-		string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][select_index];
+	private void MakeMainImage(JsonData _data, int _selected_index){
+		//メインイメージ		
+		string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][_selected_index];
 		Texture2D _texture = Resources.Load(_base_url) as Texture2D;
 
-		
-		
 		Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
 
 		img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
@@ -84,7 +80,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			//Debug.Log(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) );
 			Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
 			
-			
 			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 		
 			//ボタンイベント
@@ -95,10 +90,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			Util.SetButtonEvent(btn.gameObject,UpDateMainImage,EventTriggerType.PointerClick);
 
 			}
-
-		
-
-
+			
 		//使わないボタンは非表示
 		int j = 6;
 		while(_data["imgs"].Count < j){
