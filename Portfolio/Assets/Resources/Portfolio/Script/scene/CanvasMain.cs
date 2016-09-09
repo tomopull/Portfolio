@@ -97,14 +97,31 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 				//ボタンにjson data 保存
 				btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
 
-				Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
+				
+				
+				//Util.SetButtonEvent(btn.gameObject,OnPoninterEnter,EventTriggerType.PointerEnter);
+				
+				//Util.SetButtonEvent(btn.gameObject,OnPointerExit,EventTriggerType.PointerExit);
 
+				Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
 			}
 
 		}
 
 
 	}
+
+	private void OnPoninterEnter(BaseEventData  _base_event_data){
+		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
+		Debug.Log(_data);
+	}
+
+	private void OnPointerExit(BaseEventData  _base_event_data){
+		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
+		Debug.Log(_data);
+	}
+
+	
 	
 	private void ShowDatail(BaseEventData  _base_event_data){
 	
