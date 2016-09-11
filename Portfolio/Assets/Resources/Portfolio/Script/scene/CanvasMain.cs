@@ -38,7 +38,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		 _detail_main = _detail;
 	}
 
-
 	//バオバオ表示に戻るタイトルボタン
 	private void InitTitleButton(){
 		Button btn = (Button)GameObject.Find("TitleButton").GetComponent<Button>();
@@ -97,13 +96,14 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 				//ボタンにjson data 保存
 				btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
 
-				
-				
 				//Util.SetButtonEvent(btn.gameObject,OnPoninterEnter,EventTriggerType.PointerEnter);
-				
 				//Util.SetButtonEvent(btn.gameObject,OnPointerExit,EventTriggerType.PointerExit);
-
 				Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
+
+				//btn.AddListener(EventTriggerType.PointerEnter,OnPoninterEnter);
+				//btn.AddListener(EventTriggerType.PointerExit,OnPointerExit);
+				//btn.AddListener(EventTriggerType.PointerClick,ShowDatail);
+				
 			}
 
 		}
@@ -112,13 +112,22 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	}
 
 	private void OnPoninterEnter(BaseEventData  _base_event_data){
-		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
-		Debug.Log(_data);
+
+		//JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
+		if(_base_event_data.selectedObject != null){
+			Image triangle = _base_event_data.selectedObject.transform.parent.gameObject.GetComponent<Image>();
+			Debug.Log(triangle);
+		}
+
+		
 	}
 
 	private void OnPointerExit(BaseEventData  _base_event_data){
-		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
-		Debug.Log(_data);
+		//JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
+		if(_base_event_data.selectedObject != null){
+			Image triangle = _base_event_data.selectedObject.transform.parent.gameObject.GetComponent<Image>();
+			Debug.Log(triangle);
+		}
 	}
 
 	

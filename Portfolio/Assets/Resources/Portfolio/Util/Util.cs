@@ -10,7 +10,7 @@ using UnityEngine.UI;
 using LitJson;
 
 using System.Text.RegularExpressions;
-using System.Diagnostics;
+
 
 
 
@@ -59,7 +59,8 @@ static public class Util  {
 
 		//親のGameObjectの設定
 		if(parent != null){
-			obj.transform.parent = parent;
+			//obj.transform.parent = parent;
+			obj.transform.SetParent(parent);
 		}
 
 		// Transform初期化
@@ -72,6 +73,28 @@ static public class Util  {
 	}
 
 
+	// public static void AddListener(this UIBehaviour uiBehaviour, EventTriggerType eventID, UnityAction<BaseEventData> callback)
+    // {
+	// 	//button.AddListener(EventTriggerType.PointerUp, e => Debug.Log("PointerUp!"));
+    //     var entry = new EventTrigger.Entry();
+    //     entry.eventID = eventID;
+    //     entry.callback.AddListener(callback);
+
+    //     var eventTriggers = (uiBehaviour.GetComponent<EventTrigger>() ?? uiBehaviour.gameObject.AddComponent<EventTrigger>()).triggers;
+    //     eventTriggers.Add(entry);
+    // }
+
+    // public static void RemoveAllListeners(this UIBehaviour uiBehaviour, EventTriggerType eventID)
+    // {
+    //     var eventTrigger = uiBehaviour.GetComponent<EventTrigger>();
+
+    //     if (eventTrigger == null)
+    //         return;
+
+    //     eventTrigger.triggers.RemoveAll(listener => listener.eventID == eventID);
+    // }
+
+
 	/// <summary>
 	/// ボタンイベントの設定
 	/// _obj:GameObject
@@ -82,11 +105,14 @@ static public class Util  {
 	/// <param name="_event">_event.</param>
 	static public void SetButtonEvent(GameObject _obj, UnityAction<BaseEventData> _action, EventTriggerType _event_trigger_type){
 
-		//既にEventTriggerComponentが追加されボタン化されていなかったらボタン化
-		if (!_obj.GetComponent<EventTrigger> ()) {
 		
-			//Debug.Log (_obj);
-			EventTrigger _event_triger = _obj.AddComponent<EventTrigger> ();
+		//既にEventTriggerComponentが追加されていなかったら追加
+		//既にEventTriggerComponentが追加されていたらコンポーネント取得
+		EventTrigger _event_triger;
+
+		if(!_obj.GetComponent<EventTrigger> ()){
+
+			_event_triger = _obj.AddComponent<EventTrigger> ();
 
 			EventTrigger.Entry _entry = new EventTrigger.Entry ();
 
@@ -95,15 +121,33 @@ static public class Util  {
 			_entry.eventID = _event_trigger_type;
 
 			_event_triger.triggers = new List<EventTrigger.Entry> ();
+
 			_event_triger.triggers.Add (_entry);
 
-			//_event_triger.triggers = UIEventHandler.Instance.EntryList;
-			//UIEventHandler.Instance.EntryDict.Add(_obj.name,_entry);
-			//_event_triger.triggers = new List<EventTrigger.Entry> ();
-			//_event_triger.triggers.Add (_entry);
-			//Debug.Log (_event_triger.triggers.Count);
-			//Debug.Log (_event_triger.triggers.Count);
+		}else{
+
+			_event_triger = _obj.GetComponent<EventTrigger> ();
+
+			EventTrigger.Entry _entry = new EventTrigger.Entry ();
+
+			_entry.callback.AddListener (_action);
+
+			_entry.eventID = _event_trigger_type;
+
+			_event_triger.triggers = new List<EventTrigger.Entry> ();
+
+			_event_triger.triggers.Add (_entry);
 		}
+
+		
+		//Debug.Log (_obj);
+		//_event_triger = _obj.AddComponent<EventTrigger> ();
+		//_event_triger.triggers = UIEventHandler.Instance.EntryList;
+		//UIEventHandler.Instance.EntryDict.Add(_obj.name,_entry);
+		//_event_triger.triggers = new List<EventTrigger.Entry> ();
+		//_event_triger.triggers.Add (_entry);
+		//Debug.Log (_event_triger.triggers.Count);
+		//Debug.Log (_event_triger.triggers.Count);
 
 	}
 
@@ -119,6 +163,7 @@ static public class Util  {
 		if (_obj.GetComponent<EventTrigger> ()) {
 
 			EventTrigger _event_triger = _obj.GetComponent<EventTrigger> ();
+
 			_entry.callback.RemoveListener (_action);
 				
 		}
