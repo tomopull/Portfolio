@@ -72,9 +72,16 @@
      <Compile Include="Assets\Resources\Portfolio\Util\Util.cs" />
      <Compile Include="Assets\Tester.cs" />
      <None Include="Assets\Plugins\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\OsaawaTest\Shader\Kadai2Shader.shader" />
      <None Include="Assets\Plugins\Demigiant\DOTween\DOTween43.xml" />
+     <None Include="Assets\OsaawaTest\Shader\TestOsawaShader1.shader" />
+     <None Include="Assets\OsaawaTest\Shader\TestOsawaShader2.shader" />
      <None Include="Assets\Plugins\Demigiant\DOTween\DOTween46.xml" />
+     <None Include="Assets\OsaawaTest\Shader\TestLiquidShader.shader" />
      <None Include="Assets\Plugins\UniRx\ReadMe.txt" />
+     <None Include="Assets\OsaawaTest\Shader\TestOsawaShader_AlphaBlend.shader" />
+     <None Include="Assets\OsaawaTest\Shader\TestOsawaShader_OutLine.shader" />
+     <None Include="Assets\OsaawaTest\Shader\Kadai1Shader.shader" />
      <None Include="Assets\Plugins\Demigiant\DOTween\DOTween50.xml" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity5.3.5f1/Unity5.3.5f1.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>

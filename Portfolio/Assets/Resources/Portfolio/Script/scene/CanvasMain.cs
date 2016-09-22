@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 using LitJson;
 using UniRx;
+using DG.Tweening;
 
 public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
@@ -19,6 +20,10 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	[SerializeField]
 	private List<JsonData> _all_data_list;
+
+	//フェードアウトする秒数
+	private float _fade_out_time = 0.1f;
+
 	public List<JsonData> AllDataList{ get { return this._all_data_list; } set { this._all_data_list = value; } }
 
 	public void Initialize(){
@@ -96,8 +101,8 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 				//ボタンにjson data 保存
 				btn.GetComponent<ThumbnailData>().JsonData = _data_list[i];
 
-				//Util.SetButtonEvent(btn.gameObject,OnPoninterEnter,EventTriggerType.PointerEnter);
-				//Util.SetButtonEvent(btn.gameObject,OnPointerExit,EventTriggerType.PointerExit);
+				Util.SetButtonEvent(btn.gameObject,OnPoninterEnter,EventTriggerType.PointerEnter);
+				Util.SetButtonEvent(btn.gameObject,OnPointerExit,EventTriggerType.PointerExit);
 				Util.SetButtonEvent(btn.gameObject,ShowDatail,EventTriggerType.PointerClick);
 
 				//btn.AddListener(EventTriggerType.PointerEnter,OnPoninterEnter);
@@ -137,14 +142,19 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
 		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
 		int select_index = _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().SelectIndex;
-		//デティール表示
-		_detail_main.Execute(_data,select_index);
+		
 
 		//デテールステート
 		_main_model.MainModelState = MainModel.DETAIL_VIEW_STATE;
 
+		//GlobalCoroutine.Go(ShowBAOBAOCorutine(_data));
+		StartCoroutine(ShowBAOBAOCorutine(_data));
+
+
+		//デティール表示
+		//_detail_main.Execute(_data,select_index);
 		//メイン非表示
-		CanvasMainActivate(false);
+		//CanvasMainActivate(false);
 
 		//Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
 		// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
@@ -154,6 +164,44 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		// Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
 		// Debug.Log( (JsonData)_data["imgs"]);
 		//Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
+	}
+
+	private IEnumerator ShowBAOBAOCorutine(JsonData _selected_json_data){
+		 
+		 for (int i = 0; i < 49; i++)
+		{
+			JsonData _data = _all_data_list[i];
+			int select_index_max = _all_data_list[i]["imgs"].Count;
+			int select_index = Random.Range(0,select_index_max);			
+			string _base_url = "Portfolio" + "/images/l/" +  _all_data_list[i]["imgs"][select_index];
+		
+	 		if(GameObject.Find("ImageTriangle" + i) != null){
+				Image img =  GameObject.Find("Image" + i ).GetComponent<Image>();
+				//iが奇数が偶数かで回転する方向を分岐
+				Vector3 _target_vector;
+				if(i%2 == 1){
+					_target_vector = new Vector3(0,30f,0);
+				}else{
+					_target_vector = new Vector3(0,-30f,0);
+				}
+				img.rectTransform.DORotate(
+					_target_vector,
+					_fade_out_time
+				).SetRelative();
+
+				DOTween.ToAlpha(
+					() => img.color, 
+    				color => img.color = color,
+   					0f,                             // 最終的なalpha値
+    				_fade_out_time
+				);
+				yield return new WaitForSeconds(_fade_out_time);
+			 }
+			
+		}
+		 
+		yield return null;
+
 	}
 
 	private void CanvasMainActivate(bool _flag){
