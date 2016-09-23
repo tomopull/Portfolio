@@ -4,7 +4,10 @@ using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+
 using LitJson;
+using DG.Tweening;
+
 
 
 
@@ -15,6 +18,12 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 
 	private GameObject _detail_view;
+
+	private float _fade_in_time = 0.9f;
+
+	private float _fade_in_time_delay_total = 0;
+
+	private float _fade_in_time_delay_add = 0.3f;
 	
 	private string  _detail_folder_path = "DetailMain/DetailView/";
 
@@ -40,22 +49,65 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			
 			_detail_view.SetActive(true);
 			
-			//タイトル
-			GameObject.Find(_detail_folder_path + "Title").GetComponent<Text>().text = (_data["title"] as IJsonWrapper).GetString();
+			//タイトル-----------------------------------------------------------------------------------------------------------------
+			string _title_text_str = (_data["title"] as IJsonWrapper).GetString();
+			Text _title_text = GameObject.Find(_detail_folder_path + "Title").GetComponent<Text>();
+			_title_text.text = _title_text_str;
 
-			//年度
-			GameObject.Find(_detail_folder_path + "Year").GetComponent<Text>().text = (_data["year"] as IJsonWrapper).GetInt().ToString();
+			_title_text.color = new Color(255,255,255,0);
 
-			//詳細
-			GameObject.Find(_detail_folder_path + "DetailText").GetComponent<Text>().text = (_data["detail"] as IJsonWrapper).GetString();
+			DOTween.ToAlpha(
+				() => _title_text.color, 
+				color => _title_text.color = color,
+				1f,                             // 最終的なalpha値
+				_fade_in_time
+			);
 
-			//メインイメージ
+			//yield return new WaitForSeconds(_fade_out_time_delay_total);
+
+			//年度------------------------------------------------------------------------------------------------------------------------
+			string _year_text_str = (_data["year"] as IJsonWrapper).GetInt().ToString();
+			Text _year_text = GameObject.Find(_detail_folder_path + "Year").GetComponent<Text>();
+			_year_text.text = _year_text_str;
+
+			_year_text.color = new Color(255,255,255,0);
+
+			DOTween.ToAlpha(
+				() => _year_text.color, 
+				color => _year_text.color = color,
+				1f,                             // 最終的なalpha値
+				_fade_in_time
+			);
+
+
+			
+
+			//詳細-----------------------------------------------------------------------------------------------------------------------
+			string _detail_text_str = (_data["detail"] as IJsonWrapper).GetString();
+			Text _detail_text = GameObject.Find(_detail_folder_path + "DetailText").GetComponent<Text>();
+			_detail_text.text = _detail_text_str;
+
+			_detail_text.color = new Color(255,255,255,0);
+
+			DOTween.ToAlpha(
+				() => _detail_text.color, 
+				color => _detail_text.color = color,
+				1f,                             // 最終的なalpha値
+				_fade_in_time
+			);
+
+			//メインイメージ----------------------------------------------------------------------------------------------------------------
 			MakeMainImage(_data,_selected_index);
 			
-			//サムネイルボタン作成
+			//_fade_in_time_delay_total += _fade_in_time_delay_add;
+			//yield return new WaitForSeconds(_fade_in_time_delay_total);
+
+			//サムネイルボタン作成------------------------------------------------------------------------------------------------------------
 			MakeThumbnailButton(_data);
+
 			
-			 yield return null;
+			
+			yield return null;
 		}
 
 	}
@@ -68,6 +120,16 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 		Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
 
 		img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+
+		img.color = new Color(255,255,255,0);
+
+		DOTween.ToAlpha(
+			() => img.color, 
+			color => img.color = color,
+			1f, // 最終的なalpha値
+			_fade_in_time
+		);
+
 	}
 
 	private void MakeThumbnailButton(JsonData _data){
@@ -79,8 +141,15 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
 			//Debug.Log(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) );
 			Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
-			
 			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+			img.color = new Color(255,255,255,0);
+
+			DOTween.ToAlpha(
+				() => img.color, 
+				color => img.color = color,
+				1f, // 最終的なalpha値
+				_fade_in_time
+			);
 		
 			//ボタンイベント
 			Button btn = (Button)GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/btn_" + (i+1)).GetComponent<Button>();

@@ -22,7 +22,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	private List<JsonData> _all_data_list;
 
 	//フェードアウトする秒数
-	private float _fade_out_time = 0.3f;
+	private float _fade_out_time = 0.2f;
 	
 	//フェードアウトの時間差
 	private float _fade_out_time_delay_total = 0;
@@ -167,6 +167,9 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	private IEnumerator ShowBAOBAOCorutine(JsonData _selected_json_data,int select_index, int _opnen_flag = 0){
 
+		EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem> ();
+		eventSystem.enabled = false;
+
 		if(_opnen_flag == 0){
 
 			CanvasMainActivate(true);
@@ -236,8 +239,9 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			 }
 			
 		}
-		 
-		yield return null;
+		
+		
+		yield return new WaitForSeconds(_fade_out_time_delay_total);
 
 		if(_opnen_flag == 1){
 			//デティール表示
@@ -245,6 +249,10 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			//メイン非表示
 			CanvasMainActivate(false);
 		}
+
+		eventSystem.enabled = true;
+
+		yield return null;
 		
 	}
 
