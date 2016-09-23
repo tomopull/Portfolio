@@ -22,7 +22,12 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	private List<JsonData> _all_data_list;
 
 	//フェードアウトする秒数
-	private float _fade_out_time = 0.1f;
+	private float _fade_out_time = 0.3f;
+	
+	//フェードアウトの時間差
+	private float _fade_out_time_delay_total = 0;
+	private float _fade_out_time_delay_add = 0.015f;
+	
 
 	public List<JsonData> AllDataList{ get { return this._all_data_list; } set { this._all_data_list = value; } }
 
@@ -54,9 +59,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 		if(_main_model.MainModelState != MainModel.BAOBAO_VIEW_STATE){
 			
-			CanvasMainActivate(true);
-
-			_detail_main.Remove();
+			StartCoroutine(ShowBAOBAOCorutine(null,0,0));
 
 		}
 	}
@@ -148,13 +151,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		_main_model.MainModelState = MainModel.DETAIL_VIEW_STATE;
 
 		//GlobalCoroutine.Go(ShowBAOBAOCorutine(_data));
-		StartCoroutine(ShowBAOBAOCorutine(_data));
-
-
-		//デティール表示
-		//_detail_main.Execute(_data,select_index);
-		//メイン非表示
-		//CanvasMainActivate(false);
+		StartCoroutine(ShowBAOBAOCorutine(_data,select_index,1));
 
 		//Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
 		// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
@@ -166,42 +163,89 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
 	}
 
-	private IEnumerator ShowBAOBAOCorutine(JsonData _selected_json_data){
-		 
-		 for (int i = 0; i < 49; i++)
-		{
-			JsonData _data = _all_data_list[i];
-			int select_index_max = _all_data_list[i]["imgs"].Count;
-			int select_index = Random.Range(0,select_index_max);			
-			string _base_url = "Portfolio" + "/images/l/" +  _all_data_list[i]["imgs"][select_index];
+	
+
+	private IEnumerator ShowBAOBAOCorutine(JsonData _selected_json_data,int select_index, int _opnen_flag = 0){
+
+		if(_opnen_flag == 0){
+
+			CanvasMainActivate(true);
+			_detail_main.Remove();
+
+		}
 		
-	 		if(GameObject.Find("ImageTriangle" + i) != null){
-				Image img =  GameObject.Find("Image" + i ).GetComponent<Image>();
-				//iが奇数が偶数かで回転する方向を分岐
-				Vector3 _target_vector;
-				if(i%2 == 1){
-					_target_vector = new Vector3(0,30f,0);
+		for (int i = 1; i <= 6; i++)
+		{
+		
+	 		if(GameObject.Find("Module" + i) != null){
+				GameObject module =  GameObject.Find("Module" + i );
+				//左上
+				GameObject top_left = module.transform.FindChild("RectPartsTopLeft").gameObject;
+				//右上
+				GameObject top_right = module.transform.FindChild("RectPartsTopRight").gameObject;
+				//左下
+				GameObject bottom_left = module.transform.FindChild("RectPartsBottomLeft").gameObject;
+				//右下
+				GameObject bottom_right = module.transform.FindChild("RectPartsBottomRight").gameObject;
+
+				Vector3 _target_vector1;
+				Vector3 _target_vector2;
+
+				if(_opnen_flag == 1){
+					 _target_vector1 =  new Vector3(0f,90f,0);
+					 _target_vector2 =  new Vector3(0f,90f,0);
 				}else{
-					_target_vector = new Vector3(0,-30f,0);
+					 _target_vector1 =  new Vector3(0f,-90f,0);
+					 _target_vector2 =  new Vector3(0f,-90f,0);
 				}
-				img.rectTransform.DORotate(
-					_target_vector,
+
+				top_left.GetComponent<RectTransform>().DORotate(
+					_target_vector1,
 					_fade_out_time
 				).SetRelative();
 
-				DOTween.ToAlpha(
-					() => img.color, 
-    				color => img.color = color,
-   					0f,                             // 最終的なalpha値
-    				_fade_out_time
-				);
-				yield return new WaitForSeconds(_fade_out_time);
+				_fade_out_time_delay_total += _fade_out_time_delay_add;
+				yield return new WaitForSeconds(_fade_out_time_delay_total);
+				
+				top_right.GetComponent<RectTransform>().DORotate(
+					_target_vector2,
+					_fade_out_time
+				).SetRelative();
+
+				_fade_out_time_delay_total += _fade_out_time_delay_add;
+				yield return new WaitForSeconds(_fade_out_time_delay_total);
+
+				bottom_left.GetComponent<RectTransform>().DORotate(
+					_target_vector1,
+					_fade_out_time
+				).SetRelative();
+
+				_fade_out_time_delay_total += _fade_out_time_delay_add;
+				yield return new WaitForSeconds(_fade_out_time_delay_total);
+
+				bottom_right.GetComponent<RectTransform>().DORotate(
+					_target_vector2,
+					_fade_out_time
+				).SetRelative();
+
+				_fade_out_time_delay_total += _fade_out_time_delay_add;
+				yield return new WaitForSeconds(_fade_out_time_delay_total);
+				
+				_fade_out_time_delay_total = 0;
+
 			 }
 			
 		}
 		 
 		yield return null;
 
+		if(_opnen_flag == 1){
+			//デティール表示
+			_detail_main.Execute(_selected_json_data,select_index);
+			//メイン非表示
+			CanvasMainActivate(false);
+		}
+		
 	}
 
 	private void CanvasMainActivate(bool _flag){
@@ -242,3 +286,23 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	
 	
 }
+
+	// //iが奇数が偶数かで回転する方向を分岐
+	// Vector3 _target_vector;
+	// if(i%2 == 1){
+	// 	_target_vector = new Vector3(0,30f,0);
+	// }else{
+	// 	_target_vector = new Vector3(0,-30f,0);
+	// }
+	// img.rectTransform.DORotate(
+	// 	_target_vector,
+	// 	_fade_out_time
+	// ).SetRelative();
+
+	// DOTween.ToAlpha(
+	// 	() => img.color, 
+	// 	color => img.color = color,
+	// 	0f,                             // 最終的なalpha値
+	// 	_fade_out_time
+	// );
+	// yield return new WaitForSeconds(_fade_out_time);

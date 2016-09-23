@@ -1,0 +1,357 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ShaderB 1
+  m_Shader: {fileID: 4800000, guid: 2dcedcdd6e2f64e7fb366985e6189fd8, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
+  m_CustomRenderQueue: 2450
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 73c0c91c860bd4f59b37f6c881a1055f, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BumpMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailNormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ParallaxMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _OcclusionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _EmissionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailMask
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailAlbedoMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _mask
+        second:
+          m_Texture: {fileID: 2800000, guid: 6e052391bdb074650a529b79ef1837fe, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BaseTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: b66bceaf0cc0ace4e9bdc92f14bba709, type: 3}
+          m_Scale: {x: 0, y: 0}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Diffuse
+        second:
+          m_Texture: {fileID: 2800000, guid: 141187df81a4d473bb39ad5b5b09d89b, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Normal
+        second:
+          m_Texture: {fileID: 2800000, guid: 630f164e44edb4d848a0fc4d010cfb42, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _node_593
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _node_1193
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Base
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BlendImg
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Base_Normal
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Blending_Normal
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MaskTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: 81347a1024264453985d89bd8678536c, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DistotionTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: 4445575ea946e4dafb1c26714b562959, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _OffsetTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: 3a2af9d55b192430483afc8879918c48, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _SrcBlend
+        second: 1
+      data:
+        first:
+          name: _DstBlend
+        second: 0
+      data:
+        first:
+          name: _Cutoff
+        second: 0.5
+      data:
+        first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
+          name: _ZWrite
+        second: 1
+      data:
+        first:
+          name: _Glossiness
+        second: 0.5
+      data:
+        first:
+          name: _BumpScale
+        second: 1
+      data:
+        first:
+          name: _OcclusionStrength
+        second: 1
+      data:
+        first:
+          name: _DetailNormalMapScale
+        second: 1
+      data:
+        first:
+          name: _UVSec
+        second: 0
+      data:
+        first:
+          name: _Mode
+        second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 0
+      data:
+        first:
+          name: _Value
+        second: 1
+      data:
+        first:
+          name: _OutlineWidth
+        second: 0.1
+      data:
+        first:
+          name: _FresnelStrength
+        second: 0.95
+      data:
+        first:
+          name: _node_8315
+        second: 0.5
+      data:
+        first:
+          name: _node_7742
+        second: 10
+      data:
+        first:
+          name: _node_1012
+        second: 0.5
+      data:
+        first:
+          name: _DistotionPower
+        second: 1
+      data:
+        first:
+          name: _UseAnotherColor
+        second: 0
+      data:
+        first:
+          name: _AnotherColor
+        second: 2
+      data:
+        first:
+          name: _DistUScroll
+        second: 1
+      data:
+        first:
+          name: _DistVScroll
+        second: 0
+      data:
+        first:
+          name: _FallOffPower
+        second: 2
+      data:
+        first:
+          name: _BaseTexRotAngle
+        second: 0
+      data:
+        first:
+          name: _BaseVScroll
+        second: 0
+      data:
+        first:
+          name: _BaseUScroll
+        second: 0
+      data:
+        first:
+          name: _DistTexRotAngle
+        second: 0
+      data:
+        first:
+          name: _FollOffArea
+        second: 1
+      data:
+        first:
+          name: _UseAlphaPower
+        second: 0
+      data:
+        first:
+          name: _AlphaPower
+        second: 2
+      data:
+        first:
+          name: _RimLightArea
+        second: 2
+      data:
+        first:
+          name: _RimLightPower
+        second: 2
+      data:
+        first:
+          name: _OffsetPower
+        second: 0.1
+      data:
+        first:
+          name: _OffsetRotAngle
+        second: 0
+      data:
+        first:
+          name: _OffsetVScroll
+        second: 0
+      data:
+        first:
+          name: _OffsetUScroll
+        second: 0
+    m_Colors:
+      data:
+        first:
+          name: _EmissionColor
+        second: {r: 0, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _Color
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _OutLineColor
+        second: {r: 0.83823526, g: 0.83823526, b: 0.83823526, a: 1}
+      data:
+        first:
+          name: _node_995
+        second: {r: 0.2647059, g: 0.809, b: 0.1440312, a: 1}
+      data:
+        first:
+          name: _node_9179
+        second: {r: 0.6176471, g: 0.928, b: 0.3814879, a: 1}
+      data:
+        first:
+          name: _node_5910
+        second: {r: 0.04498268, g: 0.4705882, b: 0.1380652, a: 1}
+      data:
+        first:
+          name: _HighColor
+        second: {r: 1, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _LowColor
+        second: {r: 0.1586208, g: 0, b: 1, a: 1}
+      data:
+        first:
+          name: _RimLightColor
+        second: {r: 1, g: 0, b: 0, a: 1}
