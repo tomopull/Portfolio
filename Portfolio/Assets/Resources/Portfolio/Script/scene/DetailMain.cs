@@ -13,9 +13,18 @@ using DG.Tweening;
 
 public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
+	private float _loop_time = 5f;
+
+	private bool _update_flag = false;
+
+	//現在選択されているイメージのインデックス
+	private int _now_selected_img_index = 0;
+	
+	//現在選択されている投稿のイメージ総数
+	private int _now_img_total_count = 0;
+
 	private MainDataManager _main_data_manager;
 	// Use this for initialization
-
 
 	private GameObject _detail_view;
 
@@ -63,8 +72,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 				_fade_in_time
 			);
 
-			//yield return new WaitForSeconds(_fade_out_time_delay_total);
-
 			//年度------------------------------------------------------------------------------------------------------------------------
 			string _year_text_str = (_data["year"] as IJsonWrapper).GetInt().ToString();
 			Text _year_text = GameObject.Find(_detail_folder_path + "Year").GetComponent<Text>();
@@ -79,8 +86,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 				_fade_in_time
 			);
 
-
-			
 
 			//詳細-----------------------------------------------------------------------------------------------------------------------
 			string _detail_text_str = (_data["detail"] as IJsonWrapper).GetString();
@@ -98,18 +103,17 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 			//メインイメージ----------------------------------------------------------------------------------------------------------------
 			MakeMainImage(_data,_selected_index);
-			
-			//_fade_in_time_delay_total += _fade_in_time_delay_add;
-			//yield return new WaitForSeconds(_fade_in_time_delay_total);
-
+			_now_selected_img_index = _selected_index -1;
+			_now_img_total_count = ((JsonData)_data["imgs"].Count as IJsonWrapper).GetInt();
 			//サムネイルボタン作成------------------------------------------------------------------------------------------------------------
 			MakeThumbnailButton(_data);
 
-			
-			
 			yield return null;
 		}
 
+		_update_flag = true;
+		//サムネイルイメージの自動更新開始
+		StartCoroutine(UpdateMainImage(_data));
 	}
 
 	private void MakeMainImage(JsonData _data, int _selected_index){
@@ -156,7 +160,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			//ボタンにjson data 保存
 			//画像サムネイルの画像のindexの保存
 			btn.GetComponent<ThumbnailData>().JsonData = _data;
-			Util.SetButtonEvent(btn.gameObject,UpDateMainImage,EventTriggerType.PointerClick);
+			Util.SetButtonEvent(btn.gameObject,UpDateMainImageStart,EventTriggerType.PointerClick);
 
 			}
 			
@@ -169,29 +173,71 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	}
 
-	private void UpDateMainImage(BaseEventData  _base_event_data){
+	private IEnumerator UpdateMainImage( JsonData _selected_data) {
+
+			while(_update_flag){
+
+				string _base_url = "Portfolio" + "/images/l/" +  _selected_data["imgs"][_now_selected_img_index];
+
+				Texture2D _texture = Loader.Load(_base_url) as Texture2D;
+
+				Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
+
+				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+
+				img.color = new Color(255,255,255,0);
+
+				DOTween.ToAlpha(
+					() => img.color, 
+					color => img.color = color,
+					1f, // 最終的なalpha値
+					_fade_in_time
+				);
+
+				//次の投稿に更新
+				_now_selected_img_index +=1;
+
+				//一周回ったら最初から
+				if(_now_selected_img_index >= _now_img_total_count){
+					_now_selected_img_index = 0;
+				}
+
+				yield return new WaitForSeconds(_loop_time);
+
+			}
+
+    }
+	
+	private void UpDateMainImageStart(BaseEventData  _base_event_data = null){
 		
-		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
+		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;	
 		string btn_clicked =  Util.GetStringOnly(_base_event_data.selectedObject.GetComponent<Button>().ToString());
-		//Debug.Log(btn_clicked);
-		string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][int.Parse(btn_clicked)-1];
-		//Debug.Log(_base_url);
-		Texture2D _texture = Loader.Load(_base_url) as Texture2D;
-
-		Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
-		img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
-
+		
+		//現在選択中の画像のインデックスを更新
+		_now_selected_img_index = int.Parse(Util.GetStringOnly(btn_clicked))-1;
+		UpdateMainImage(_data);
 	}
 
 	public void Remove(){
 		
 		if(_detail_view){
 			Destroy(_detail_view);
+			//コルーチン終了
+			StopCoroutine("UpdateMainImage");
+			_update_flag = false;
 		}
 
+		
 	}
 
 }
+
+
+
+//メインイメージ総数の決定// Debug.Log( (_data["category"] as IJsonWrapper).GetInt());
+// Debug.Log( (JsonData)_data["tag"]);
+// Debug.Log( (_data["mov"] as IJsonWrapper).GetString());
+// Debug.Log( (JsonData)_data["imgs"]);
 
 //string _movie_tx_str = (_data["mov"] as IJsonWrapper).GetString();
 
