@@ -22,11 +22,11 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	private List<JsonData> _all_data_list;
 
 	//フェードアウトする秒数
-	private float _fade_out_time = 0.2f;
+	private float _fade_out_time = 0.01f;
 	
 	//フェードアウトの時間差
 	private float _fade_out_time_delay_total = 0;
-	private float _fade_out_time_delay_add = 0.015f;
+	private float _fade_out_time_delay_add = 0.001f;
 	
 
 	public List<JsonData> AllDataList{ get { return this._all_data_list; } set { this._all_data_list = value; } }
@@ -59,7 +59,8 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 		if(_main_model.MainModelState != MainModel.BAOBAO_VIEW_STATE){
 			
-			StartCoroutine(ShowBAOBAOCorutine(null,0,0));
+			InitImages();
+			StartCoroutine(ShowBAOBAOCorutine2(null,0,0));
 
 		}
 	}
@@ -150,8 +151,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//デテールステート
 		_main_model.MainModelState = MainModel.DETAIL_VIEW_STATE;
 
-		//GlobalCoroutine.Go(ShowBAOBAOCorutine(_data));
-		StartCoroutine(ShowBAOBAOCorutine(_data,select_index,1));
+		StartCoroutine(ShowBAOBAOCorutine1(_data,select_index,1));
 
 		//Debug.Log( (_data["id"] as IJsonWrapper).GetInt() );	
 		// Debug.Log( (_data["title"] as IJsonWrapper).GetString());
@@ -163,7 +163,10 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
 	}
 
-	private IEnumerator ShowBAOBAOCorutine(JsonData _selected_json_data,int select_index, int _opnen_flag = 0){
+	//デテールイメージのアニメーション１
+	private IEnumerator ShowBAOBAOCorutine1(JsonData _selected_json_data,int select_index, int _opnen_flag = 0){
+
+		Util.SetEventSystemInteractive(false);
 
 		for (int i = 0; i < 49; i++)
 		{
@@ -175,19 +178,155 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][pickup];
 
-			//Debug.Log(_base_url);
 			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
-		
+			
 	 		if(GameObject.Find("ImageTriangle" + i) != null){
 				Image img =  GameObject.Find("Image" + i ).GetComponent<Image>();
 				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+				//img.color = new Color(1,1,1,0);
+
+				DOTween.ToAlpha(
+					() => img.color, 
+					color => img.color = color,
+					1f,// 最終的なalpha値
+					_fade_out_time
+				);
+
 			 }
+
+			yield return new WaitForSeconds(_fade_out_time_delay_add);
 
 		}
 
+		StartCoroutine(ShowBAOBAOCorutine2(_selected_json_data, select_index, 1));
+
 		yield return null;
-		
+
 	}
+
+	//デテールイメージのアニメーション２
+	private IEnumerator ShowBAOBAOCorutine2(JsonData _selected_json_data,int select_index, int _opnen_flag = 0){
+
+		if(_opnen_flag == 0){
+
+			CanvasMainActivate(true);
+			_detail_main.Remove();
+
+		}
+
+		for (int i = 1; i <= 6; i++)
+		{
+
+	 		if(GameObject.Find("Module" + i) != null){
+
+				GameObject module =  GameObject.Find("Module" + i );
+				//左上
+				GameObject top_left = module.transform.FindChild("RectPartsTopLeft").gameObject;
+				//右上
+				GameObject top_right = module.transform.FindChild("RectPartsTopRight").gameObject;
+				//左下
+				GameObject bottom_left = module.transform.FindChild("RectPartsBottomLeft").gameObject;
+				//右下
+				GameObject bottom_right = module.transform.FindChild("RectPartsBottomRight").gameObject;
+
+				Vector3 _target_vector1;
+				Vector3 _target_vector2;
+
+				if(_opnen_flag == 1){
+					 _target_vector1 =  new Vector3(0f,90f,0);
+					 _target_vector2 =  new Vector3(0f,90f,0);
+				}else{
+					 _target_vector1 =  new Vector3(0f,-90f,0);
+					 _target_vector2 =  new Vector3(0f,-90f,0);
+				}
+
+				top_left.GetComponent<RectTransform>().DORotate(
+					_target_vector1,
+					_fade_out_time
+				).SetRelative();
+
+				_fade_out_time_delay_total += _fade_out_time_delay_add;
+				yield return new WaitForSeconds(_fade_out_time_delay_total);
+				
+				top_right.GetComponent<RectTransform>().DORotate(
+					_target_vector2,
+					_fade_out_time
+				).SetRelative();
+
+				_fade_out_time_delay_total += _fade_out_time_delay_add;
+				yield return new WaitForSeconds(_fade_out_time_delay_total);
+
+				bottom_left.GetComponent<RectTransform>().DORotate(
+					_target_vector1,
+					_fade_out_time
+				).SetRelative();
+
+				_fade_out_time_delay_total += _fade_out_time_delay_add;
+				yield return new WaitForSeconds(_fade_out_time_delay_total);
+
+				bottom_right.GetComponent<RectTransform>().DORotate(
+					_target_vector2,
+					_fade_out_time
+				).SetRelative();
+
+				_fade_out_time_delay_total += _fade_out_time_delay_add;
+				yield return new WaitForSeconds(_fade_out_time_delay_total);
+				
+				_fade_out_time_delay_total = 0;
+
+			 }
+			
+		}
+		
+		yield return new WaitForSeconds(_fade_out_time_delay_total);
+
+		if(_opnen_flag == 1){
+			//デティール表示
+			_detail_main.Execute(_selected_json_data,select_index);
+			//メイン非表示
+			CanvasMainActivate(false);
+		}
+
+		yield return null;
+
+		Util.SetEventSystemInteractive(true);
+
+	}
+
+		private void CanvasMainActivate(bool _flag){
+		for (int i = 0; i < 49; i++)
+		{
+			JsonData _data = _all_data_list[i];
+
+	 		if(GameObject.Find("Image" + i) != null){
+
+				GameObject.Find("Image" + i).GetComponent<Image>().enabled = _flag;
+				
+			 }
+
+		}
+	}
+
+	private void CreateDataList(List<JsonData> _list, List<JsonData> _list_additional){
+		for (int i = 0; i < _list_additional.Count; i++)
+		{
+			JsonData _tmp_data = _list_additional[i];
+			_list.Add(_tmp_data);
+			//Debug.Log(_list.Count);
+		}
+
+	}
+
+	private void ShuffleList (List<JsonData> _list) {
+		for (int i = 0; i < _list.Count; i++) {
+			JsonData temp = _list[i];
+			int randomIndex = UnityEngine.Random.Range(0, _list.Count);
+			_list[i] = _list[randomIndex];
+			_list[randomIndex] = temp;
+		}
+	}
+
+
 	
 
 	// private IEnumerator ShowBAOBAOCorutine(JsonData _selected_json_data,int select_index, int _opnen_flag = 0){
@@ -278,45 +417,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	// 	yield return null;
 		
-	// }
-
-	private void CanvasMainActivate(bool _flag){
-		for (int i = 0; i < 49; i++)
-		{
-			JsonData _data = _all_data_list[i];
-
-	 		if(GameObject.Find("Image" + i) != null){
-
-				GameObject.Find("Image" + i).GetComponent<Image>().enabled = _flag;
-				
-			 }
-
-		}
-	}
-
-	private void CreateDataList(List<JsonData> _list, List<JsonData> _list_additional){
-		for (int i = 0; i < _list_additional.Count; i++)
-		{
-			JsonData _tmp_data = _list_additional[i];
-			_list.Add(_tmp_data);
-			//Debug.Log(_list.Count);
-		}
-
-	}
-
-	private void ShuffleList (List<JsonData> _list) {
-		for (int i = 0; i < _list.Count; i++) {
-			JsonData temp = _list[i];
-			int randomIndex = UnityEngine.Random.Range(0, _list.Count);
-			_list[i] = _list[randomIndex];
-			_list[randomIndex] = temp;
-		}
-	}
-	
-
-
-	
-	
+	// }	
 }
 
 	// //iが奇数が偶数かで回転する方向を分岐

@@ -32,6 +32,12 @@ static public class Util  {
 	}
 
 
+	//インタラクティブを不可にするかどうか
+	static public void SetEventSystemInteractive(bool _isInteractive){
+			EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem> ();
+			eventSystem.enabled = _isInteractive;
+	}
+
 	//数字だけ抜き出す
 	static public string GetStringOnly(string _str){
 		Regex re = new Regex(@"[^0-9]");

@@ -115,7 +115,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 	private void MakeMainImage(JsonData _data, int _selected_index){
 		//メインイメージ		
 		string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][_selected_index];
-		Texture2D _texture = Resources.Load(_base_url) as Texture2D;
+		Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 
 		Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
 
@@ -138,7 +138,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 		{			
 			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][i];
 			
-			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
+			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 			//Debug.Log(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) );
 			Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
 			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
@@ -176,7 +176,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 		//Debug.Log(btn_clicked);
 		string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][int.Parse(btn_clicked)-1];
 		//Debug.Log(_base_url);
-		Texture2D _texture = Resources.Load(_base_url) as Texture2D;
+		Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 
 		Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
 		img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
