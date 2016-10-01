@@ -64,6 +64,7 @@
      <Compile Include="Assets\Resources\Portfolio\Util\CreateAssetBundles.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\GameViewSizeHelper.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\GlobalCoroutine.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Util\Loader.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\RaycastMask.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\SceneGUI.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\SortingLayer.cs" />

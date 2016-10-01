@@ -87,7 +87,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			int select_index_max = _data_list[i]["imgs"].Count;
 			int select_index = Random.Range(0,select_index_max);			
 			string _base_url = "Portfolio" + "/images/l/" +  _data_list[i]["imgs"][select_index];
-			Texture2D _texture = Resources.Load(_base_url) as Texture2D;
+			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 		
 	 		if(GameObject.Find("ImageTriangle" + i) != null){
 				Image img =  GameObject.Find("Image" + i ).GetComponent<Image>();
@@ -163,98 +163,122 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//Debug.Log( (_data["detail"] as IJsonWrapper).GetString());	
 	}
 
-	
-
 	private IEnumerator ShowBAOBAOCorutine(JsonData _selected_json_data,int select_index, int _opnen_flag = 0){
 
-		EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem> ();
-		eventSystem.enabled = false;
-
-		if(_opnen_flag == 0){
-
-			CanvasMainActivate(true);
-			_detail_main.Remove();
-
-		}
-		
-		for (int i = 1; i <= 6; i++)
+		for (int i = 0; i < 49; i++)
 		{
+			JsonData _data = _selected_json_data;
+
+			int select_index_max = ( (JsonData)_data["imgs"].Count as IJsonWrapper).GetInt();
+
+			int pickup = Random.Range(0,select_index_max);
+
+			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][pickup];
+
+			//Debug.Log(_base_url);
+			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 		
-	 		if(GameObject.Find("Module" + i) != null){
-				GameObject module =  GameObject.Find("Module" + i );
-				//左上
-				GameObject top_left = module.transform.FindChild("RectPartsTopLeft").gameObject;
-				//右上
-				GameObject top_right = module.transform.FindChild("RectPartsTopRight").gameObject;
-				//左下
-				GameObject bottom_left = module.transform.FindChild("RectPartsBottomLeft").gameObject;
-				//右下
-				GameObject bottom_right = module.transform.FindChild("RectPartsBottomRight").gameObject;
-
-				Vector3 _target_vector1;
-				Vector3 _target_vector2;
-
-				if(_opnen_flag == 1){
-					 _target_vector1 =  new Vector3(0f,90f,0);
-					 _target_vector2 =  new Vector3(0f,90f,0);
-				}else{
-					 _target_vector1 =  new Vector3(0f,-90f,0);
-					 _target_vector2 =  new Vector3(0f,-90f,0);
-				}
-
-				top_left.GetComponent<RectTransform>().DORotate(
-					_target_vector1,
-					_fade_out_time
-				).SetRelative();
-
-				_fade_out_time_delay_total += _fade_out_time_delay_add;
-				yield return new WaitForSeconds(_fade_out_time_delay_total);
-				
-				top_right.GetComponent<RectTransform>().DORotate(
-					_target_vector2,
-					_fade_out_time
-				).SetRelative();
-
-				_fade_out_time_delay_total += _fade_out_time_delay_add;
-				yield return new WaitForSeconds(_fade_out_time_delay_total);
-
-				bottom_left.GetComponent<RectTransform>().DORotate(
-					_target_vector1,
-					_fade_out_time
-				).SetRelative();
-
-				_fade_out_time_delay_total += _fade_out_time_delay_add;
-				yield return new WaitForSeconds(_fade_out_time_delay_total);
-
-				bottom_right.GetComponent<RectTransform>().DORotate(
-					_target_vector2,
-					_fade_out_time
-				).SetRelative();
-
-				_fade_out_time_delay_total += _fade_out_time_delay_add;
-				yield return new WaitForSeconds(_fade_out_time_delay_total);
-				
-				_fade_out_time_delay_total = 0;
-
+	 		if(GameObject.Find("ImageTriangle" + i) != null){
+				Image img =  GameObject.Find("Image" + i ).GetComponent<Image>();
+				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 			 }
-			
-		}
-		
-		
-		yield return new WaitForSeconds(_fade_out_time_delay_total);
 
-		if(_opnen_flag == 1){
-			//デティール表示
-			_detail_main.Execute(_selected_json_data,select_index);
-			//メイン非表示
-			CanvasMainActivate(false);
 		}
-
-		eventSystem.enabled = true;
 
 		yield return null;
 		
 	}
+	
+
+	// private IEnumerator ShowBAOBAOCorutine(JsonData _selected_json_data,int select_index, int _opnen_flag = 0){
+
+	// 	EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem> ();
+	// 	eventSystem.enabled = false;
+
+	// 	if(_opnen_flag == 0){
+
+	// 		CanvasMainActivate(true);
+	// 		_detail_main.Remove();
+
+	// 	}
+		
+	// 	for (int i = 1; i <= 6; i++)
+	// 	{
+		
+	//  		if(GameObject.Find("Module" + i) != null){
+	// 			GameObject module =  GameObject.Find("Module" + i );
+	// 			//左上
+	// 			GameObject top_left = module.transform.FindChild("RectPartsTopLeft").gameObject;
+	// 			//右上
+	// 			GameObject top_right = module.transform.FindChild("RectPartsTopRight").gameObject;
+	// 			//左下
+	// 			GameObject bottom_left = module.transform.FindChild("RectPartsBottomLeft").gameObject;
+	// 			//右下
+	// 			GameObject bottom_right = module.transform.FindChild("RectPartsBottomRight").gameObject;
+
+	// 			Vector3 _target_vector1;
+	// 			Vector3 _target_vector2;
+
+	// 			if(_opnen_flag == 1){
+	// 				 _target_vector1 =  new Vector3(0f,90f,0);
+	// 				 _target_vector2 =  new Vector3(0f,90f,0);
+	// 			}else{
+	// 				 _target_vector1 =  new Vector3(0f,-90f,0);
+	// 				 _target_vector2 =  new Vector3(0f,-90f,0);
+	// 			}
+
+	// 			top_left.GetComponent<RectTransform>().DORotate(
+	// 				_target_vector1,
+	// 				_fade_out_time
+	// 			).SetRelative();
+
+	// 			_fade_out_time_delay_total += _fade_out_time_delay_add;
+	// 			yield return new WaitForSeconds(_fade_out_time_delay_total);
+				
+	// 			top_right.GetComponent<RectTransform>().DORotate(
+	// 				_target_vector2,
+	// 				_fade_out_time
+	// 			).SetRelative();
+
+	// 			_fade_out_time_delay_total += _fade_out_time_delay_add;
+	// 			yield return new WaitForSeconds(_fade_out_time_delay_total);
+
+	// 			bottom_left.GetComponent<RectTransform>().DORotate(
+	// 				_target_vector1,
+	// 				_fade_out_time
+	// 			).SetRelative();
+
+	// 			_fade_out_time_delay_total += _fade_out_time_delay_add;
+	// 			yield return new WaitForSeconds(_fade_out_time_delay_total);
+
+	// 			bottom_right.GetComponent<RectTransform>().DORotate(
+	// 				_target_vector2,
+	// 				_fade_out_time
+	// 			).SetRelative();
+
+	// 			_fade_out_time_delay_total += _fade_out_time_delay_add;
+	// 			yield return new WaitForSeconds(_fade_out_time_delay_total);
+				
+	// 			_fade_out_time_delay_total = 0;
+
+	// 		 }
+			
+	// 	}
+		
+	// 	yield return new WaitForSeconds(_fade_out_time_delay_total);
+
+	// 	if(_opnen_flag == 1){
+	// 		//デティール表示
+	// 		_detail_main.Execute(_selected_json_data,select_index);
+	// 		//メイン非表示
+	// 		CanvasMainActivate(false);
+	// 	}
+
+	// 	eventSystem.enabled = true;
+
+	// 	yield return null;
+		
+	// }
 
 	private void CanvasMainActivate(bool _flag){
 		for (int i = 0; i < 49; i++)
