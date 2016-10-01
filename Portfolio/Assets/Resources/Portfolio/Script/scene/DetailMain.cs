@@ -13,9 +13,17 @@ using DG.Tweening;
 
 public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
-	private float _loop_time = 5f;
+	//ループしだす間の制止している間の間隔
+	private float _idle_time = 3f;
+	private float _now_idle_time = 3f;
 
 	private bool _update_flag = false;
+
+
+	//アイドル状態かどうか。
+	//アイドル状態の時はゆっくり時間をとってフェードインアウト
+	//アイドル状態でない時はクリックされた時なので、すぐにフェードインアウト
+	private bool _is_idle_time = true;
 
 	//現在選択されているイメージのインデックス
 	private int _now_selected_img_index = 0;
@@ -103,7 +111,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 			//メインイメージ----------------------------------------------------------------------------------------------------------------
 			MakeMainImage(_data,_selected_index);
-			_now_selected_img_index = _selected_index -1;
+			_now_selected_img_index = _selected_index;
 			_now_img_total_count = ((JsonData)_data["imgs"].Count as IJsonWrapper).GetInt();
 			//サムネイルボタン作成------------------------------------------------------------------------------------------------------------
 			MakeThumbnailButton(_data);
@@ -202,7 +210,8 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 					_now_selected_img_index = 0;
 				}
 
-				yield return new WaitForSeconds(_loop_time);
+				yield return new WaitForSeconds(_now_idle_time);
+				
 
 			}
 
