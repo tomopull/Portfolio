@@ -11,6 +11,7 @@ using DG.Tweening;
 
 
 
+
 public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	//ループしだす間の制止している間の間隔
@@ -94,7 +95,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 				_fade_in_time
 			);
 
-
 			//詳細-----------------------------------------------------------------------------------------------------------------------
 			string _detail_text_str = (_data["detail"] as IJsonWrapper).GetString();
 			Text _detail_text = GameObject.Find(_detail_folder_path + "DetailText").GetComponent<Text>();
@@ -110,7 +110,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			);
 
 			//メインイメージ----------------------------------------------------------------------------------------------------------------
-			MakeMainImage(_data,_selected_index);
+			MakeImage(_data,_selected_index);
 			_now_selected_img_index = _selected_index;
 			_now_img_total_count = ((JsonData)_data["imgs"].Count as IJsonWrapper).GetInt();
 			//サムネイルボタン作成------------------------------------------------------------------------------------------------------------
@@ -120,11 +120,12 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 		}
 
 		_update_flag = true;
+
 		//サムネイルイメージの自動更新開始
-		StartCoroutine(UpdateMainImage(_data));
+		StartCoroutine(UpdateImage(_data));
 	}
 
-	private void MakeMainImage(JsonData _data, int _selected_index){
+	private void MakeImage(JsonData _data, int _selected_index){
 		//メインイメージ		
 		string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][_selected_index];
 		Texture2D _texture = Loader.Load(_base_url) as Texture2D;
@@ -154,12 +155,21 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			//Debug.Log(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) );
 			Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
 			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+
 			img.color = new Color(255,255,255,0);
+
+			float tint_color;
+
+			if(_now_selected_img_index == i){
+				tint_color = 1;
+			}else{
+				tint_color = 0.3f;
+			}
 
 			DOTween.ToAlpha(
 				() => img.color, 
 				color => img.color = color,
-				1f, // 最終的なalpha値
+				tint_color, // 最終的なalpha値
 				_fade_in_time
 			);
 		
@@ -168,7 +178,8 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			//ボタンにjson data 保存
 			//画像サムネイルの画像のindexの保存
 			btn.GetComponent<ThumbnailData>().JsonData = _data;
-			Util.SetButtonEvent(btn.gameObject,UpDateMainImageStart,EventTriggerType.PointerClick);
+
+			Util.SetButtonEvent(btn.gameObject,UpDateImageStart,EventTriggerType.PointerClick);
 
 			}
 			
@@ -181,9 +192,12 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	}
 
-	private IEnumerator UpdateMainImage( JsonData _selected_data) {
+	private IEnumerator UpdateImage( JsonData _selected_data) {
 
 			while(_update_flag){
+
+				//サムネイルの フォーカスの移動
+				SetThumbnailForcus(_selected_data);
 
 				string _base_url = "Portfolio" + "/images/l/" +  _selected_data["imgs"][_now_selected_img_index];
 
@@ -211,21 +225,56 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 				}
 
 				yield return new WaitForSeconds(_now_idle_time);
-				
 
 			}
-
     }
 	
-	private void UpDateMainImageStart(BaseEventData  _base_event_data = null){
+	private void UpDateImageStart(BaseEventData  _base_event_data = null){
 		
 		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;	
 		string btn_clicked =  Util.GetStringOnly(_base_event_data.selectedObject.GetComponent<Button>().ToString());
-		
+
 		//現在選択中の画像のインデックスを更新
 		_now_selected_img_index = int.Parse(Util.GetStringOnly(btn_clicked))-1;
-		UpdateMainImage(_data);
+		UpdateImage(_data);
 	}
+
+	private void SetThumbnailForcus(JsonData _data){
+		
+		for (int i = 0; i <  _data["imgs"].Count; i++)
+		{			
+			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][i];
+			
+			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
+			Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
+			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+
+			Color tint_color;
+
+			if(_now_selected_img_index == i){
+				tint_color = new Color(255,255,255,1);
+			}else{
+				tint_color = new Color(255,255,255,0.3f);
+			}
+
+			DOTween.To(
+				() => img.color,              // 何を対象にするのか
+				color => img.color = color,   // 値の更新
+				tint_color,                   // 最終的な値
+				0                             // アニメーション時間
+			);
+
+		}
+
+		// DOTween.To(
+		// () => image.color,              // 何を対象にするのか
+		// color => image.color = color,   // 値の更新
+		// Color.yellow,                   // 最終的な値
+		// 3f                              // アニメーション時間
+		// );
+		
+	}
+
 
 	public void Remove(){
 		
@@ -235,7 +284,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			StopCoroutine("UpdateMainImage");
 			_update_flag = false;
 		}
-
 		
 	}
 
