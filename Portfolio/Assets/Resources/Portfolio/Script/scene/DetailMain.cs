@@ -15,8 +15,8 @@ using DG.Tweening;
 public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	//ループしだす間の制止している間の間隔
-	private float _idle_time = 3f;
-	private float _now_idle_time = 3f;
+	private float _idle_time = 4f;
+	private float _now_idle_time = 4f;
 
 	private bool _update_flag = false;
 
@@ -170,7 +170,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 				() => img.color, 
 				color => img.color = color,
 				tint_color, // 最終的なalpha値
-				_fade_in_time
+				0.1f
 			);
 		
 			//ボタンイベント

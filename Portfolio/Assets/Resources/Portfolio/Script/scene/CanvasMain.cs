@@ -163,7 +163,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	private IEnumerator ShowBAOBAOCorutine1(JsonData _selected_json_data,int select_index, int _opnen_flag = 0){
 
 		float	_fade_out_time_delay_total = 0;
-		float _fade_out_time_delay_add = 0.0002f;
+		float _fade_out_time_delay_add = 0.0001f;
 
 		for (int i = 0; i < 49; i++)
 		{
@@ -173,7 +173,9 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 			int pickup = Random.Range(0,select_index_max);
 
-			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][pickup];
+			//string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][pickup];
+			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][select_index];
+			
 
 			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 			
@@ -196,6 +198,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			_fade_out_time_delay_total +=  _fade_out_time_delay_add;
 		}
 
+		yield return new WaitForSeconds(0.4f);
 		StartCoroutine(ShowBAOBAOCorutine2(_selected_json_data, select_index, 1));
 
 		yield return null;
