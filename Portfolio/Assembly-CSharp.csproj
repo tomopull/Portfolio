@@ -68,6 +68,7 @@
      <Compile Include="Assets\Resources\Portfolio\Util\RaycastMask.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\SceneGUI.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\SortingLayer.cs" />
+     <Compile Include="Assets\Resources\Portfolio\Util\StableAspect.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\TextureUtil.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\UIEventHandler.cs" />
      <Compile Include="Assets\Resources\Portfolio\Util\Util.cs" />

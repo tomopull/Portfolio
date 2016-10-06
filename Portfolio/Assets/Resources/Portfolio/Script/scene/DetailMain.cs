@@ -122,28 +122,65 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 		_update_flag = true;
 
 		//サムネイルイメージの自動更新開始
-		StartCoroutine(UpdateImage(_data));
+		//StartCoroutine(UpdateImage(_data));
+		StartCoroutine(MakeImage(_data,_selected_index));
+		
 	}
 
-	private void MakeImage(JsonData _data, int _selected_index){
-		//メインイメージ		
-		string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][_selected_index];
-		Texture2D _texture = Loader.Load(_base_url) as Texture2D;
+	private IEnumerator MakeImage(JsonData _data, int _selected_index){
 
-		Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
+		string  movieTexturePath    = Application.streamingAssetsPath + "/" + "donburi_catcher.ogv";
+		Debug.Log(movieTexturePath);
+		string  url                 = "file://" + movieTexturePath;
+		WWW     movie               = new WWW(url);
 
-		img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+		while (!movie.isDone) {
+			yield return null;
+		}
 
-		img.color = new Color(255,255,255,0);
+		MovieTexture movieTexture = movie.movie;
 
-		DOTween.ToAlpha(
-			() => img.color, 
-			color => img.color = color,
-			1f, // 最終的なalpha値
-			_fade_in_time
-		);
+		while (!movieTexture.isReadyToPlay) {
+			yield return null;
+		}
+
+			var renderer = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<MeshRenderer>();
+			renderer.material.mainTexture = movieTexture;
+
+			movieTexture.loop = true;
+			movieTexture.Play ();
+
+		#if false
+
+			//オーディオを使用する場合はこの部分を有効にしてください
+			var audioSource = GetComponent<AudioSource>();
+			audioSource.clip = movieTexture.audioClip;
+			audioSource.loop = true;
+			audioSource.Play ();
+			
+		#endif
 
 	}
+
+	// private void MakeImage(JsonData _data, int _selected_index){
+	// 	//メインイメージ		
+	// 	string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][_selected_index];
+	// 	Texture2D _texture = Loader.Load(_base_url) as Texture2D;
+
+	// 	Image img =  GameObject.Find(_detail_folder_path + "DetailImg").GetComponent<Image>();
+
+	// 	img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+
+	// 	img.color = new Color(255,255,255,0);
+
+	// 	DOTween.ToAlpha(
+	// 		() => img.color, 
+	// 		color => img.color = color,
+	// 		1f, // 最終的なalpha値
+	// 		_fade_in_time
+	// 	);
+
+	// }
 
 	private void MakeThumbnailButton(JsonData _data){
 
@@ -203,7 +240,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 				Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 
-				Image img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<Image>();
+				Image img =  GameObject.Find(_detail_folder_path + "DetailImg").GetComponent<Image>();
 
 				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 
