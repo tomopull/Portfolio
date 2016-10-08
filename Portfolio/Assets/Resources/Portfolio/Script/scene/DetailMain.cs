@@ -144,9 +144,13 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			yield return null;
 		}
 
-			var renderer = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<MeshRenderer>();
-			renderer.material.mainTexture = movieTexture;
-
+			//var renderer = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<MeshRenderer>();
+			//renderer.material.mainTexture = movieTexture;
+			RawImage img = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>();
+			img.material.mainTexture = movieTexture;
+			
+			img.gameObject.SetActive(false);
+			img.gameObject.SetActive(true);
 			movieTexture.loop = true;
 			movieTexture.Play ();
 
