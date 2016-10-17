@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 using System.Collections.Generic;
-
 using UnityEngine.UI;
+
 
 public class DetailView :  AbstractBehaviour,IInterfaceBehaviour {
 
@@ -22,7 +23,9 @@ public class DetailView :  AbstractBehaviour,IInterfaceBehaviour {
 
 	public void Initialize(){
 
+
 	}
+
 
 	
 

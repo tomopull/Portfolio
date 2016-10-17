@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
@@ -9,17 +10,16 @@ using LitJson;
 using DG.Tweening;
 
 
+public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 
-
-
-public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
+	//jsonデータ
+	JsonData _json_data;
 
 	//ループしだす間の制止している間の間隔
 	private float _idle_time = 4f;
 	private float _now_idle_time = 4f;
 
 	private bool _update_flag = false;
-
 
 	//アイドル状態かどうか。
 	//アイドル状態の時はゆっくり時間をとってフェードインアウト
@@ -45,10 +45,27 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 	
 	private string  _detail_folder_path = "DetailMain/DetailView/";
 
+	//TouchManager GameObject
+	GameObject _touch_manager;
+	
+	DragDetector _drag_detector;
+
+	//TouchHandler script
+	TouchHandler _touch_handler;
+
+
 	//private MovieTexture _movie_texture;
 
 	public void Initialize(){
-		
+
+		//TouchManager GameObject
+		_touch_manager = GameObject.Find("RootManeger/TouchManager");
+
+		//TouchHandler script
+		_touch_handler = _touch_manager.GetComponent<TouchHandler>();
+
+		//DragDetector script
+		_drag_detector = _touch_manager.GetComponent<DragDetector>();
 	}
 	
 	public void SetMainDataManager(MainDataManager _manager){
@@ -59,7 +76,62 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 		StartCoroutine(Show(_data,_selected_index));
 	}
 
+	void Update(){
+		InputHandler();
+	} 
+
+	//すワイプ動作の監視
+	private void InputHandler(){
+
+		Vector3 _touch_start_pos = new Vector3();
+		Vector3 _temp_touch_pos = new Vector3();
+		Vector3 _touch_end_pos = new Vector3();
+
+		Camera _main_camera = GameObject.Find("Camera").GetComponent<Camera>();
+		
+		if(TouchHandler.Instance.IsDown){
+			_touch_start_pos = TouchHandler.Instance.TouchStartPos;
+		}
+
+		if(TouchHandler.Instance.IsDrag){
+			_temp_touch_pos = Input.mousePosition;
+
+			if(_detail_view!= null){
+				_detail_view.transform.position = new Vector3(_temp_touch_pos.x,_detail_view.transform.position.y,_detail_view.transform.position.z);
+			}
+			
+		}
+
+		if(TouchHandler.Instance.IsUp){
+			_touch_end_pos = TouchHandler.Instance.TouchEndPos;
+			//次の投稿の表示
+			if(_main_data_manager.GetModel().MainModelState == MainModel.DETAIL_VIEW_STATE){
+				ShowNext();
+			}
+		}
+		
+	}
+
+	//次の投稿の表示
+	private void ShowNext(){
+		Debug.Log("ShowNext");
+		Remove();
+		// //idを一つ進める
+		int now_id = (_json_data["id"] as IJsonWrapper).GetInt();
+		int next_id = now_id+=1;
+
+		// //idが一周したら最初に戻る
+		if(_main_data_manager.GetModel().OriginalJsonData.Count < next_id){
+			next_id = 1;
+		}
+		JsonData _next_json_data = _main_data_manager.GetDataById(next_id);
+
+		StartCoroutine(Show(_next_json_data,0));
+		
+	}
+
 	private IEnumerator Show(JsonData _data, int _selected_index){
+		Debug.Log("Show");
 
 		if(_detail_view == null){
 
@@ -110,79 +182,68 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 			);
 
 			//メインイメージ----------------------------------------------------------------------------------------------------------------
-			MakeImage(_data,_selected_index);
+			_update_flag = true;
 			_now_selected_img_index = _selected_index;
+			_json_data = _data;
 			_now_img_total_count = ((JsonData)_data["imgs"].Count as IJsonWrapper).GetInt();
 			//サムネイルボタン作成------------------------------------------------------------------------------------------------------------
 			MakeThumbnailButton(_data);
 
 			yield return null;
 		}
-
-		_update_flag = true;
-
 		//サムネイルイメージの自動更新開始
-		//StartCoroutine(UpdateImage(_data));
-		StartCoroutine(MakeImage(_data,_selected_index));
-		
+		StartCoroutine(UpdateMainImage(_data));
+
+		//対象投稿のidが動画データを持っているかどうかで分岐仮
+		// if((_data["mov"] as IJsonWrapper).ToString() == "donburi_catcher"){
+		// 	StartCoroutine(StartMovie(_data,_selected_index));
+		// 	_update_flag = false;
+		// 	_now_selected_img_index = -100;
+		// 	//コルーチン終了
+		// 	StopCoroutine("UpdateMainImage");
+		// }else{
+		// 	//サムネイルイメージの自動更新開始
+		// 	StartCoroutine(UpdateMainImage(_data));
+		// }
 	}
 
-	private IEnumerator MakeImage(JsonData _data, int _selected_index){
 
-		string  movieTexturePath    = Application.streamingAssetsPath + "/" + "donburi_catcher.ogv";
-		Debug.Log(movieTexturePath);
-		string  url                 = "file://" + movieTexturePath;
-		WWW     movie               = new WWW(url);
 
-		while (!movie.isDone) {
-			yield return null;
-		}
+	// private IEnumerator StartMovie(JsonData _data, int _selected_index){
 
-		MovieTexture movieTexture = movie.movie;
+	// 	string  movieTexturePath    = Application.streamingAssetsPath + "/" + "donburi_catcher.ogv";
+	// 	string  url                 = "file://" + movieTexturePath;
+	// 	WWW     movie               = new WWW(url);
 
-		while (!movieTexture.isReadyToPlay) {
-			yield return null;
-		}
+	// 	while (!movie.isDone) {
+	// 		yield return null;
+	// 	}
 
-			//var renderer = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<MeshRenderer>();
-			//renderer.material.mainTexture = movieTexture;
-			RawImage img = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>();
-			img.material.mainTexture = movieTexture;
+	// 	MovieTexture movieTexture = movie.movie as MovieTexture;
+
+	// 	while (!movieTexture.isReadyToPlay) {
+	// 		yield return null;
+	// 	}
+
+	// 		//var renderer = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<MeshRenderer>();
+	// 		//renderer.material.mainTexture = movieTexture;
+	// 		RawImage img = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>();
+	// 		img.material.mainTexture = movieTexture;
 			
-			img.gameObject.SetActive(false);
-			img.gameObject.SetActive(true);
-			movieTexture.loop = true;
-			movieTexture.Play ();
+	// 		img.gameObject.SetActive(false);
+	// 		img.gameObject.SetActive(true);
+	// 		movieTexture.loop = true;
+	// 		movieTexture.Play ();
 
-		#if false
+	// 	#if false
 
-			//オーディオを使用する場合はこの部分を有効にしてください
-			var audioSource = GetComponent<AudioSource>();
-			audioSource.clip = movieTexture.audioClip;
-			audioSource.loop = true;
-			audioSource.Play ();
+	// 		//オーディオを使用する場合はこの部分を有効にしてください
+	// 		var audioSource = GetComponent<AudioSource>();
+	// 		audioSource.clip = movieTexture.audioClip;
+	// 		audioSource.loop = true;
+	// 		audioSource.Play ();
 			
-		#endif
-
-	}
-
-	// private void MakeImage(JsonData _data, int _selected_index){
-	// 	//メインイメージ		
-	// 	string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][_selected_index];
-	// 	Texture2D _texture = Loader.Load(_base_url) as Texture2D;
-
-	// 	Image img =  GameObject.Find(_detail_folder_path + "DetailImg").GetComponent<Image>();
-
-	// 	img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
-
-	// 	img.color = new Color(255,255,255,0);
-
-	// 	DOTween.ToAlpha(
-	// 		() => img.color, 
-	// 		color => img.color = color,
-	// 		1f, // 最終的なalpha値
-	// 		_fade_in_time
-	// 	);
+	// 	#endif
 
 	// }
 
@@ -233,7 +294,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	}
 
-	private IEnumerator UpdateImage( JsonData _selected_data) {
+	private IEnumerator UpdateMainImage( JsonData _selected_data) {
 
 			while(_update_flag){
 
@@ -242,9 +303,13 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 				string _base_url = "Portfolio" + "/images/l/" +  _selected_data["imgs"][_now_selected_img_index];
 
+				Debug.Log(_base_url);
 				Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 
 				Image img =  GameObject.Find(_detail_folder_path + "DetailImg").GetComponent<Image>();
+				RawImage raw_img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>();
+				img.gameObject.SetActive(true);
+				raw_img.gameObject.SetActive(false);
 
 				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 
@@ -277,7 +342,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 
 		//現在選択中の画像のインデックスを更新
 		_now_selected_img_index = int.Parse(Util.GetStringOnly(btn_clicked))-1;
-		UpdateImage(_data);
+		UpdateMainImage(_data);
 	}
 
 	private void SetThumbnailForcus(JsonData _data){
@@ -313,7 +378,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 		// Color.yellow,                   // 最終的な値
 		// 3f                              // アニメーション時間
 		// );
-		
+
 	}
 
 
@@ -331,6 +396,25 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour {
 }
 
 
+// private void UpdateMainImage(JsonData _data, int _selected_index){
+// 	//メインイメージ		
+// 	string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][_selected_index];
+// 	Texture2D _texture = Loader.Load(_base_url) as Texture2D;
+
+// 	Image img =  GameObject.Find(_detail_folder_path + "DetailImg").GetComponent<Image>();
+
+// 	img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
+
+// 	img.color = new Color(255,255,255,0);
+
+// 	DOTween.ToAlpha(
+// 		() => img.color, 
+// 		color => img.color = color,
+// 		1f, // 最終的なalpha値
+// 		_fade_in_time
+// 	);
+
+// }
 
 //メインイメージ総数の決定// Debug.Log( (_data["category"] as IJsonWrapper).GetInt());
 // Debug.Log( (JsonData)_data["tag"]);

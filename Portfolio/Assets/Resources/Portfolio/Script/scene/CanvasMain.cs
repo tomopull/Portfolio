@@ -122,7 +122,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			Debug.Log(triangle);
 		}
 
-		
 	}
 
 	private void OnPointerExit(BaseEventData  _base_event_data){
@@ -140,10 +139,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
 		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
 		int select_index = _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().SelectIndex;
-		
-
-		//デテールステート
-		_main_model.MainModelState = MainModel.DETAIL_VIEW_STATE;
 
 		Util.SetEventSystemInteractive(false);
 
@@ -296,6 +291,9 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 		Util.SetEventSystemInteractive(true);
 
+		//デテールステート
+		_main_model.MainModelState = MainModel.DETAIL_VIEW_STATE;
+		
 		yield return null;
 
 	}
