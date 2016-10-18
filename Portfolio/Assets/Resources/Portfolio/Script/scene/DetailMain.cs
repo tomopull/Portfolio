@@ -53,6 +53,8 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 	//TouchHandler script
 	TouchHandler _touch_handler;
 
+	IEnumerator ShowWork;
+	IEnumerator UpdateMainImageWork;
 
 	//private MovieTexture _movie_texture;
 
@@ -73,7 +75,8 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 	}
 
 	public void Execute(JsonData _data, int _selected_index){
-		StartCoroutine(Show(_data,_selected_index));
+		ShowWork =  Show(_data,_selected_index);
+		StartCoroutine(ShowWork);
 	}
 
 	void Update(){
@@ -120,18 +123,22 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		int now_id = (_json_data["id"] as IJsonWrapper).GetInt();
 		int next_id = now_id+=1;
 
+		Debug.Log(next_id);
+
 		// //idが一周したら最初に戻る
 		if(_main_data_manager.GetModel().OriginalJsonData.Count < next_id){
 			next_id = 1;
 		}
+
 		JsonData _next_json_data = _main_data_manager.GetDataById(next_id);
 
-		StartCoroutine(Show(_next_json_data,0));
+		ShowWork =  Show(_next_json_data,0);
+		StartCoroutine(ShowWork);
 		
 	}
 
 	private IEnumerator Show(JsonData _data, int _selected_index){
-		Debug.Log("Show");
+		//Debug.Log(_data["id"]);
 
 		if(_detail_view == null){
 
@@ -192,7 +199,8 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 			yield return null;
 		}
 		//サムネイルイメージの自動更新開始
-		StartCoroutine(UpdateMainImage(_data));
+		UpdateMainImageWork =  UpdateMainImage(_data);
+		StartCoroutine(UpdateMainImageWork);
 
 		//対象投稿のidが動画データを持っているかどうかで分岐仮
 		// if((_data["mov"] as IJsonWrapper).ToString() == "donburi_catcher"){
@@ -386,8 +394,10 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		
 		if(_detail_view){
 			Destroy(_detail_view);
+			_detail_view = null;
 			//コルーチン終了
-			StopCoroutine("UpdateMainImage");
+			StopCoroutine(ShowWork);
+			StopCoroutine(UpdateMainImageWork);
 			_update_flag = false;
 		}
 		
