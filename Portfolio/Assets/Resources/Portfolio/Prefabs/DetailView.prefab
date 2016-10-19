@@ -627,7 +627,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Salt Make On The Net
+  m_Text: 'AAAAAAAAAA
+
+    AAAAAAAAAA'
 --- !u!114 &11424396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -711,7 +713,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2009
+  m_Text: xxxx
 --- !u!114 &11434222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -881,8 +883,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30AF\u30E9\u30A4\u30A2\u30F3\u30C8\u306E\u4E8B\u696D\u5185\u5BB9\u306EPR\u3092\u76EE\u7684\u3068\u3057\u305F\u30A2\u30C9\u30D0\u30B2\u30FC\u30E0\u3002\u30C7\u30B6\u30A4\u30CA\u30FC,\u30C7\u30A3\u30EC\u30AF\u30BF\u30FC\u3068\u4F1A\u8B70\u3092\u91CD\u306D\u5236\u4F5C\u3002\u5869\u306B\u95A2\u3059\u308B\u30AF\u30A4\u30BA\u3068\uFF12\u7A2E\u985E\u306E\u30B2\u30FC\u30E0\u3067\u69CB\u6210\u3055\u308C\u308B\u3002
-    \n\u3000\t\t\t\t\u30AF\u30E9\u30A4\u30A2\u30F3\u30C8\u304B\u3089\u3044\u305F\u3060\u3044\u305F\u30B0\u30E9\u30D5\u30A3\u30C3\u30AF\u7D20\u6750\u304C\u6BD4\u8F03\u7684\u30B7\u30F3\u30D7\u30EB\u3060\u3063\u305F\u305F\u3081\u30D5\u30E9\u30C3\u30B7\u30E5\u306B\u3088\u308A\u6B8B\u50CF\u8868\u73FE\u3084\u30D1\u30FC\u30C6\u30A3\u30AF\u30EB\u8868\u73FE\u3092\u8FFD\u52A0\u3002"
+  m_Text: 'AAAAAAAAAA
+
+    AAAAAAAAAA'
 --- !u!114 &11452392
 MonoBehaviour:
   m_ObjectHideFlags: 1

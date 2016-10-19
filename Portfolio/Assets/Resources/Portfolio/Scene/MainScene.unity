@@ -434,8 +434,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a267925b97d4934835cdc0b236398d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logs: []
-  circle: {fileID: 0}
+  _touch_start_pos: {x: 0, y: 0}
+  _touch_end_pos: {x: 0, y: 0}
+  _swipe_pos: {x: 0, y: 0}
+  _is_drag: 0
+  _is_flicking: 0
+  _isDown: 0
+  _is_up: 0
 --- !u!1001 &686284999
 Prefab:
   m_ObjectHideFlags: 0
@@ -745,18 +750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df8aa51693924202b8b9b4fd12ac05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idle_time: 4
-  _now_idle_time: 4
-  _update_flag: 0
-  _is_idle_time: 1
-  _now_selected_img_index: 0
-  _now_img_total_count: 0
-  _main_data_manager: {fileID: 0}
-  _detail_view: {fileID: 0}
-  _fade_in_time: 0.9
-  _fade_in_time_delay_total: 0
-  _fade_in_time_delay_add: 0.3
-  _detail_folder_path: 44657461696c4d61696e2f44657461696c566965772f
 --- !u!1 &1984499390
 GameObject:
   m_ObjectHideFlags: 0

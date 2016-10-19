@@ -42,7 +42,9 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 	//バオバオ表示に戻るタイトルボタン
 	private void InitTitleButton(){
+		
 		Button btn = (Button)GameObject.Find("TitleButton").GetComponent<Button>();
+
 		Util.SetButtonEvent(btn.gameObject,ShowBAOBAO,EventTriggerType.PointerClick);
 	}
 
@@ -214,6 +216,8 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			CanvasMainActivate(true);
 			_detail_main.Remove();
 
+			_main_model.MainModelState = MainModel.BAOBAO_VIEW_STATE;			
+
 		}
 
 		for (int i = 1; i <= 6; i++)
@@ -287,13 +291,14 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 			_detail_main.Execute(_selected_json_data,select_index);
 			//メイン非表示
 			CanvasMainActivate(false);
+
+			//デテールステート
+			_main_model.MainModelState = MainModel.DETAIL_VIEW_STATE;
 		}
 
 		Util.SetEventSystemInteractive(true);
 
-		//デテールステート
-		_main_model.MainModelState = MainModel.DETAIL_VIEW_STATE;
-		
+	
 		yield return null;
 
 	}

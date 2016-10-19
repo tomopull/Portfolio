@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 using LitJson;
 using DG.Tweening;
 
-
 public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 
 	//jsonデータ
@@ -123,7 +122,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		int now_id = (_json_data["id"] as IJsonWrapper).GetInt();
 		int next_id = now_id+=1;
 
-		Debug.Log(next_id);
+		//Debug.Log(next_id);
 
 		// //idが一周したら最初に戻る
 		if(_main_data_manager.GetModel().OriginalJsonData.Count < next_id){
@@ -143,14 +142,14 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		if(_detail_view == null){
 
 			_detail_view = Util.InstantiateUtil("DetailView",new Vector3(0,0,0),Quaternion.identity,transform);
-			
+		
 			_detail_view.SetActive(true);
 			
 			//タイトル-----------------------------------------------------------------------------------------------------------------
 			string _title_text_str = (_data["title"] as IJsonWrapper).GetString();
-			Text _title_text = GameObject.Find(_detail_folder_path + "Title").GetComponent<Text>();
+			Text _title_text = _detail_view.gameObject.transform.FindChild("Title").GetComponent<Text>();
 			_title_text.text = _title_text_str;
-
+			Debug.Log(_title_text.text);
 			_title_text.color = new Color(255,255,255,0);
 
 			DOTween.ToAlpha(
@@ -162,7 +161,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 
 			//年度------------------------------------------------------------------------------------------------------------------------
 			string _year_text_str = (_data["year"] as IJsonWrapper).GetInt().ToString();
-			Text _year_text = GameObject.Find(_detail_folder_path + "Year").GetComponent<Text>();
+			Text _year_text = _detail_view.gameObject.transform.FindChild("Year").GetComponent<Text>();
 			_year_text.text = _year_text_str;
 
 			_year_text.color = new Color(255,255,255,0);
@@ -176,7 +175,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 
 			//詳細-----------------------------------------------------------------------------------------------------------------------
 			string _detail_text_str = (_data["detail"] as IJsonWrapper).GetString();
-			Text _detail_text = GameObject.Find(_detail_folder_path + "DetailText").GetComponent<Text>();
+			Text _detail_text = _detail_view.gameObject.transform.FindChild("DetailText").GetComponent<Text>();
 			_detail_text.text = _detail_text_str;
 
 			_detail_text.color = new Color(255,255,255,0);
@@ -215,46 +214,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		// }
 	}
 
-
-
-	// private IEnumerator StartMovie(JsonData _data, int _selected_index){
-
-	// 	string  movieTexturePath    = Application.streamingAssetsPath + "/" + "donburi_catcher.ogv";
-	// 	string  url                 = "file://" + movieTexturePath;
-	// 	WWW     movie               = new WWW(url);
-
-	// 	while (!movie.isDone) {
-	// 		yield return null;
-	// 	}
-
-	// 	MovieTexture movieTexture = movie.movie as MovieTexture;
-
-	// 	while (!movieTexture.isReadyToPlay) {
-	// 		yield return null;
-	// 	}
-
-	// 		//var renderer = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<MeshRenderer>();
-	// 		//renderer.material.mainTexture = movieTexture;
-	// 		RawImage img = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>();
-	// 		img.material.mainTexture = movieTexture;
-			
-	// 		img.gameObject.SetActive(false);
-	// 		img.gameObject.SetActive(true);
-	// 		movieTexture.loop = true;
-	// 		movieTexture.Play ();
-
-	// 	#if false
-
-	// 		//オーディオを使用する場合はこの部分を有効にしてください
-	// 		var audioSource = GetComponent<AudioSource>();
-	// 		audioSource.clip = movieTexture.audioClip;
-	// 		audioSource.loop = true;
-	// 		audioSource.Play ();
-			
-	// 	#endif
-
-	// }
-
 	private void MakeThumbnailButton(JsonData _data){
 
 		for (int i = 0; i <  _data["imgs"].Count; i++)
@@ -263,7 +222,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 			
 			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 			//Debug.Log(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) );
-			Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
+			Image img =  _detail_view.gameObject.transform.FindChild("Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
 			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 
 			img.color = new Color(255,255,255,0);
@@ -284,7 +243,9 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 			);
 		
 			//ボタンイベント
-			Button btn = (Button)GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/btn_" + (i+1)).GetComponent<Button>();
+			//Button btn = (Button)GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/btn_" + (i+1)).GetComponent<Button>();
+			Button btn = (Button)_detail_view.gameObject.transform.FindChild("Images" + "/ImageBtn" + (i+1) + "/btn_" + (i+1)).GetComponent<Button>();
+			
 			//ボタンにjson data 保存
 			//画像サムネイルの画像のindexの保存
 			btn.GetComponent<ThumbnailData>().JsonData = _data;
@@ -295,9 +256,11 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 			
 		//使わないボタンは非表示
 		int j = 6;
+		Debug.Log(_data["imgs"].Count);
 		while(_data["imgs"].Count < j){
-			GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (j)).SetActive(false);
-			j--;	
+			Transform _thumb_btn =  _detail_view.gameObject.transform.FindChild("Images" + "/ImageBtn" + (j));
+			_thumb_btn.gameObject.SetActive(false);
+			j--;
 		}
 
 	}
@@ -311,12 +274,14 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 
 				string _base_url = "Portfolio" + "/images/l/" +  _selected_data["imgs"][_now_selected_img_index];
 
-				Debug.Log(_base_url);
 				Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 
-				Image img =  GameObject.Find(_detail_folder_path + "DetailImg").GetComponent<Image>();
-				RawImage raw_img =  GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>();
+				Image img =  _detail_view.gameObject.transform.FindChild("DetailImg").GetComponent<Image>();
+		
+				RawImage raw_img =  _detail_view.gameObject.transform.FindChild("DetailMov").GetComponent<RawImage>();
+
 				img.gameObject.SetActive(true);
+
 				raw_img.gameObject.SetActive(false);
 
 				img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
@@ -360,7 +325,9 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][i];
 			
 			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
-			Image img =  GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
+
+			Image img =  _detail_view.gameObject.transform.FindChild("Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
+
 			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 
 			Color tint_color;
@@ -380,13 +347,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 
 		}
 
-		// DOTween.To(
-		// () => image.color,              // 何を対象にするのか
-		// color => image.color = color,   // 値の更新
-		// Color.yellow,                   // 最終的な値
-		// 3f                              // アニメーション時間
-		// );
-
 	}
 
 
@@ -404,6 +364,51 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 	}
 
 }
+
+// DOTween.To(
+	// () => image.color,              // 何を対象にするのか
+	// color => image.color = color,   // 値の更新
+	// Color.yellow,                   // 最終的な値
+	// 3f                              // アニメーション時間
+	// );
+
+// private IEnumerator StartMovie(JsonData _data, int _selected_index){
+
+	// 	string  movieTexturePath    = Application.streamingAssetsPath + "/" + "donburi_catcher.ogv";
+	// 	string  url                 = "file://" + movieTexturePath;
+	// 	WWW     movie               = new WWW(url);
+
+	// 	while (!movie.isDone) {
+	// 		yield return null;
+	// 	}
+
+	// 	MovieTexture movieTexture = movie.movie as MovieTexture;
+
+	// 	while (!movieTexture.isReadyToPlay) {
+	// 		yield return null;
+	// 	}
+
+	// 		//var renderer = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<MeshRenderer>();
+	// 		//renderer.material.mainTexture = movieTexture;
+	// 		RawImage img = GameObject.Find(_detail_folder_path + "DetailMov").GetComponent<RawImage>();
+	// 		img.material.mainTexture = movieTexture;
+			
+	// 		img.gameObject.SetActive(false);
+	// 		img.gameObject.SetActive(true);
+	// 		movieTexture.loop = true;
+	// 		movieTexture.Play ();
+
+	// 	#if false
+
+	// 		//オーディオを使用する場合はこの部分を有効にしてください
+	// 		var audioSource = GetComponent<AudioSource>();
+	// 		audioSource.clip = movieTexture.audioClip;
+	// 		audioSource.loop = true;
+	// 		audioSource.Play ();
+			
+	// 	#endif
+
+	// }
 
 
 // private void UpdateMainImage(JsonData _data, int _selected_index){
