@@ -55,7 +55,6 @@ public class TouchHandler : MonoBehaviour
 
 
 
-		
 		void OnEnable ()
 		{
 				TouchManager.Instance.Drag += OnSwipe;

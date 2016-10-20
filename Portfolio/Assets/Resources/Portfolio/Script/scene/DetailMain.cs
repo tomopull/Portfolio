@@ -35,6 +35,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 	// Use this for initialization
 
 	private GameObject _detail_view;
+	private Vector3 _detail_view_pos;
 
 	private float _fade_in_time = 0.9f;
 
@@ -88,14 +89,18 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		Vector3 _touch_start_pos = new Vector3();
 		Vector3 _temp_touch_pos = new Vector3();
 		Vector3 _touch_end_pos = new Vector3();
+		int _slide_direction;
 
 		Camera _main_camera = GameObject.Find("Camera").GetComponent<Camera>();
 		
 		if(TouchHandler.Instance.IsDown){
+
 			_touch_start_pos = TouchHandler.Instance.TouchStartPos;
+
 		}
 
 		if(TouchHandler.Instance.IsDrag){
+
 			_temp_touch_pos = Input.mousePosition;
 
 			if(_detail_view!= null){
@@ -105,31 +110,66 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		}
 
 		if(TouchHandler.Instance.IsUp){
+
 			_touch_end_pos = TouchHandler.Instance.TouchEndPos;
-			//次の投稿の表示
+
+			//ある程度ドラッグしていたら次の投稿の表示
+			
 			if(_main_data_manager.GetModel().MainModelState == MainModel.DETAIL_VIEW_STATE){
-				ShowNext();
+				
+				//右方向にドラッグしていたら未来の投稿
+				if(_touch_end_pos.x > ( (Screen.width/2) + (Screen.width/3) ) ){
+
+					//Debug.Log("過去の投稿");
+					//idを一つ遅らせる
+					int now_id = (_json_data["id"] as IJsonWrapper).GetInt();
+					int prev_id = now_id-=1;
+
+					//Debug.Log(next_id);
+					//idが一周したら最初に戻る
+					if(1 > prev_id){
+						prev_id = _main_data_manager.GetModel().OriginalJsonData.Count;
+					}
+
+					ShowNext(prev_id);
+
+				//左方向にドラッグしてたら過去の投稿
+				}else if(_touch_end_pos.x <  ( (Screen.width/2) - (Screen.width/3) ) ){
+
+					//Debug.Log("未来の投稿");
+					//idを一つ進める
+					int now_id = (_json_data["id"] as IJsonWrapper).GetInt();
+					int next_id = now_id+=1;
+
+					//Debug.Log(next_id);
+
+					//idが一周したら最初に戻る
+					if(_main_data_manager.GetModel().OriginalJsonData.Count < next_id){
+						next_id = 1;
+					}
+
+					ShowNext(next_id);
+				
+				}else{
+					//元に戻る
+					_detail_view.transform.position = new Vector3(_detail_view_pos.x,_detail_view_pos.y,_detail_view_pos.y);
+					
+				}
+
+				
+
 			}
 		}
 		
 	}
 
 	//次の投稿の表示
-	private void ShowNext(){
+	private void ShowNext(int _next_id){
+
 		Debug.Log("ShowNext");
 		Remove();
-		// //idを一つ進める
-		int now_id = (_json_data["id"] as IJsonWrapper).GetInt();
-		int next_id = now_id+=1;
-
-		//Debug.Log(next_id);
-
-		// //idが一周したら最初に戻る
-		if(_main_data_manager.GetModel().OriginalJsonData.Count < next_id){
-			next_id = 1;
-		}
-
-		JsonData _next_json_data = _main_data_manager.GetDataById(next_id);
+		
+		JsonData _next_json_data = _main_data_manager.GetDataById(_next_id);
 
 		ShowWork =  Show(_next_json_data,0);
 		StartCoroutine(ShowWork);
@@ -142,7 +182,10 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		if(_detail_view == null){
 
 			_detail_view = Util.InstantiateUtil("DetailView",new Vector3(0,0,0),Quaternion.identity,transform);
-		
+			_detail_view_pos = new Vector3();
+			_detail_view_pos.x = _detail_view.transform.position.x;
+			_detail_view_pos.y = _detail_view.transform.position.y;
+
 			_detail_view.SetActive(true);
 			
 			//タイトル-----------------------------------------------------------------------------------------------------------------
