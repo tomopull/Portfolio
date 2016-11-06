@@ -151,9 +151,10 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 					ShowNext(next_id);
 				
 				}else{
+					//Debug.Log("元に戻る");
 					//元に戻る
-					_detail_view.transform.position = new Vector3(_detail_view_pos.x,_detail_view_pos.y,_detail_view_pos.y);
-					
+					_detail_view.transform.position = new Vector3(_detail_view_pos.x,_detail_view_pos.y,_detail_view_pos.z);
+
 				}
 
 				
@@ -185,6 +186,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 			_detail_view_pos = new Vector3();
 			_detail_view_pos.x = _detail_view.transform.position.x;
 			_detail_view_pos.y = _detail_view.transform.position.y;
+			_detail_view_pos.z = _detail_view.transform.position.z;
 
 			_detail_view.SetActive(true);
 			
