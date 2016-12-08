@@ -79,6 +79,12 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		StartCoroutine(ShowWork);
 	}
 
+
+	private Vector3 _touch_start_pos = new Vector3();
+	private Vector3 _temp_touch_pos = new Vector3();
+	private Vector3 _touch_end_pos = new Vector3();
+	private int _slide_direction;
+
 	void Update(){
 		InputHandler();
 	} 
@@ -86,10 +92,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 	//すワイプ動作の監視
 	private void InputHandler(){
 
-		Vector3 _touch_start_pos = new Vector3();
-		Vector3 _temp_touch_pos = new Vector3();
-		Vector3 _touch_end_pos = new Vector3();
-		int _slide_direction;
+		
 
 		Camera _main_camera = GameObject.Find("Camera").GetComponent<Camera>();
 		
@@ -104,7 +107,20 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 			_temp_touch_pos = Input.mousePosition;
 
 			if(_detail_view!= null){
-				_detail_view.transform.position = new Vector3(_temp_touch_pos.x,_detail_view.transform.position.y,_detail_view.transform.position.z);
+
+				//一定の距離以上ドラッグしていたら移動_
+				float tmp_dist = Vector2.Distance(_temp_touch_pos,_touch_start_pos);
+
+				//_detail_view.transform.position = new Vector3(_temp_touch_pos.x ,_detail_view.transform.position.y,_detail_view.transform.position.z);
+				if(_touch_start_pos.x > _temp_touch_pos.x){
+					_detail_view.transform.position = new Vector3(_detail_view_pos.x-tmp_dist,_detail_view.transform.position.y,_detail_view.transform.position.z);
+				}else if(_touch_start_pos.x < _temp_touch_pos.x){
+					_detail_view.transform.position = new Vector3(_detail_view_pos.x+tmp_dist,_detail_view.transform.position.y,_detail_view.transform.position.z);
+				}else{
+
+				}
+				
+				
 			}
 			
 		}

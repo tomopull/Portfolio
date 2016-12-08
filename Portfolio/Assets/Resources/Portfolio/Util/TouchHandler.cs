@@ -12,7 +12,7 @@ public class TouchHandler : MonoBehaviour
 
 		//現在のマウスタッチを開始位置
 		[SerializeField]
-		private Vector2 _touch_start_pos = new Vector2();
+		private Vector2 _touch_start_pos = new Vector2(3f,3f);
 		public Vector2 TouchStartPos{ get { return this._touch_start_pos; } set { this._touch_start_pos = value; } }
 		
 
