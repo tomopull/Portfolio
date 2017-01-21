@@ -138,7 +138,6 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 	
 	private void ShowDatail(BaseEventData  _base_event_data){
 	
-		//JsonData _data =  _main_data_manager.GetDataById( int.Parse(Util.GetStringOnly(_base_event_data.selectedObject.ToString())) );
 		JsonData _data =  _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().JsonData;
 		int select_index = _base_event_data.selectedObject.GetComponent<Button>().GetComponent<ThumbnailData>().SelectIndex;
 
@@ -170,10 +169,8 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 
 			int pickup = Random.Range(0,select_index_max);
 
-			//string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][pickup];
 			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][select_index];
 			
-
 			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
 			
 	 		if(GameObject.Find("ImageTriangle" + i) != null){
@@ -289,6 +286,7 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		if(_opnen_flag == 1){
 			//デティール表示
 			_detail_main.Execute(_selected_json_data,select_index);
+
 			//メイン非表示
 			CanvasMainActivate(false);
 

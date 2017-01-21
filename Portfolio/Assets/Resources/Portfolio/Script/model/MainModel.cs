@@ -26,7 +26,14 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 	//デティール表示
 	public static string DETAIL_VIEW_STATE = "detail_view_state";
 
+	//switch 2d and 3d
+	[SerializeField]
+	private string _display_mode;
 
+	public const string TwoDMode = "2D/";
+
+	public const string ThreeDMode = "3D/";
+	public string DisplayMode{ get { return this.DisplayMode; } set { this.DisplayMode = value; } }
 
 	// //アセットロード開始
 	// public static string ASSET_LOADING_STATE = "asset_loading_state";
@@ -44,19 +51,21 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 
 		_main_model_state = MainModel.REQUEST_STATE;
 
+		_display_mode = MainModel.TwoDMode;
+
 		LoadFile();
 
 		PlayerPrefs.DeleteAll ();
 
 	}
 
-		private void LoadFile(){
+	private void LoadFile(){
 		GlobalCoroutine.Go(LoadFileCorutine(Config.Json_Path));
 
 		Text _debug_text = GameObject.Find("RootCanvas/DebugText1").GetComponent<Text>();
 		_debug_text.text = Config.Json_Path;
-		
 	}
+
 	private IEnumerator LoadFileCorutine(string _file_path){
 
 		//リクエストの返事が返ってきた
@@ -72,8 +81,7 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 		
 
 		_main_model_state = MainModel.LOAD_COMPLETE_STATE;
-
-		
+	
 	}
 
 	public void InitializeData(JsonData _json_data){
@@ -85,7 +93,7 @@ public class MainModel : AbstractBehaviour,IInterfaceBehaviour {
 			
 			for (int i = 0; i < _json_data.Count; i++)
 			{
-				DataObject _data = Util.InstantiateUtil("DataObjectPrefab",Vector3.zero,Quaternion.identity,null).GetComponent<DataObject>();
+				DataObject _data = Util.InstantiateUtil("DataObjectPrefab",_display_mode,Vector3.zero,Quaternion.identity,null).GetComponent<DataObject>();
 				_data.Id =(_json_data[i]["id"] as IJsonWrapper).GetInt();
 				 _data.Title= (_json_data[i]["title"] as IJsonWrapper).GetString();
 				 _data.Year = (_json_data[i]["year"] as IJsonWrapper).GetInt();

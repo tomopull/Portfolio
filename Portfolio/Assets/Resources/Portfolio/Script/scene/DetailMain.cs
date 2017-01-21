@@ -58,6 +58,7 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 
 	//private MovieTexture _movie_texture;
 
+
 	public void Initialize(){
 
 		//TouchManager GameObject
@@ -75,7 +76,8 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 	}
 
 	public void Execute(JsonData _data, int _selected_index){
-		ShowWork =  Show(_data,_selected_index);
+
+		ShowWork =  Show(MainModel.TwoDMode,_data,_selected_index);
 		StartCoroutine(ShowWork);
 	}
 
@@ -111,7 +113,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 				//一定の距離以上ドラッグしていたら移動_
 				float tmp_dist = Vector2.Distance(_temp_touch_pos,_touch_start_pos);
 
-				//_detail_view.transform.position = new Vector3(_temp_touch_pos.x ,_detail_view.transform.position.y,_detail_view.transform.position.z);
 				if(_touch_start_pos.x > _temp_touch_pos.x){
 					_detail_view.transform.position = new Vector3(_detail_view_pos.x-tmp_dist,_detail_view.transform.position.y,_detail_view.transform.position.z);
 				}else if(_touch_start_pos.x < _temp_touch_pos.x){
@@ -173,8 +174,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 
 				}
 
-				
-
 			}
 		}
 		
@@ -188,17 +187,16 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		
 		JsonData _next_json_data = _main_data_manager.GetDataById(_next_id);
 
-		ShowWork =  Show(_next_json_data,0);
+		ShowWork =  Show(MainModel.TwoDMode, _next_json_data,0);
 		StartCoroutine(ShowWork);
 		
 	}
 
-	private IEnumerator Show(JsonData _data, int _selected_index){
+	private IEnumerator Show(string _mode, JsonData _data, int _selected_index){
 		//Debug.Log(_data["id"]);
 
 		if(_detail_view == null){
-
-			_detail_view = Util.InstantiateUtil("DetailView",new Vector3(0,0,0),Quaternion.identity,transform);
+			_detail_view = Util.InstantiateUtil("DetailView",_mode,new Vector3(0,0,0),Quaternion.identity,transform);
 			_detail_view_pos = new Vector3();
 			_detail_view_pos.x = _detail_view.transform.position.x;
 			_detail_view_pos.y = _detail_view.transform.position.y;
@@ -282,7 +280,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 			string _base_url = "Portfolio" + "/images/l/" +  _data["imgs"][i];
 			
 			Texture2D _texture = Loader.Load(_base_url) as Texture2D;
-			//Debug.Log(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) );
 			Image img =  _detail_view.gameObject.transform.FindChild("Images" + "/ImageBtn" + (i+1) + "/Image" + (i+1) ).GetComponent<Image>();
 			img.sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), Vector2.zero);
 
@@ -304,7 +301,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 			);
 		
 			//ボタンイベント
-			//Button btn = (Button)GameObject.Find(_detail_folder_path +  "Images" + "/ImageBtn" + (i+1) + "/btn_" + (i+1)).GetComponent<Button>();
 			Button btn = (Button)_detail_view.gameObject.transform.FindChild("Images" + "/ImageBtn" + (i+1) + "/btn_" + (i+1)).GetComponent<Button>();
 			
 			//ボタンにjson data 保存

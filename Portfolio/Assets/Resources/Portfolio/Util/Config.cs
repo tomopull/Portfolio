@@ -12,6 +12,7 @@ public class Config : AbstractBehaviour{
 	//サイト名をパスのルートに入れる
 	[SerializeField]
 	static private string _root_path = "Portfolio";
+	 
 	static public string RootPath{ get { return _root_path; } set { _root_path = value; } }
 
 	//ローカルのjsonのパス
@@ -67,6 +68,11 @@ public class Config : AbstractBehaviour{
 
 	Debug.Log(base_url);
 	return base_url;
+}
+
+//2dmodeか3dモードか
+public static string GetDisplayMode(string _display_mode){
+	return _display_mode;
 }
 
 //ネイティブデバイスタッチ

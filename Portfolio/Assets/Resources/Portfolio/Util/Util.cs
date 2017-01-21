@@ -12,8 +12,6 @@ using LitJson;
 using System.Text.RegularExpressions;
 
 
-
-
 static public class Util  {
 
 
@@ -57,8 +55,8 @@ static public class Util  {
 	/// <summary>
 	/// リソースのprefabから複製
 	/// </summary>
-	static public GameObject InstantiateUtil(string resource_path,Vector3 default_position,Quaternion default_quaernion, Transform parent){
-		GameObject obj = (GameObject)GameObject.Instantiate(Resources.Load(Config.PrefabResourceBasePath + resource_path),default_position ,default_quaernion);
+	static public GameObject InstantiateUtil(string resource_path,string _display_mode,Vector3 default_position,Quaternion default_quaernion, Transform parent){
+		GameObject obj = (GameObject)GameObject.Instantiate(Resources.Load(Config.PrefabResourceBasePath + Config.GetDisplayMode(_display_mode) + resource_path),default_position ,default_quaernion);
 
 		//自動的につく(cloneの文字を除去処理 名称をresource_pathのみにする)
 		obj.name = resource_path;
