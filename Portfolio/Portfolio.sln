@@ -6,6 +6,8 @@ Project("{D4F859A9-6C13-F551-A277-1B7FC3A78D38}") = "Portfolio", "Assembly-CShar
 EndProject
 Project("{D4F859A9-6C13-F551-A277-1B7FC3A78D38}") = "Portfolio", "Assembly-CSharp-Editor-firstpass.csproj", "{4A0D37BA-AF65-43FF-8F3A-D0C53CB91C9E}"
 EndProject
+Project("{D4F859A9-6C13-F551-A277-1B7FC3A78D38}") = "Portfolio", "Assembly-CSharp-Editor.csproj", "{00D9841F-F003-5E5C-98D1-35DEA3C55119}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{4A0D37BA-AF65-43FF-8F3A-D0C53CB91C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A0D37BA-AF65-43FF-8F3A-D0C53CB91C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A0D37BA-AF65-43FF-8F3A-D0C53CB91C9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00D9841F-F003-5E5C-98D1-35DEA3C55119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00D9841F-F003-5E5C-98D1-35DEA3C55119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00D9841F-F003-5E5C-98D1-35DEA3C55119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00D9841F-F003-5E5C-98D1-35DEA3C55119}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj

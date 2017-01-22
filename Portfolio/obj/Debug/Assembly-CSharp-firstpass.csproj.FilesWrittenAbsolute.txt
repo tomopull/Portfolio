@@ -19,3 +19,5 @@
 /Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/OSCsharp.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/TUIOsharp.dll

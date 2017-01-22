@@ -35,3 +35,7 @@
 /Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb
 /Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll
 /Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll.mdb
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/OSCsharp.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/TUIOsharp.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb

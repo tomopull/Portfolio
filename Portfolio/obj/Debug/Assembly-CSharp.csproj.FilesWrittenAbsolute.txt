@@ -15,3 +15,11 @@
 /Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/obj/Debug/Assembly-CSharp.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/OSCsharp.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/TUIOsharp.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb

@@ -11,8 +11,14 @@ using DG.Tweening;
 
 public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 
+	[SerializeField]
+	private bool _is_swiping = false;
+	public bool IsSwiping{ get { return this._is_swiping; } set { this._is_swiping = value; } }
+
 	//jsonデータ
-	JsonData _json_data;
+	[SerializeField]
+	private JsonData _json_data;
+	public JsonData JsonData{ get { return this._json_data; } set { this._json_data = value; } }
 
 	//ループしだす間の制止している間の間隔
 	private float _idle_time = 4f;
@@ -34,8 +40,13 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 	private MainDataManager _main_data_manager;
 	// Use this for initialization
 
+	[SerializeField]
 	private GameObject _detail_view;
+	public GameObject DetailView{ get { return this._detail_view; } set { this._detail_view = value; } }
+
+	[SerializeField]
 	private Vector3 _detail_view_pos;
+	public Vector3 DetailViewPos{ get { return this._detail_view_pos; } set { this._detail_view_pos = value; } }
 
 	private float _fade_in_time = 0.9f;
 
@@ -45,30 +56,13 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 	
 	private string  _detail_folder_path = "DetailMain/DetailView/";
 
-	//TouchManager GameObject
-	GameObject _touch_manager;
-	
-	DragDetector _drag_detector;
-
-	//TouchHandler script
-	TouchHandler _touch_handler;
-
 	IEnumerator ShowWork;
 	IEnumerator UpdateMainImageWork;
 
 	//private MovieTexture _movie_texture;
 
-
 	public void Initialize(){
 
-		//TouchManager GameObject
-		_touch_manager = GameObject.Find("RootManeger/TouchManager");
-
-		//TouchHandler script
-		_touch_handler = _touch_manager.GetComponent<TouchHandler>();
-
-		//DragDetector script
-		_drag_detector = _touch_manager.GetComponent<DragDetector>();
 	}
 	
 	public void SetMainDataManager(MainDataManager _manager){
@@ -88,99 +82,13 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 	private int _slide_direction;
 
 	void Update(){
-		InputHandler();
+		//InputHandler();
 	} 
 
-	//すワイプ動作の監視
-	private void InputHandler(){
 
-		
-
-		Camera _main_camera = GameObject.Find("Camera").GetComponent<Camera>();
-		
-		if(TouchHandler.Instance.IsDown){
-
-			_touch_start_pos = TouchHandler.Instance.TouchStartPos;
-
-		}
-
-		if(TouchHandler.Instance.IsDrag){
-
-			_temp_touch_pos = Input.mousePosition;
-
-			if(_detail_view!= null){
-
-				//一定の距離以上ドラッグしていたら移動_
-				float tmp_dist = Vector2.Distance(_temp_touch_pos,_touch_start_pos);
-
-				if(_touch_start_pos.x > _temp_touch_pos.x){
-					_detail_view.transform.position = new Vector3(_detail_view_pos.x-tmp_dist,_detail_view.transform.position.y,_detail_view.transform.position.z);
-				}else if(_touch_start_pos.x < _temp_touch_pos.x){
-					_detail_view.transform.position = new Vector3(_detail_view_pos.x+tmp_dist,_detail_view.transform.position.y,_detail_view.transform.position.z);
-				}else{
-
-				}
-				
-				
-			}
-			
-		}
-
-		if(TouchHandler.Instance.IsUp){
-
-			_touch_end_pos = TouchHandler.Instance.TouchEndPos;
-
-			//ある程度ドラッグしていたら次の投稿の表示
-			
-			if(_main_data_manager.GetModel().MainModelState == MainModel.DETAIL_VIEW_STATE){
-				
-				//右方向にドラッグしていたら未来の投稿
-				if(_touch_end_pos.x > ( (Screen.width/2) + (Screen.width/3) ) ){
-
-					//Debug.Log("過去の投稿");
-					//idを一つ遅らせる
-					int now_id = (_json_data["id"] as IJsonWrapper).GetInt();
-					int prev_id = now_id-=1;
-
-					//Debug.Log(next_id);
-					//idが一周したら最初に戻る
-					if(1 > prev_id){
-						prev_id = _main_data_manager.GetModel().OriginalJsonData.Count;
-					}
-
-					ShowNext(prev_id);
-
-				//左方向にドラッグしてたら過去の投稿
-				}else if(_touch_end_pos.x <  ( (Screen.width/2) - (Screen.width/3) ) ){
-
-					//Debug.Log("未来の投稿");
-					//idを一つ進める
-					int now_id = (_json_data["id"] as IJsonWrapper).GetInt();
-					int next_id = now_id+=1;
-
-					//Debug.Log(next_id);
-
-					//idが一周したら最初に戻る
-					if(_main_data_manager.GetModel().OriginalJsonData.Count < next_id){
-						next_id = 1;
-					}
-
-					ShowNext(next_id);
-				
-				}else{
-					//Debug.Log("元に戻る");
-					//元に戻る
-					_detail_view.transform.position = new Vector3(_detail_view_pos.x,_detail_view_pos.y,_detail_view_pos.z);
-
-				}
-
-			}
-		}
-		
-	}
 
 	//次の投稿の表示
-	private void ShowNext(int _next_id){
+	public void ShowNext(int _next_id){
 
 		Debug.Log("ShowNext");
 		Remove();
@@ -259,18 +167,6 @@ public class DetailMain : AbstractBehaviour,IInterfaceBehaviour{
 		//サムネイルイメージの自動更新開始
 		UpdateMainImageWork =  UpdateMainImage(_data);
 		StartCoroutine(UpdateMainImageWork);
-
-		//対象投稿のidが動画データを持っているかどうかで分岐仮
-		// if((_data["mov"] as IJsonWrapper).ToString() == "donburi_catcher"){
-		// 	StartCoroutine(StartMovie(_data,_selected_index));
-		// 	_update_flag = false;
-		// 	_now_selected_img_index = -100;
-		// 	//コルーチン終了
-		// 	StopCoroutine("UpdateMainImage");
-		// }else{
-		// 	//サムネイルイメージの自動更新開始
-		// 	StartCoroutine(UpdateMainImage(_data));
-		// }
 	}
 
 	private void MakeThumbnailButton(JsonData _data){

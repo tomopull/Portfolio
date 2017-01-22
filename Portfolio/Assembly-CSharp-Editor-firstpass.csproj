@@ -50,16 +50,16 @@
   <ItemGroup>
      <Compile Include="Assets\Plugins\Editor\dotBunny\VSCode.cs" />
      <None Include="Assets\Plugins\Demigiant\DOTween\readme.txt" />
-     <None Include="Assets\OsaawaTest\Shader\Kadai2Shader.shader" />
+     <None Include="Assets\Lib\TouchScript\Shaders\DebugDepthTest.shader" />
      <None Include="Assets\Plugins\Demigiant\DOTween\DOTween43.xml" />
-     <None Include="Assets\OsaawaTest\Shader\TestOsawaShader1.shader" />
-     <None Include="Assets\OsaawaTest\Shader\TestOsawaShader2.shader" />
      <None Include="Assets\Plugins\Demigiant\DOTween\DOTween46.xml" />
-     <None Include="Assets\OsaawaTest\Shader\TestLiquidShader.shader" />
-     <None Include="Assets\Plugins\UniRx\ReadMe.txt" />
-     <None Include="Assets\OsaawaTest\Shader\TestOsawaShader_AlphaBlend.shader" />
-     <None Include="Assets\OsaawaTest\Shader\TestOsawaShader_OutLine.shader" />
-     <None Include="Assets\OsaawaTest\Shader\Kadai1Shader.shader" />
+     <None Include="Assets\Lib\TouchScript\license.txt" />
+     <None Include="Assets\Lib\TouchScript\Shaders\DebugMultiplyDepthTest.shader" />
+     <None Include="Assets\Lib\TouchScript\Shaders\DebugNoDepthTest.shader" />
+     <None Include="Assets\Lib\UniRx\ReadMe.txt" />
+     <None Include="Assets\Lib\TouchScript\Shaders\DebugMultiplyNoDepthTest.shader" />
+     <None Include="Assets\Lib\TouchScript\Examples\_misc\Shaders\UnlitColor.shader" />
+     <None Include="Assets\Lib\TouchScript\Examples\_misc\Shaders\BorderDiffuse.shader" />
      <None Include="Assets\Plugins\Demigiant\DOTween\DOTween50.xml" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity5.4.2f2/Unity5.4.2f2.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -84,6 +84,12 @@
  </Reference>
  <Reference Include="UnityEditor.TreeEditor">
  <HintPath>/Applications/Unity5.4.2f2/Unity5.4.2f2.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="OSCsharp">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Lib/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>
+ </Reference>
+ <Reference Include="TUIOsharp">
+ <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Lib/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
  <HintPath>/Users/tomohiro.ohsawa/git/Portfolio/Portfolio/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>

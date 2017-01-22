@@ -54,6 +54,8 @@ public class CanvasMain : AbstractBehaviour,IInterfaceBehaviour {
 		if(_main_model.MainModelState != MainModel.BAOBAO_VIEW_STATE){
 			
 			_main_model.MainModelState = MainModel.BAOBAO_VIEW_STATE;
+			_detail_main.IsSwiping = false; //スワイプ終了
+			
 
 			InitImages();
 			StartCoroutine(ShowBAOBAOCorutine2(null,0,0));
